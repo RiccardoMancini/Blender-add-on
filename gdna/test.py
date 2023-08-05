@@ -21,7 +21,7 @@ from numpy import savez_compressed
 @hydra.main(config_path="config", config_name="config")
 def main(opt):
     # print(opt.pretty())
-    opt.seed = 0
+    opt.seed = 10
     pl.seed_everything(opt.seed, workers=True)
     torch.set_num_threads(10)
 
@@ -46,7 +46,7 @@ def main(opt):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    max_samples = 5
+    max_samples = 60
 
     smpl_param_zero = torch.zeros((1, 86)).cuda().float()
     smpl_param_zero[:, 0] = 1

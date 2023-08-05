@@ -1,0 +1,8 @@
+faces&verts/
+.idea/
+
+/gdna/data/
+/gdna/outputs/
+/gdna/UNKNOWN.egg-info/
+/gdna/dist/
+/gdna/lib/smpl/smpl_model/

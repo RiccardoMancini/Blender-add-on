@@ -1,0 +1,141 @@
+expname: coarse
+resume: true
+starting_path: outputs/coarse/checkpoints/last.ckpt
+eval_mode: interp
+seed: 0
+agent_tot: 1
+agent_id: 0
+trainer:
+  max_epochs: 300
+  gradient_clip_val: 0.1
+  check_val_every_n_epoch: 1
+  deterministic: true
+  gpus: -1
+  log_every_n_steps: 5
+  accelerator: ddp
+  profiler: simple
+model:
+  stage: coarse
+  dim_shape: 64
+  dim_detail: 64
+  deformer:
+    _target_: lib.model.deformer.ForwardDeformer
+    max_steps: 50
+    lbs_network:
+      _target_: lib.model.network.ImplicitNetwork
+      d_in: 3
+      d_out: 24
+      width: 128
+      depth: 4
+      geometric_init: false
+      bias: 1
+      skip_in: -1
+      weight_norm: true
+      multires: 0
+      pose_cond_dim: 69
+      pose_cond_layer: []
+      pose_embed_dim: -1
+      shape_cond_dim: 10
+      shape_cond_layer: []
+      shape_embed_dim: -1
+      latent_cond_dim: ${model.dim_shape}
+      latent_cond_layer:
+      - 0
+      latent_embed_dim: -1
+    disp_network:
+      _target_: lib.model.network.ImplicitNetwork
+      d_in: 3
+      d_out: 3
+      width: 128
+      depth: 4
+      geometric_init: false
+      bias: 1
+      skip_in: -1
+      weight_norm: true
+      multires: 0
+      pose_cond_dim: 69
+      pose_cond_layer: []
+      pose_embed_dim: -1
+      shape_cond_dim: 10
+      shape_cond_layer:
+      - 0
+      shape_embed_dim: -1
+      latent_cond_dim: 128
+      latent_cond_layer: []
+      latent_embed_dim: -1
+  optim:
+    lr: 0.001
+    lr_dis: 0.001
+  nepochs_pretrain: 1
+  lambda_bone_occ: 1
+  lambda_bone_w: 10
+  lambda_disp: 10
+  lambda_reg: 0.001
+  lambda_gan: 0
+  use_gan: false
+  ray_tracer:
+    n_secant_steps: 8
+    max_points: 500000
+    check_cube_intersection: false
+    depth_range:
+    - 0
+    - 2
+    n_steps:
+    - 128
+    - 129
+  network:
+    _target_: lib.model.network.ImplicitNetwork
+    d_in: 3
+    d_out: 1
+    width: 256
+    depth: 4
+    geometric_init: true
+    bias: 1
+    skip_in: 4
+    weight_norm: true
+    multires: 4
+    pose_cond_dim: 69
+    pose_cond_layer: []
+    pose_embed_dim: -1
+    shape_cond_dim: 10
+    shape_cond_layer: []
+    shape_embed_dim: -1
+    latent_cond_dim: 64
+    latent_cond_layer:
+    - 0
+    latent_embed_dim: -1
+  norm_network:
+    _target_: lib.model.network.ImplicitNetwork
+    d_in: 3
+    d_out: 3
+    width: 256
+    depth: 8
+    geometric_init: false
+    bias: 1
+    skip_in: 4
+    weight_norm: true
+    multires: 4
+    pose_cond_dim: 69
+    pose_cond_layer: []
+    pose_embed_dim: -1
+    shape_cond_dim: 10
+    shape_cond_layer: []
+    shape_embed_dim: -1
+    latent_cond_dim: ${model.dim_detail}
+    latent_cond_layer:
+    - 0
+    latent_embed_dim: -1
+    feat_cond_dim: 229
+    feat_cond_layer:
+    - 0
+datamodule:
+  dataset_path: ./data/RenderPeople
+  data_list: ./lib/dataset/renderpeople.csv
+  cache_path: ${starting_path}
+  num_workers: 16
+  batch_size: 16
+  points_per_frame: 2000
+  load_img: false
+  load_cache: false
+  load_surface: false
+  load_res: 256

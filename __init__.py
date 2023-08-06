@@ -1,10 +1,24 @@
-import bpy
+#import bpy
 import numpy as np
 import glob
 import os
+import sys
+from pathlib import Path
+import hydra
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]  # YOLOv5 root directory
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))  # add ROOT to PATH
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+
+sys.path.insert(1, f'{ROOT}/gdna')
+
+from test import GDNA
 
 # Start global var
-PATH = r'/home/richi/Scrivania/Blender/faces&verts/'
+PATH = r'/home/richi/Scrivania/Blender/tmp/'
+
 
 # End global var
 
@@ -55,4 +69,7 @@ if __name__ == "__main__":
     # Blender path where addons is installed
     # bpy.utils.user_resource('SCRIPTS', path='addons')
 
-    array2mesh()
+    #array2mesh()
+    #obj = GDNA()
+    #obj.action_z_shape()
+    print('test')

@@ -7,7 +7,7 @@ defaults:
 
 hydra:
   run:
-    dir: outputs/${expname}/
+    dir: gdna/outputs/${expname}/
 
 expname: coarse
 resume: true

@@ -1,6 +1,6 @@
 datamodule:
-  dataset_path: ./data/RenderPeople
-  data_list: ./lib/dataset/renderpeople.csv
+  dataset_path: ./gdna/data/RenderPeople
+  data_list: ./gdna/lib/dataset/renderpeople.csv
   cache_path: ${starting_path}
   num_workers: 16
   batch_size: 16

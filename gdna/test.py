@@ -20,8 +20,9 @@ from numpy import savez_compressed
 eval_mode, seed, datamodule, model, expname = None, None, None, None, None
 
 
-@hydra.main(config_path="config", config_name="config")
+@hydra.main(config_path="gdna/config", config_name="config")
 def get_cfg(opt):
+    #print(opt)
     global eval_mode, seed, datamodule, model, expname
     eval_mode = opt.eval_mode
     seed = opt.seed
@@ -29,11 +30,9 @@ def get_cfg(opt):
     model = opt.model
     expname = opt.expname
 
-
 get_cfg()
 
 
-# @hydra.main(config_path="config", config_name="config")
 def pre_load():
     global seed, datamodule, model, expname
     # print(opt.pretty())
@@ -45,7 +44,7 @@ def pre_load():
     # print(opt.datamodule.data_list)
 
     data_processor = DataProcessor(datamodule)
-    checkpoint_path = os.path.join(f'./outputs/{expname}/checkpoints', 'last.ckpt')
+    checkpoint_path = os.path.join(f'./gdna/outputs/{expname}/checkpoints', 'last.ckpt')
 
     model = BaseModel.load_from_checkpoint(
         checkpoint_path=checkpoint_path,
@@ -57,12 +56,12 @@ def pre_load():
 
     renderer = Renderer(256, anti_alias=True)
 
-    max_samples = 60
+    max_samples = 4
 
     smpl_param_zero = torch.zeros((1, 86)).cuda().float()
     smpl_param_zero[:, 0] = 1
 
-    motion_folder = hydra.utils.to_absolute_path('data/aist_demo/seqs')
+    motion_folder = hydra.utils.to_absolute_path('gdna/data/aist_demo/seqs')
     motion_files = sorted(glob.glob(os.path.join(motion_folder, '*.npz')))
     smpl_param_anim = []
     for f in motion_files:
@@ -73,7 +72,6 @@ def pre_load():
     smpl_param_anim = torch.stack(smpl_param_anim).float().cuda()
 
     return meta_info, max_samples, smpl_param_zero, smpl_param_anim, renderer, data_processor
-
 
     if opt.eval_mode == 'z_shape':
         print('Deprecation...')
@@ -118,7 +116,7 @@ def pre_load():
 class GDNA:
 
     def __init__(self):
-        self.output_folder = f'outputs/{expname}/results'
+        self.output_folder = f'gdna/outputs/{expname}/results'
         if not os.path.exists(self.output_folder):
             os.makedirs(self.output_folder)
 
@@ -273,16 +271,17 @@ class GDNA:
                      'z_detail': z_details[i][None],
                      'smpl_params': smpl_param_anim[id_smpl][None],
                      }
-            print(batch)
+            #print(batch)
             batch_list.append(batch)
 
         self.rendering(batch_list, renderer, data_processor)
 
 
 if __name__ == '__main__':
-    print(hydra.utils.to_absolute_path(datamodule.data_list))
+
+
     gDNAObj = GDNA()
-    #print(eval_mode)
+    # print(eval_mode)
     if eval_mode == 'z_shape':
         gDNAObj.action_z_shape()
 

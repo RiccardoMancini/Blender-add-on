@@ -9,7 +9,7 @@ class SMPLServer(torch.nn.Module):
     def __init__(self, gender='male', betas=None):
         super().__init__()
 
-        self.smpl = SMPL(model_path=hydra.utils.to_absolute_path('lib/smpl/smpl_model'),
+        self.smpl = SMPL(model_path=hydra.utils.to_absolute_path('gdna/lib/smpl/smpl_model'),
                          gender=gender,
                          batch_size=1,
                          use_hands=False,

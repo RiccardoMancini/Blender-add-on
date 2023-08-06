@@ -70,6 +70,5 @@ if __name__ == "__main__":
     # bpy.utils.user_resource('SCRIPTS', path='addons')
 
     #array2mesh()
-    #obj = GDNA()
-    #obj.action_z_shape()
-    print('test')
+    obj = GDNA()
+    obj.action_sample()

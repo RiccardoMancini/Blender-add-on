@@ -144,11 +144,11 @@ class GDNA:
                 # print("FACES: ", faces[:3].tolist())
 
                 npz_folder = 'tmp'
-                if not os.path.exists(hydra.utils.to_absolute_path(f'../{npz_folder}')):
-                    os.makedirs((hydra.utils.to_absolute_path(f'../{npz_folder}')))
+                if not os.path.exists(hydra.utils.to_absolute_path(f'./{npz_folder}')):
+                    os.makedirs((hydra.utils.to_absolute_path(f'./{npz_folder}')))
 
-                savez_compressed(hydra.utils.to_absolute_path(f'../{npz_folder}/verts{i}.npz'), verts)
-                savez_compressed(hydra.utils.to_absolute_path(f'../{npz_folder}/faces{i}.npz'), faces)
+                savez_compressed(hydra.utils.to_absolute_path(f'./{npz_folder}/verts{i}.npz'), verts)
+                savez_compressed(hydra.utils.to_absolute_path(f'./{npz_folder}/faces{i}.npz'), faces)
 
                 img_def = render_mesh_dict(mesh_def, mode='xy', render_new=renderer)
                 # img_def = np.concatenate([img_def[:256,:,:], img_def[256:,:,:]],axis=1)

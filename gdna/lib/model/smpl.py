@@ -1,15 +1,25 @@
 import torch
 import hydra
 import numpy as np
+from pathlib import Path
+import sys
+import os
 
 from lib.smpl.smplx.body_models import SMPL
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]  # YOLOv5 root directory
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))  # add ROOT to PATH
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))
+
 
 class SMPLServer(torch.nn.Module):
 
     def __init__(self, gender='male', betas=None):
         super().__init__()
 
-        self.smpl = SMPL(model_path=hydra.utils.to_absolute_path('gdna/lib/smpl/smpl_model'),
+        self.smpl = SMPL(model_path=hydra.utils.to_absolute_path(f'{ROOT}/../smpl/smpl_model'),
                          gender=gender,
                          batch_size=1,
                          use_hands=False,

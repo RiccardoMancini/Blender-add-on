@@ -1,3 +1,9 @@
+bl_info = {
+    "name": "My First Add-on",
+    "blender": (3, 6, 0),
+    "category": "Object",
+}
+
 #import bpy
 import numpy as np
 import glob
@@ -12,7 +18,9 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
+sys.argv[1:] = ['expname=renderpeople', '+experiments=fine', f'+r_path={ROOT}']
 sys.path.insert(1, f'{ROOT}/gdna')
+# print(sys.argv[1:])
 
 from test import GDNA
 
@@ -65,10 +73,38 @@ def array2mesh():
             bpy.context.collection.objects.link(obj)  # Link to scene
 
 
-if __name__ == "__main__":
-    # Blender path where addons is installed
-    # bpy.utils.user_resource('SCRIPTS', path='addons')
+'''class TestClass(bpy.types.Operator):
+    """My Object Moving Script"""      # Use this as a tooltip for menu items and buttons.
+    bl_idname = "object.test_ao"        # Unique identifier for buttons and menu items to reference.
+    bl_label = "Test add-on"         # Display name in the interface.
+    bl_options = {'REGISTER', 'UNDO'}  # Enable undo for the operator.
 
-    #array2mesh()
-    obj = GDNA()
+    def execute(self, context):
+        # Blender path where addons is installed
+        # print(bpy.utils.user_resource('SCRIPTS', path='addons'))
+        obj = GDNA(seed=50)
+        obj.action_sample()
+
+        return {'FINISHED'}
+
+def menu_func(self, context):
+    self.layout.operator(TestClass.bl_idname)
+
+def register():
+    bpy.utils.register_class(TestClass)
+    bpy.types.VIEW3D_MT_object.append(menu_func)  # Adds the new operator to an existing menu.
+
+
+def unregister():
+    bpy.utils.unregister_class(TestClass)
+'''
+
+if __name__ == "__main__":
+    # register()
+
+    obj = GDNA(seed=20, expname='thuman')
     obj.action_sample()
+    # obj.action_z_shape()
+    # obj.action_z_detail()
+    # obj.action_betas()
+    # obj.action_thetas()

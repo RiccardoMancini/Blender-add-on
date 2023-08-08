@@ -1,6 +1,6 @@
 datamodule:
-  dataset_path: ./data/THuman2.0_processed
-  data_list: ./lib/dataset/thuman.csv
+  dataset_path: ${r_path}/gdna/data/THuman2.0_processed
+  data_list: ${r_path}/gdna/lib/dataset/thuman.csv
   cache_path: ${starting_path}
   num_workers: 16
   batch_size: 16

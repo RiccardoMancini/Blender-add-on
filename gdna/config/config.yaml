@@ -1,19 +1,19 @@
 defaults:
   - datamodule: renderpeople
-  - network: lbs 
+  - network: lbs
   - network: shape
   - network: disp
   - network: norm
 
 hydra:
   run:
-    dir: gdna/outputs/${expname}/
+    dir: ${r_path}/gdna/outputs/${expname}/
 
 expname: coarse
 resume: true
 starting_path: 'outputs/coarse/checkpoints/last.ckpt'
 eval_mode: interp
-seed: 0
+seed: 20
 agent_tot: 1
 agent_id: 0
 

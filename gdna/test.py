@@ -85,7 +85,7 @@ class GDNA:
 
         renderer = Renderer(256, anti_alias=True)
 
-        max_samples = 15
+        max_samples = 1
 
         smpl_param_zero = torch.zeros((1, 86)).cuda().float()
         smpl_param_zero[:, 0] = 1
@@ -103,7 +103,8 @@ class GDNA:
         return meta_info, max_samples, smpl_param_zero, smpl_param_anim, renderer, data_processor
 
     def get_mesh(self, batch_list, renderer, data_processor):
-        images_all = []
+        mesh = []
+        bones = []
         with torch.no_grad():
             import time
 
@@ -111,14 +112,21 @@ class GDNA:
                 cond = self.model.prepare_cond(batch)
                 batch_smpl = data_processor.process_smpl({'smpl_params': batch['smpl_params']}, self.model.smpl_server)
 
-                # print(batch_smpl['smpl_jnts'])
+                joints, _, _, _ = self.model.sampler_bone.get_points(batch_smpl['smpl_jnts'])
+                joints = joints.cpu().numpy()
+                #joints = batch_smpl['smpl_jnts'].cpu().numpy()
+                b = {'joints': joints}
+                bones.append(b)
 
                 mesh_cano = self.model.extract_mesh(batch_smpl['smpl_verts_cano'], batch_smpl['smpl_tfs'], cond,
                                                     res_up=4)
                 mesh_def = self.model.deform_mesh(mesh_cano, batch_smpl['smpl_tfs'])
-
+                #print(mesh_def)
                 verts = mesh_def['verts'].cpu().numpy()
                 faces = mesh_def['faces'].cpu().numpy()
+
+                d = {'verts': verts, 'faces': faces}
+                mesh.append(d)
 
                 npz_folder = 'tmp'
                 if not os.path.exists(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}')):
@@ -135,6 +143,8 @@ class GDNA:
                     os.path.join(self.output_folder,
                                  '%s_seed%d_%d.png' % (self.eval_mode, self.seed, int(time.time()))),
                     [img_def], codec='libx264')
+        return mesh, bones
+
 
     def action_z_shape(self, z_shape=None, z_detail=None):
         self.eval_mode = 'z_shape'
@@ -252,4 +262,5 @@ class GDNA:
             # print(batch)
             batch_list.append(batch)
 
-        self.get_mesh(batch_list, renderer, data_processor)
+        mesh, _ = self.get_mesh(batch_list, renderer, data_processor)
+        return mesh

@@ -7,7 +7,7 @@ from functools import partial
 def show_progress(area):
     if os.path.exists('/home/richi/Scrivania/stop/'):
         area.header_text_set(None)
-        print('Created!')
+        print('Loaded!')
         return
     else:
         msg = "\r{0}{1}".format('Loading', "."*show_progress.n_dot)

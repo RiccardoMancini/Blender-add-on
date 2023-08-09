@@ -21,7 +21,7 @@ from pathlib import Path
 import omegaconf
 
 FILE = Path(__file__).resolve()
-ROOTD = FILE.parents[0]  # YOLOv5 root directory
+ROOTD = FILE.parents[1]
 if str(ROOTD) not in sys.path:
     sys.path.append(str(ROOTD))  # add ROOT to PATH
 ROOTD = Path(os.path.relpath(ROOTD, Path.cwd()))  # relative
@@ -36,7 +36,6 @@ def get_cfg(opt):
     CFG_MODEL = opt.model
     EXPNAME = opt.expname
     ROOT = opt.r_path
-    print(ROOT)
 
 
 class GDNA:
@@ -44,7 +43,7 @@ class GDNA:
         if expname == 'thuman':
             self.expname = expname
             sys.argv[1:] = ['expname=thuman', 'model.norm_network.multires=6', '+experiments=fine', 'datamodule=thuman',
-                            f'+r_path={ROOTD}/..']
+                            f'+r_path={ROOTD}']
             # self.datamodule = omegaconf.OmegaConf.load(f'{ROOT}/gdna/config/datamodule/thuman.yaml').datamodule
             # self.cfg_model.norm_network.multires = 6
         else:
@@ -120,8 +119,6 @@ class GDNA:
 
                 verts = mesh_def['verts'].cpu().numpy()
                 faces = mesh_def['faces'].cpu().numpy()
-                # print("VERTS: ", verts[:3].tolist())
-                # print("FACES: ", faces[:3].tolist())
 
                 npz_folder = 'tmp'
                 if not os.path.exists(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}')):
@@ -138,11 +135,6 @@ class GDNA:
                     os.path.join(self.output_folder,
                                  '%s_seed%d_%d.png' % (self.eval_mode, self.seed, int(time.time()))),
                     [img_def], codec='libx264')
-
-                '''images_all.append(img_def)
-                if i % 10 == 0:
-                    imageio.mimsave(os.path.join(output_folder, '%s_seed%d.mp4' % (opt.eval_mode, opt.seed)), images_all,
-                                    codec='libx264')'''
 
     def action_z_shape(self, z_shape=None, z_detail=None):
         self.eval_mode = 'z_shape'

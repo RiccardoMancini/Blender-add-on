@@ -1,7 +1,7 @@
 tmp/
 .idea/
-gdna/__pycache__/
-
+__pycache__/
+*.pyc
 
 /gdna/data/
 /gdna/outputs/

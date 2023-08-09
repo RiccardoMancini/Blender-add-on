@@ -4,16 +4,14 @@ bl_info = {
     "category": "Object",
 }
 
-#import bpy
+import bpy
 import numpy as np
-import glob
 import os
 import sys
 from pathlib import Path
-import hydra
 
 FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]  # YOLOv5 root directory
+ROOT = FILE.parents[0]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
@@ -73,7 +71,7 @@ def array2mesh():
             bpy.context.collection.objects.link(obj)  # Link to scene
 
 
-'''class TestClass(bpy.types.Operator):
+class TestClass(bpy.types.Operator):
     """My Object Moving Script"""      # Use this as a tooltip for menu items and buttons.
     bl_idname = "object.test_ao"        # Unique identifier for buttons and menu items to reference.
     bl_label = "Test add-on"         # Display name in the interface.
@@ -97,13 +95,13 @@ def register():
 
 def unregister():
     bpy.utils.unregister_class(TestClass)
-'''
+
 
 if __name__ == "__main__":
-    # register()
+    register()
 
-    obj = GDNA(seed=20, expname='thuman')
-    obj.action_sample()
+    # obj = GDNA(seed=20, expname='thuman')
+    # obj.action_sample()
     # obj.action_z_shape()
     # obj.action_z_detail()
     # obj.action_betas()

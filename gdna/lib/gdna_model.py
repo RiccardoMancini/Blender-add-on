@@ -26,13 +26,13 @@ class BaseModel(pl.LightningModule):
         self.opt = opt
 
         self.network = ImplicitNetwork(**opt.network)
-        print(self.network)
+        # print(self.network)
 
         self.deformer = hydra.utils.instantiate(opt.deformer, opt.deformer)
-        print(self.deformer)
+        # print(self.deformer)
 
         self.generator = Generator(opt.dim_shape)
-        print(self.generator)
+        # print(self.generator)
 
         self.smpl_server = SMPLServer(gender='neutral')
 
@@ -48,12 +48,12 @@ class BaseModel(pl.LightningModule):
 
         if opt.stage=='fine':
             self.norm_network = ImplicitNetwork(**opt.norm_network)
-            print(self.norm_network)
+            # print(self.norm_network)
 
             if opt.use_gan:
                 from lib.model.losses import GANLoss
                 self.gan_loss = GANLoss(self.opt)
-                print(self.gan_loss.discriminator)
+                # print(self.gan_loss.discriminator)
 
         self.render = DepthModule(**self.opt.ray_tracer)
 

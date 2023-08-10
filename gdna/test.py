@@ -18,7 +18,7 @@ from lib.model.helpers import Dict2Class
 import pandas
 from numpy import savez_compressed
 from pathlib import Path
-import omegaconf
+import utils.glob_vars as gl
 
 FILE = Path(__file__).resolve()
 ROOTD = FILE.parents[1]
@@ -39,7 +39,8 @@ def get_cfg(opt):
 
 
 class GDNA:
-    def __init__(self, seed: int = 42, expname=None):
+    def __init__(self, max_samples: int = 1, seed: int = 42, expname=None):
+        self.model, self.eval_mode, self.renderer, self.data_processor = None, None, None, None
         if expname == 'thuman':
             self.expname = expname
             sys.argv[1:] = ['expname=thuman', 'model.norm_network.multires=6', '+experiments=fine', 'datamodule=thuman',
@@ -50,10 +51,9 @@ class GDNA:
             self.expname = 'renderpeople'
         # print(self.datamodule, self.expname)
         get_cfg()
-        self.seed, self.datamodule, self.cfg_model, self.expname = \
-            seed, DATAMODULE, CFG_MODEL, EXPNAME
+        self.max_samples, self.seed, self.datamodule, self.cfg_model, self.expname = \
+            max_samples, seed, DATAMODULE, CFG_MODEL, EXPNAME
 
-        self.model, self.eval_mode = None, None
         self.output_folder = f'{ROOT}/gdna/outputs/{self.expname}/results'
         if not os.path.exists(self.output_folder):
             os.makedirs(self.output_folder)
@@ -72,7 +72,7 @@ class GDNA:
         meta_info = Dict2Class({'n_samples': len(scan_info)})
         # print(opt.datamodule.data_list)
 
-        data_processor = DataProcessor(self.datamodule)
+        self.data_processor = DataProcessor(self.datamodule)
         checkpoint_path = os.path.join(f'{ROOT}/gdna/outputs/{self.expname}/checkpoints', 'last.ckpt')
 
         self.model = BaseModel.load_from_checkpoint(
@@ -80,12 +80,10 @@ class GDNA:
             strict=False,
             opt=self.cfg_model,
             meta_info=meta_info,
-            data_processor=data_processor,
+            data_processor=self.data_processor,
         ).cuda()
 
-        renderer = Renderer(256, anti_alias=True)
-
-        max_samples = 1
+        self.renderer = Renderer(256, anti_alias=True)
 
         smpl_param_zero = torch.zeros((1, 86)).cuda().float()
         smpl_param_zero[:, 0] = 1
@@ -100,42 +98,46 @@ class GDNA:
             smpl_param_anim.append(torch.tensor(smpl_params))
         smpl_param_anim = torch.stack(smpl_param_anim).float().cuda()
 
-        return meta_info, max_samples, smpl_param_zero, smpl_param_anim, renderer, data_processor
+        return meta_info, smpl_param_zero, smpl_param_anim
 
-    def get_mesh(self, batch_list, renderer, data_processor):
+    def get_mesh(self, batch_list):
         mesh = []
         bones = []
         with torch.no_grad():
             import time
 
             for i, batch in enumerate(tqdm(batch_list)):
+                # print(list(batch.keys())[0])
+                if self.eval_mode == 'sample':
+                    batch = batch[list(batch.keys())[0]]
                 cond = self.model.prepare_cond(batch)
-                batch_smpl = data_processor.process_smpl({'smpl_params': batch['smpl_params']}, self.model.smpl_server)
+                batch_smpl = self.data_processor.process_smpl({'smpl_params': batch['smpl_params']},
+                                                              self.model.smpl_server)
 
-                joints, _, _, _ = self.model.sampler_bone.get_points(batch_smpl['smpl_jnts'])
+                '''joints, _, _, _ = self.model.sampler_bone.get_points(batch_smpl['smpl_jnts'])
                 joints = joints.cpu().numpy()
-                #joints = batch_smpl['smpl_jnts'].cpu().numpy()
+                # joints = batch_smpl['smpl_jnts'].cpu().numpy()
                 b = {'joints': joints}
-                bones.append(b)
+                bones.append(b)'''
 
                 mesh_cano = self.model.extract_mesh(batch_smpl['smpl_verts_cano'], batch_smpl['smpl_tfs'], cond,
                                                     res_up=4)
                 mesh_def = self.model.deform_mesh(mesh_cano, batch_smpl['smpl_tfs'])
-                #print(mesh_def)
+                # print(mesh_def)
                 verts = mesh_def['verts'].cpu().numpy()
                 faces = mesh_def['faces'].cpu().numpy()
 
                 d = {'verts': verts, 'faces': faces}
                 mesh.append(d)
 
-                npz_folder = 'tmp'
+                '''npz_folder = 'tmp'
                 if not os.path.exists(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}')):
                     os.makedirs((hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}')))
 
                 savez_compressed(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}/verts{i}.npz'), verts)
-                savez_compressed(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}/faces{i}.npz'), faces)
+                savez_compressed(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}/faces{i}.npz'), faces)'''
 
-                img_def = render_mesh_dict(mesh_def, mode='xy', render_new=renderer)
+                img_def = render_mesh_dict(mesh_def, mode='xy', render_new=self.renderer)
                 # img_def = np.concatenate([img_def[:256,:,:], img_def[256:,:,:]],axis=1)
                 img_def = np.concatenate([img_def[256:, :, :]], axis=1)
 
@@ -145,16 +147,15 @@ class GDNA:
                     [img_def], codec='libx264')
         return mesh, bones
 
-
     def action_z_shape(self, z_shape=None, z_detail=None):
         self.eval_mode = 'z_shape'
-        meta_info, max_samples, smpl_param_zero, smpl_param_anim, renderer, data_processor = self.pre_load()
+        meta_info, smpl_param_zero, smpl_param_anim = self.pre_load()
 
         batch_list = []
 
         idx_b = np.random.randint(0, meta_info.n_samples)
 
-        while len(batch_list) < max_samples:
+        while len(batch_list) < self.max_samples:
             idx_a = idx_b
             idx_b = np.random.randint(0, meta_info.n_samples)
 
@@ -171,17 +172,17 @@ class GDNA:
 
                 batch_list.append(batch)
 
-        self.get_mesh(batch_list, renderer, data_processor)
+        self.get_mesh(batch_list)
 
     def action_z_detail(self, z_shape=None, z_detail=None):
         self.eval_mode = 'z_detail'
-        meta_info, max_samples, smpl_param_zero, smpl_param_anim, renderer, data_processor = self.pre_load()
+        meta_info, smpl_param_zero, smpl_param_anim = self.pre_load()
 
         batch_list = []
 
         idx_b = np.random.randint(0, meta_info.n_samples)
 
-        while len(batch_list) < max_samples:
+        while len(batch_list) < self.max_samples:
             idx_a = idx_b
             idx_b = np.random.randint(0, meta_info.n_samples)
 
@@ -198,11 +199,11 @@ class GDNA:
 
                 batch_list.append(batch)
 
-        self.get_mesh(batch_list, renderer, data_processor)
+        self.get_mesh(batch_list)
 
     def action_betas(self, z_shape=None, z_detail=None):
         self.eval_mode = 'betas'
-        _, _, smpl_param_zero, _, renderer, data_processor = self.pre_load()
+        _, smpl_param_zero, _ = self.pre_load()
 
         batch_list = []
 
@@ -224,43 +225,54 @@ class GDNA:
 
             batch_list.append(batch)
 
-        self.get_mesh(batch_list, renderer, data_processor)
+        self.get_mesh(batch_list)
 
-    def action_thetas(self, z_shape=None, z_detail=None):
+    def action_thetas(self, batch=None):
         self.eval_mode = 'thetas'
-        _, _, _, smpl_param_anim, renderer, data_processor = self.pre_load()
-
+        _, _, smpl_param_anim = self.pre_load()
         batch_list = []
+        if batch is None:
+            z_shape = self.model.z_shapes.weight.data.mean(0)
+            z_detail = self.model.z_details.weight.data.mean(0)
+            for i in range(len(smpl_param_anim)):
+                batch = {'z_shape': z_shape[None],
+                         'z_detail': z_detail[None],
+                         'smpl_params': smpl_param_anim[[i]]
+                         }
 
-        z_shape = self.model.z_shapes.weight.data.mean(0)
-        z_detail = self.model.z_details.weight.data.mean(0)
+                batch_list.append(batch)
+        else:
+            j = torch.where((smpl_param_anim == batch['smpl_params'].unsqueeze(1))
+                            .prod(dim=2))[1].cpu().numpy()[0].item()
 
-        for i in range(len(smpl_param_anim)):
-            batch = {'z_shape': z_shape[None],
-                     'z_detail': z_detail[None],
-                     'smpl_params': smpl_param_anim[[i]]
-                     }
+            for i in range(len(smpl_param_anim.tolist()[j - 10:j + 10])):
+                batch = {'z_shape': batch['z_shape'],
+                         'z_detail': batch['z_detail'],
+                         'smpl_params': smpl_param_anim[[i + (j - 10)]]
+                         }
 
-            batch_list.append(batch)
+                batch_list.append(batch)
 
-        self.get_mesh(batch_list, renderer, data_processor)
+        mesh, _ = self.get_mesh(batch_list)
+        return mesh, batch_list
 
     def action_sample(self):
         self.eval_mode = 'sample'
-        meta_info, max_samples, smpl_param_zero, smpl_param_anim, renderer, data_processor = self.pre_load()
+        meta_info, smpl_param_zero, smpl_param_anim = self.pre_load()
 
         batch_list = []
 
-        z_shapes, z_details = self.model.sample_codes(max_samples)
+        z_shapes, z_details = self.model.sample_codes(self.max_samples)
 
         for i in range(len(z_shapes)):
             id_smpl = np.random.randint(len(smpl_param_anim))
-            batch = {'z_shape': z_shapes[i][None],
-                     'z_detail': z_details[i][None],
-                     'smpl_params': smpl_param_anim[id_smpl][None],
+            batch = {f'batch{i}': {'z_shape': z_shapes[i][None],
+                                   'z_detail': z_details[i][None],
+                                   'smpl_params': smpl_param_anim[id_smpl][None],
+                                   }
                      }
             # print(batch)
             batch_list.append(batch)
 
-        mesh, _ = self.get_mesh(batch_list, renderer, data_processor)
-        return mesh
+        mesh, _ = self.get_mesh(batch_list)
+        return mesh, batch_list

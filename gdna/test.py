@@ -40,7 +40,8 @@ def get_cfg(opt):
 
 class GDNA:
     def __init__(self, max_samples: int = 1, seed: int = 42, expname=None):
-        self.model, self.eval_mode, self.renderer, self.data_processor = None, None, None, None
+        self.model, self.eval_mode, self.renderer, self.data_processor, self.meta_info, \
+            self.smpl_param_zero, self.smpl_param_anim = None, None, None, None, None, None, None
         if expname == 'thuman':
             self.expname = expname
             sys.argv[1:] = ['expname=thuman', 'model.norm_network.multires=6', '+experiments=fine', 'datamodule=thuman',
@@ -64,12 +65,14 @@ class GDNA:
         except (Exception,):
             print('GPU is not detected!')
 
+        self.pre_load()
+
     def pre_load(self):
         pl.seed_everything(self.seed, workers=True)
         torch.set_num_threads(10)
 
         scan_info = pandas.read_csv(hydra.utils.to_absolute_path(self.datamodule.data_list))
-        meta_info = Dict2Class({'n_samples': len(scan_info)})
+        self.meta_info = Dict2Class({'n_samples': len(scan_info)})
         # print(opt.datamodule.data_list)
 
         self.data_processor = DataProcessor(self.datamodule)
@@ -79,26 +82,24 @@ class GDNA:
             checkpoint_path=checkpoint_path,
             strict=False,
             opt=self.cfg_model,
-            meta_info=meta_info,
+            meta_info=self.meta_info,
             data_processor=self.data_processor,
         ).cuda()
 
         self.renderer = Renderer(256, anti_alias=True)
 
-        smpl_param_zero = torch.zeros((1, 86)).cuda().float()
-        smpl_param_zero[:, 0] = 1
+        self.smpl_param_zero = torch.zeros((1, 86)).cuda().float()
+        self.smpl_param_zero[:, 0] = 1
 
         motion_folder = hydra.utils.to_absolute_path(f'{ROOT}/gdna/data/aist_demo/seqs')
         motion_files = sorted(glob.glob(os.path.join(motion_folder, '*.npz')))
-        smpl_param_anim = []
+        self.smpl_param_anim = []
         for f in motion_files:
             f = np.load(f)
             smpl_params = np.zeros(86)
             smpl_params[0], smpl_params[4:76] = 1, f['pose']
-            smpl_param_anim.append(torch.tensor(smpl_params))
-        smpl_param_anim = torch.stack(smpl_param_anim).float().cuda()
-
-        return meta_info, smpl_param_zero, smpl_param_anim
+            self.smpl_param_anim.append(torch.tensor(smpl_params))
+        self.smpl_param_anim = torch.stack(self.smpl_param_anim).float().cuda()
 
     def get_mesh(self, batch_list):
         mesh = []
@@ -106,10 +107,11 @@ class GDNA:
         with torch.no_grad():
             import time
 
-            for i, batch in enumerate(tqdm(batch_list)):
+            for i, batch in enumerate(tqdm(batch_list, desc=self.eval_mode)):
                 # print(list(batch.keys())[0])
                 if self.eval_mode == 'sample':
                     batch = batch[list(batch.keys())[0]]
+
                 cond = self.model.prepare_cond(batch)
                 batch_smpl = self.data_processor.process_smpl({'smpl_params': batch['smpl_params']},
                                                               self.model.smpl_server)
@@ -147,108 +149,149 @@ class GDNA:
                     [img_def], codec='libx264')
         return mesh, bones
 
-    def action_z_shape(self, z_shape=None, z_detail=None):
+    def action_z_shape(self, batch=None):
         self.eval_mode = 'z_shape'
-        meta_info, smpl_param_zero, smpl_param_anim = self.pre_load()
-
         batch_list = []
+        if batch is None:
+            idx_b = np.random.randint(0, self.meta_info.n_samples)
+            while len(batch_list) < self.max_samples:
+                idx_a = idx_b
+                idx_b = np.random.randint(0, self.meta_info.n_samples)
 
-        idx_b = np.random.randint(0, meta_info.n_samples)
+                z_shape_a = self.model.z_shapes.weight.data[idx_a]
+                z_shape_b = self.model.z_shapes.weight.data[idx_b]
+                z_detail = self.model.z_details.weight.data.mean(0)
 
-        while len(batch_list) < self.max_samples:
-            idx_a = idx_b
-            idx_b = np.random.randint(0, meta_info.n_samples)
+                for i in range(10):
+                    z_shape = torch.lerp(z_shape_a, z_shape_b, i / 10)
 
-            z_shape_a = self.model.z_shapes.weight.data[idx_a]
-            z_shape_b = self.model.z_shapes.weight.data[idx_b]
-            z_detail = self.model.z_details.weight.data.mean(0)
+                    batch = {'z_shape': z_shape[None],
+                             'z_detail': z_detail[None],
+                             'smpl_params': self.smpl_param_zero}
 
-            for i in range(10):
-                z_shape = torch.lerp(z_shape_a, z_shape_b, i / 10)
+                    batch_list.append(batch)
+        else:
+            z_shape = None
+            while len(batch_list) < self.max_samples:
+                if len(batch_list) == 0:
+                    z_shape_a = batch['z_shape'].squeeze()
+                else:
+                    z_shape_a = z_shape
 
-                batch = {'z_shape': z_shape[None],
-                         'z_detail': z_detail[None],
-                         'smpl_params': smpl_param_zero}
+                idx_b = np.random.randint(0, self.meta_info.n_samples)
+                z_shape_b = self.model.z_shapes.weight.data[idx_b]
 
-                batch_list.append(batch)
+                for i in range(10):
+                    z_shape = torch.lerp(z_shape_a, z_shape_b, i / 10)
 
-        self.get_mesh(batch_list)
+                    batch = {'z_shape': z_shape[None],
+                             'z_detail': batch['z_detail'],
+                             'smpl_params': batch['smpl_params']}
 
-    def action_z_detail(self, z_shape=None, z_detail=None):
+                    batch_list.append(batch)
+
+        mesh, _ = self.get_mesh(batch_list)
+        return mesh, batch_list
+
+    def action_z_detail(self, batch=None):
         self.eval_mode = 'z_detail'
-        meta_info, smpl_param_zero, smpl_param_anim = self.pre_load()
-
         batch_list = []
 
-        idx_b = np.random.randint(0, meta_info.n_samples)
+        if batch is None:
+            idx_b = np.random.randint(0, self.meta_info.n_samples)
+            while len(batch_list) < self.max_samples:
+                idx_a = idx_b
+                idx_b = np.random.randint(0, self.meta_info.n_samples)
 
-        while len(batch_list) < self.max_samples:
-            idx_a = idx_b
-            idx_b = np.random.randint(0, meta_info.n_samples)
+                z_detail_a = self.model.z_details.weight.data[idx_a]
+                z_detail_b = self.model.z_details.weight.data[idx_b]
+                z_shape = self.model.z_shapes.weight.data.mean(0)
 
-            z_detail_a = self.model.z_details.weight.data[idx_a]
-            z_detail_b = self.model.z_details.weight.data[idx_b]
-            z_shape = self.model.z_shapes.weight.data.mean(0)
+                for i in range(10):
+                    z_detail = torch.lerp(z_detail_a, z_detail_b, i / 10)
 
-            for i in range(10):
-                z_detail = torch.lerp(z_detail_a, z_detail_b, i / 10)
+                    batch = {'z_shape': z_shape[None],
+                             'z_detail': z_detail[None],
+                             'smpl_params': self.smpl_param_zero}
 
-                batch = {'z_shape': z_shape[None],
-                         'z_detail': z_detail[None],
-                         'smpl_params': smpl_param_zero}
+                    batch_list.append(batch)
+        else:
+            z_detail = None
+            while len(batch_list) < self.max_samples:
+                if len(batch_list) == 0:
+                    z_detail_a = batch['z_detail'].squeeze()
+                else:
+                    z_detail_a = z_detail
+                idx_b = np.random.randint(0, self.meta_info.n_samples)
+                z_detail_b = self.model.z_details.weight.data[idx_b]
+                for i in range(10):
+                    z_detail = torch.lerp(z_detail_a, z_detail_b, i / 10)
 
-                batch_list.append(batch)
+                    batch = {'z_shape': batch['z_shape'],
+                             'z_detail': z_detail[None],
+                             'smpl_params': batch['smpl_params']}
 
-        self.get_mesh(batch_list)
+                    batch_list.append(batch)
 
-    def action_betas(self, z_shape=None, z_detail=None):
+        mesh, _ = self.get_mesh(batch_list)
+        return mesh, batch_list
+
+    def action_betas(self, batch=None):
         self.eval_mode = 'betas'
-        _, smpl_param_zero, _ = self.pre_load()
 
         batch_list = []
-
-        z_shape = self.model.z_shapes.weight.data.mean(0)
-        z_detail = self.model.z_details.weight.data.mean(0)
-
         betas = torch.cat([torch.linspace(0, -2, 10),
                            torch.linspace(-2, 0, 10),
                            torch.linspace(0, 2, 10),
                            torch.linspace(2, 0, 10)])
+        if batch is None:
+            z_shape = self.model.z_shapes.weight.data.mean(0)
+            z_detail = self.model.z_details.weight.data.mean(0)
 
-        for i in range(len(betas)):
-            smpl_param = smpl_param_zero.clone()
-            smpl_param[:, -10] = betas[i]
+            for i in range(len(betas)):
+                smpl_param = self.smpl_param_zero.clone()
+                smpl_param[:, -10] = betas[i]
 
-            batch = {'z_shape': z_shape[None],
-                     'z_detail': z_detail[None],
-                     'smpl_params': smpl_param}
+                batch = {'z_shape': z_shape[None],
+                         'z_detail': z_detail[None],
+                         'smpl_params': smpl_param}
 
-            batch_list.append(batch)
+                batch_list.append(batch)
+        else:
+            for i in range(len(betas)):
+                smpl_param = batch['smpl_params'].clone()
+                smpl_param[:, -10] = betas[i]
 
-        self.get_mesh(batch_list)
+                batch = {'z_shape': batch['z_shape'],
+                         'z_detail': batch['z_detail'],
+                         'smpl_params': smpl_param}
+
+                batch_list.append(batch)
+
+        mesh, _ = self.get_mesh(batch_list)
+        return mesh, batch_list
 
     def action_thetas(self, batch=None):
         self.eval_mode = 'thetas'
-        _, _, smpl_param_anim = self.pre_load()
         batch_list = []
         if batch is None:
             z_shape = self.model.z_shapes.weight.data.mean(0)
             z_detail = self.model.z_details.weight.data.mean(0)
-            for i in range(len(smpl_param_anim)):
+            for i in range(len(self.smpl_param_anim)):
                 batch = {'z_shape': z_shape[None],
                          'z_detail': z_detail[None],
-                         'smpl_params': smpl_param_anim[[i]]
+                         'smpl_params': self.smpl_param_anim[[i]]
                          }
 
                 batch_list.append(batch)
         else:
-            j = torch.where((smpl_param_anim == batch['smpl_params'].unsqueeze(1))
+            j = torch.where((self.smpl_param_anim == batch['smpl_params'].unsqueeze(1))
                             .prod(dim=2))[1].cpu().numpy()[0].item()
 
-            for i in range(len(smpl_param_anim.tolist()[j - 10:j + 10])):
+            for i in range(len(self.smpl_param_anim.tolist()[j - 20:j + 20])):
                 batch = {'z_shape': batch['z_shape'],
                          'z_detail': batch['z_detail'],
-                         'smpl_params': smpl_param_anim[[i + (j - 10)]]
+                         'smpl_params': self.smpl_param_anim[[i + (j - 10)]]
                          }
 
                 batch_list.append(batch)
@@ -258,18 +301,17 @@ class GDNA:
 
     def action_sample(self):
         self.eval_mode = 'sample'
-        meta_info, smpl_param_zero, smpl_param_anim = self.pre_load()
 
         batch_list = []
 
         z_shapes, z_details = self.model.sample_codes(self.max_samples)
 
         for i in range(len(z_shapes)):
-            id_smpl = np.random.randint(len(smpl_param_anim))
-            batch = {f'batch{i}': {'z_shape': z_shapes[i][None],
-                                   'z_detail': z_details[i][None],
-                                   'smpl_params': smpl_param_anim[id_smpl][None],
-                                   }
+            id_smpl = np.random.randint(len(self.smpl_param_anim))
+            batch = {f'batch_{i}': {'z_shape': z_shapes[i][None],
+                                    'z_detail': z_details[i][None],
+                                    'smpl_params': self.smpl_param_anim[id_smpl][None],
+                                    }
                      }
             # print(batch)
             batch_list.append(batch)

@@ -6,11 +6,13 @@ bl_info = {
     "category": "Object",
 }
 
-#import bpy
+# import bpy
 import os
+import pickle
 import sys
 import torch
 import utils.glob_vars as gl
+import numpy as np
 from pathlib import Path
 from functools import partial
 from threading import Thread
@@ -25,7 +27,6 @@ sys.argv[1:] = ['expname=renderpeople', '+experiments=fine', f'+r_path={ROOT}']
 sys.path.insert(1, f'{ROOT}/gdna')
 
 from test import GDNA
-
 
 
 # Blender path where addons is installed
@@ -47,39 +48,18 @@ class ThreadWithReturnValue(Thread):
         return self._return
 
 
-def removeMeshFromMemory(passedName):
-    print("removeMeshFromMemory:[%s]." % passedName)
-    # Extra test because this can crash Blender if not done correctly.
-    result = False
-    mesh = bpy.data.meshes.get(passedName)
-    if mesh != None:
-        if mesh.users == 0:
-            try:
-                mesh.user_clear()
-                can_continue = True
-            except:
-                can_continue = False
+def save_tmp(eval_mode, seed, expname):
+    np.savez(f'{eval_mode}_{seed}_{expname}.npz', *gl.MESH_GEN)
 
-            if can_continue == True:
-                try:
-                    bpy.data.meshes.remove(mesh)
-                    result = True
-                    print("removeMeshFromMemory: MESH [" + passedName + "] removed from memory.")
-                except:
-                    result = False
-                    print("removeMeshFromMemory: FAILED to remove [" + passedName + "] from memory.")
-            else:
-                # Unable to clear users, something is holding a reference to it.
-                # Can't risk removing. Favor leaving it in memory instead of risking a crash.
-                print("removeMeshFromMemory: Unable to clear users for MESH, something is holding a reference to it.")
-                result = False
-        else:
-            print("removeMeshFromMemory: Unable to remove MESH because it still has [" + str(mesh.users) + "] users.")
-    else:
-        # We could not fetch it, it does not exist in memory, essentially removed.
-        print("We could not fetch MESH [%s], it does not exist in memory, essentially removed." % passedName)
-        result = True
-    return result
+    # TODO: salvare gl.ACT_GEN (Use torch.save(tensor, 'file.pt') even for list of tensor
+
+
+def load_tmp(eval_mode, seed, expname):
+    # TODO: 1) check se esiste 2) sistemare le directory
+    loaded_data = np.load(f'{eval_mode}_{seed}_{expname}.npz', allow_pickle=True)
+    gl.MESH_GEN = [loaded_data[f"arr_{i}"][()] for i in range(len(loaded_data.files))]
+
+    # TODO: torch.load('file.pt'))
 
 
 def array2mesh(verts, faces, replace=False):
@@ -218,10 +198,10 @@ def unregister():
 
 if __name__ == "__main__":
     # register()
-    obj = GDNA(max_samples=1, seed=45, expname='thuman')
+    obj = GDNA(max_samples=1, seed=45)
     _, gl.BATCH_GEN = obj.action_sample()
-    obj.max_samples = 20
+    # obj.max_samples = 20
     gl.MESH_GEN, gl.ACT_GEN = obj.action_z_shape(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
-    gl.MESH_GEN, gl.ACT_GEN = obj.action_z_detail(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
-    gl.MESH_GEN, gl.ACT_GEN = obj.action_betas(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
-    gl.MESH_GEN, gl.ACT_GEN = obj.action_thetas(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
+    # gl.MESH_GEN, gl.ACT_GEN = obj.action_z_detail(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
+    # gl.MESH_GEN, gl.ACT_GEN = obj.action_betas(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
+    # gl.MESH_GEN, gl.ACT_GEN = obj.action_thetas(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])

@@ -18,8 +18,9 @@ from lib.model.helpers import Dict2Class
 import pandas
 from numpy import savez_compressed
 from pathlib import Path
-import utils.glob_vars as gl
+#import utils.glob_vars as gl
 
+# Start global var
 FILE = Path(__file__).resolve()
 ROOTD = FILE.parents[1]
 if str(ROOTD) not in sys.path:
@@ -27,6 +28,12 @@ if str(ROOTD) not in sys.path:
 ROOTD = Path(os.path.relpath(ROOTD, Path.cwd()))  # relative
 
 DATAMODULE, CFG_MODEL, EXPNAME, ROOT = None, None, None, None
+
+BATCH_GEN = []
+ACT_GEN = []
+MESH_GEN = []
+
+# End global var
 
 
 @hydra.main(config_path="gdna/config", config_name="config")
@@ -102,8 +109,8 @@ class GDNA:
         self.smpl_param_anim = torch.stack(self.smpl_param_anim).float().cuda()
 
     def get_mesh(self, batch_list):
-        mesh = []
         bones = []
+        MESH_GEN.clear()
         with torch.no_grad():
             import time
 
@@ -130,14 +137,7 @@ class GDNA:
                 faces = mesh_def['faces'].cpu().numpy()
 
                 d = {'verts': verts, 'faces': faces}
-                mesh.append(d)
-
-                '''npz_folder = 'tmp'
-                if not os.path.exists(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}')):
-                    os.makedirs((hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}')))
-
-                savez_compressed(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}/verts{i}.npz'), verts)
-                savez_compressed(hydra.utils.to_absolute_path(f'{ROOT}/{npz_folder}/faces{i}.npz'), faces)'''
+                MESH_GEN.append(d)
 
                 img_def = render_mesh_dict(mesh_def, mode='xy', render_new=self.renderer)
                 # img_def = np.concatenate([img_def[:256,:,:], img_def[256:,:,:]],axis=1)
@@ -147,7 +147,6 @@ class GDNA:
                     os.path.join(self.output_folder,
                                  '%s_seed%d_%d.png' % (self.eval_mode, self.seed, int(time.time()))),
                     [img_def], codec='libx264')
-        return mesh, bones
 
     def action_z_shape(self, batch=None):
         self.eval_mode = 'z_shape'
@@ -190,8 +189,8 @@ class GDNA:
 
                     batch_list.append(batch)
 
-        mesh, _ = self.get_mesh(batch_list)
-        return mesh, batch_list
+        self.get_mesh(batch_list)
+        return batch_list
 
     def action_z_detail(self, batch=None):
         self.eval_mode = 'z_detail'
@@ -233,8 +232,8 @@ class GDNA:
 
                     batch_list.append(batch)
 
-        mesh, _ = self.get_mesh(batch_list)
-        return mesh, batch_list
+        self.get_mesh(batch_list)
+        return batch_list
 
     def action_betas(self, batch=None):
         self.eval_mode = 'betas'
@@ -268,8 +267,8 @@ class GDNA:
 
                 batch_list.append(batch)
 
-        mesh, _ = self.get_mesh(batch_list)
-        return mesh, batch_list
+        self.get_mesh(batch_list)
+        return batch_list
 
     def action_thetas(self, batch=None):
         self.eval_mode = 'thetas'
@@ -296,8 +295,8 @@ class GDNA:
 
                 batch_list.append(batch)
 
-        mesh, _ = self.get_mesh(batch_list)
-        return mesh, batch_list
+        self.get_mesh(batch_list)
+        return batch_list
 
     def action_sample(self):
         self.eval_mode = 'sample'
@@ -316,5 +315,5 @@ class GDNA:
             # print(batch)
             batch_list.append(batch)
 
-        mesh, _ = self.get_mesh(batch_list)
-        return mesh, batch_list
+        self.get_mesh(batch_list)
+        return batch_list

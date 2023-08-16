@@ -18,7 +18,8 @@ from lib.model.helpers import Dict2Class
 import pandas
 from numpy import savez_compressed
 from pathlib import Path
-#import utils.glob_vars as gl
+
+# import utils.glob_vars as gl
 
 # Start global var
 FILE = Path(__file__).resolve()
@@ -32,6 +33,7 @@ DATAMODULE, CFG_MODEL, EXPNAME, ROOT = None, None, None, None
 BATCH_GEN = []
 ACT_GEN = []
 MESH_GEN = []
+
 
 # End global var
 
@@ -304,16 +306,17 @@ class GDNA:
         batch_list = []
 
         z_shapes, z_details = self.model.sample_codes(self.max_samples)
-
+        x = len(BATCH_GEN)
         for i in range(len(z_shapes)):
             id_smpl = np.random.randint(len(self.smpl_param_anim))
-            batch = {f'batch_{i}': {'z_shape': z_shapes[i][None],
-                                    'z_detail': z_details[i][None],
-                                    'smpl_params': self.smpl_param_anim[id_smpl][None],
-                                    }
+            batch = {f'batch_{i + x}': {'z_shape': z_shapes[i][None],
+                                        'z_detail': z_details[i][None],
+                                        'smpl_params': self.smpl_param_anim[id_smpl][None],
+                                        }
                      }
             # print(batch)
             batch_list.append(batch)
+            BATCH_GEN.append(batch)
 
         self.get_mesh(batch_list)
-        return batch_list
+        # print(BATCH_GEN)

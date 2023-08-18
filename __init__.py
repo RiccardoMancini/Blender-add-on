@@ -4,7 +4,7 @@ bl_info = {
     "category": "Object",
 }
 
-import bpy
+#import bpy
 import os
 import sys
 import torch
@@ -25,7 +25,6 @@ sys.path.insert(1, f'{ROOT}/gdna')
 
 from test import GDNA
 import test as gl
-
 
 
 # Blender path where addons is installed
@@ -146,7 +145,7 @@ def generate_mesh(process):
         return 1.0
 
 
-class TestClass1(bpy.types.Operator):
+'''class TestClass1(bpy.types.Operator):
     """My Object First Script"""  # Use this as a tooltip for menu items and buttons.
     bl_idname = "object.test_ao1"  # Unique identifier for buttons and menu items to reference.
     bl_label = "Test 1 add-on"  # Display name in the interface.
@@ -185,7 +184,7 @@ class TestClass2(bpy.types.Operator):
 classes = (
     TestClass1,
     TestClass2
-)
+)'''
 
 
 def menu_func(self, context):
@@ -207,9 +206,9 @@ def unregister():
 
 
 if __name__ == "__main__":
-    register()
-    # obj = GDNA(max_samples=5, seed=45)
-    # obj.action_sample()
+    # register()
+    obj = GDNA(max_samples=5, seed=45)
+    obj.action_sample()
     # obj.max_samples = 20
     # gl.ACT_GEN = obj.action_z_shape(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
     # gl.ACT_GEN = obj.action_z_detail(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])

@@ -5,6 +5,7 @@ __pycache__/
 
 /gdna/data/
 /gdna/outputs/
+/gdna/build/
 /gdna/UNKNOWN.egg-info/
 /gdna/dist/
 /gdna/lib/smpl/smpl_model/

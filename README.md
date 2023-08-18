@@ -15,3 +15,9 @@ conda install pytorch3d -c pytorch3d -y
 conda env update --file env.yml
 python setup.py install
 ```
+
+## Setup environment 2.0
+TODO: mettere env.yml nella root dir del progetto e testare se la rete funziona anche senza setup.py
+```
+source config_env.sh
+```

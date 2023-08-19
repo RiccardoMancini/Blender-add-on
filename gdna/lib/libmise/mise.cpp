@@ -5,12 +5,12 @@
     "distutils": {
         "depends": [],
         "language": "c++",
-        "name": "gdna.lib.libmise.mise",
+        "name": "lib.libmise.mise",
         "sources": [
-            "gdna/lib/libmise/mise.pyx"
+            "lib/libmise/mise.pyx"
         ]
     },
-    "module_name": "gdna.lib.libmise.mise"
+    "module_name": "lib.libmise.mise"
 }
 END: Cython Metadata */
 
@@ -1099,8 +1099,8 @@ static CYTHON_INLINE float __PYX_NAN() {
     #define __PYX_EXTERN_C extern "C++"
 #endif
 
-#define __PYX_HAVE__gdna__lib__libmise__mise
-#define __PYX_HAVE_API__gdna__lib__libmise__mise
+#define __PYX_HAVE__lib__libmise__mise
+#define __PYX_HAVE_API__lib__libmise__mise
 /* Early includes */
 #include "ios"
 #include "new"
@@ -1387,7 +1387,7 @@ static const char *__pyx_filename;
 /* #### Code section: filename_table ### */
 
 static const char *__pyx_f[] = {
-  "gdna/lib/libmise/mise.pyx",
+  "lib/libmise/mise.pyx",
   "<stringsource>",
 };
 /* #### Code section: utility_code_proto_before_types ### */
@@ -1536,67 +1536,67 @@ typedef struct {
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
-struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE;
+struct __pyx_obj_3lib_7libmise_4mise_MISE;
 struct __pyx_array_obj;
 struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
-struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D;
-struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel;
-struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint;
+struct __pyx_t_3lib_7libmise_4mise_Vector3D;
+struct __pyx_t_3lib_7libmise_4mise_Voxel;
+struct __pyx_t_3lib_7libmise_4mise_GridPoint;
 
-/* "gdna/lib/libmise/mise.pyx":10
+/* "lib/libmise/mise.pyx":10
  * 
  * 
  * cdef struct Vector3D:             # <<<<<<<<<<<<<<
  *     int x, y, z
  * 
  */
-struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D {
+struct __pyx_t_3lib_7libmise_4mise_Vector3D {
   int x;
   int y;
   int z;
 };
 
-/* "gdna/lib/libmise/mise.pyx":14
+/* "lib/libmise/mise.pyx":14
  * 
  * 
  * cdef struct Voxel:             # <<<<<<<<<<<<<<
  *     Vector3D loc
  *     unsigned int level
  */
-struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel {
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D loc;
+struct __pyx_t_3lib_7libmise_4mise_Voxel {
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D loc;
   unsigned int level;
   int is_leaf;
   unsigned long children[2][2][2];
 };
 
-/* "gdna/lib/libmise/mise.pyx":21
+/* "lib/libmise/mise.pyx":21
  * 
  * 
  * cdef struct GridPoint:             # <<<<<<<<<<<<<<
  *     Vector3D loc
  *     double value
  */
-struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint {
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D loc;
+struct __pyx_t_3lib_7libmise_4mise_GridPoint {
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D loc;
   double value;
   int known;
 };
 
-/* "gdna/lib/libmise/mise.pyx":33
+/* "lib/libmise/mise.pyx":33
  * 
  * 
  * cdef class MISE:             # <<<<<<<<<<<<<<
  *     cdef vector[Voxel] voxels
  *     cdef vector[GridPoint] grid_points
  */
-struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE {
+struct __pyx_obj_3lib_7libmise_4mise_MISE {
   PyObject_HEAD
-  struct __pyx_vtabstruct_4gdna_3lib_7libmise_4mise_MISE *__pyx_vtab;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel>  voxels;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint>  grid_points;
+  struct __pyx_vtabstruct_3lib_7libmise_4mise_MISE *__pyx_vtab;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Voxel>  voxels;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_GridPoint>  grid_points;
   std::map<long,long>  grid_point_hash;
   int resolution_0;
   int depth;
@@ -1683,7 +1683,7 @@ struct __pyx_memoryviewslice_obj {
 
 
 
-/* "gdna/lib/libmise/mise.pyx":33
+/* "lib/libmise/mise.pyx":33
  * 
  * 
  * cdef class MISE:             # <<<<<<<<<<<<<<
@@ -1691,16 +1691,16 @@ struct __pyx_memoryviewslice_obj {
  *     cdef vector[GridPoint] grid_points
  */
 
-struct __pyx_vtabstruct_4gdna_3lib_7libmise_4mise_MISE {
-  void (*subdivide_voxels)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *);
-  void (*subdivide_voxel)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, long);
-  long (*get_voxel_idx)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D);
-  void (*add_grid_point)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D);
-  int (*get_grid_point_idx)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D);
+struct __pyx_vtabstruct_3lib_7libmise_4mise_MISE {
+  void (*subdivide_voxels)(struct __pyx_obj_3lib_7libmise_4mise_MISE *);
+  void (*subdivide_voxel)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, long);
+  long (*get_voxel_idx)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D);
+  void (*add_grid_point)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D);
+  int (*get_grid_point_idx)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D);
 };
-static struct __pyx_vtabstruct_4gdna_3lib_7libmise_4mise_MISE *__pyx_vtabptr_4gdna_3lib_7libmise_4mise_MISE;
-static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D);
-static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_idx(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D);
+static struct __pyx_vtabstruct_3lib_7libmise_4mise_MISE *__pyx_vtabptr_3lib_7libmise_4mise_MISE;
+static CYTHON_INLINE void __pyx_f_3lib_7libmise_4mise_4MISE_add_grid_point(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D);
+static CYTHON_INLINE int __pyx_f_3lib_7libmise_4mise_4MISE_get_grid_point_idx(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D);
 
 
 /* "View.MemoryView":114
@@ -2608,8 +2608,8 @@ static void __Pyx_CppExn2PyErr() {
 }
 #endif
 
-struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D;
-static PyObject* __pyx_convert__to_py_struct____pyx_t_4gdna_3lib_7libmise_4mise_Vector3D(struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D s);
+struct __pyx_t_3lib_7libmise_4mise_Vector3D;
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3lib_7libmise_4mise_Vector3D(struct __pyx_t_3lib_7libmise_4mise_Vector3D s);
 /* ObjectToMemviewSlice.proto */
 static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsdsds_double(PyObject *, int writable_flag);
 
@@ -2695,11 +2695,11 @@ static PyObject *__pyx_memoryview__get_base(struct __pyx_memoryview_obj *__pyx_v
 static PyObject *__pyx_memoryviewslice_convert_item_to_object(struct __pyx_memoryviewslice_obj *__pyx_v_self, char *__pyx_v_itemp); /* proto*/
 static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memoryviewslice_obj *__pyx_v_self, char *__pyx_v_itemp, PyObject *__pyx_v_value); /* proto*/
 static PyObject *__pyx_memoryviewslice__get_base(struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto*/
-static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto*/
-static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, long __pyx_v_idx); /* proto*/
-static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc); /* proto*/
-static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc); /* proto*/
-static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_idx(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc); /* proto*/
+static void __pyx_f_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto*/
+static void __pyx_f_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, long __pyx_v_idx); /* proto*/
+static long __pyx_f_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc); /* proto*/
+static CYTHON_INLINE void __pyx_f_3lib_7libmise_4mise_4MISE_add_grid_point(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc); /* proto*/
+static CYTHON_INLINE int __pyx_f_3lib_7libmise_4mise_4MISE_get_grid_point_idx(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc); /* proto*/
 
 /* Module declarations from "cython.view" */
 
@@ -2715,7 +2715,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
 
 /* Module declarations from "libc.math" */
 
-/* Module declarations from "gdna.lib.libmise.mise" */
+/* Module declarations from "lib.libmise.mise" */
 static PyObject *__pyx_collections_abc_Sequence = 0;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
@@ -2724,7 +2724,7 @@ static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
-static CYTHON_INLINE unsigned long __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D, long); /*proto*/
+static CYTHON_INLINE unsigned long __pyx_f_3lib_7libmise_4mise_vec_to_idx(struct __pyx_t_3lib_7libmise_4mise_Vector3D, long); /*proto*/
 static int __pyx_array_allocate_buffer(struct __pyx_array_obj *); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -2763,11 +2763,11 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, 
 static __Pyx_TypeInfo __Pyx_TypeInfo_long = { "long", NULL, sizeof(long), { 0 }, 0, __PYX_IS_UNSIGNED(long) ? 'U' : 'I', __PYX_IS_UNSIGNED(long), 0 };
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "gdna.lib.libmise.mise"
-extern int __pyx_module_is_main_gdna__lib__libmise__mise;
-int __pyx_module_is_main_gdna__lib__libmise__mise = 0;
+#define __Pyx_MODULE_NAME "lib.libmise.mise"
+extern int __pyx_module_is_main_lib__libmise__mise;
+int __pyx_module_is_main_lib__libmise__mise = 0;
 
-/* Implementation of "gdna.lib.libmise.mise" */
+/* Implementation of "lib.libmise.mise" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_AssertionError;
@@ -2906,23 +2906,23 @@ static const char __pyx_k_collections_abc[] = "collections.abc";
 static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
+static const char __pyx_k_lib_libmise_mise[] = "lib.libmise.mise";
 static const char __pyx_k_Point_not_in_grid[] = "Point not in grid!";
 static const char __pyx_k_pyx_unpickle_Enum[] = "__pyx_unpickle_Enum";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_MISE___reduce_cython[] = "MISE.__reduce_cython__";
+static const char __pyx_k_lib_libmise_mise_pyx[] = "lib/libmise/mise.pyx";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_Invalid_shape_in_axis[] = "Invalid shape in axis ";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
-static const char __pyx_k_gdna_lib_libmise_mise[] = "gdna.lib.libmise.mise";
 static const char __pyx_k_Cannot_index_with_type[] = "Cannot index with type '";
 static const char __pyx_k_MISE___setstate_cython[] = "MISE.__setstate_cython__";
 static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
 static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x>";
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Dimension_d_is_not_direct[] = "Dimension %d is not direct";
-static const char __pyx_k_gdna_lib_libmise_mise_pyx[] = "gdna/lib/libmise/mise.pyx";
 static const char __pyx_k_Index_out_of_bounds_axis_d[] = "Index out of bounds (axis %d)";
 static const char __pyx_k_Step_may_not_be_zero_axis_d[] = "Step may not be zero (axis %d)";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
@@ -2985,19 +2985,19 @@ static void __pyx_memoryviewslice___pyx_pf_15View_dot_MemoryView_16_memoryviewsl
 static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, int __pyx_v_resolution_0, int __pyx_v_depth, double __pyx_v_threshold); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, __Pyx_memviewslice __pyx_v_points, __Pyx_memviewslice __pyx_v_values); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_5depth___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_9threshold___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10resolution___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_4gdna_3lib_7libmise_4mise_MISE(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static int __pyx_pf_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, int __pyx_v_resolution_0, int __pyx_v_depth, double __pyx_v_threshold); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_2update(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, __Pyx_memviewslice __pyx_v_points, __Pyx_memviewslice __pyx_v_values); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_4query(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_8get_points(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_12resolution_0___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_5depth___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_9threshold___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_10resolution___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_tp_new_3lib_7libmise_4mise_MISE(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -3044,13 +3044,13 @@ typedef struct {
   #if CYTHON_USE_MODULE_STATE
   #endif
   #if CYTHON_USE_MODULE_STATE
-  PyObject *__pyx_type_4gdna_3lib_7libmise_4mise_MISE;
+  PyObject *__pyx_type_3lib_7libmise_4mise_MISE;
   PyObject *__pyx_type___pyx_array;
   PyObject *__pyx_type___pyx_MemviewEnum;
   PyObject *__pyx_type___pyx_memoryview;
   PyObject *__pyx_type___pyx_memoryviewslice;
   #endif
-  PyTypeObject *__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE;
+  PyTypeObject *__pyx_ptype_3lib_7libmise_4mise_MISE;
   PyTypeObject *__pyx_array_type;
   PyTypeObject *__pyx_MemviewEnum_type;
   PyTypeObject *__pyx_memoryview_type;
@@ -3130,8 +3130,6 @@ typedef struct {
   PyObject *__pyx_n_u_fortran;
   PyObject *__pyx_n_s_full;
   PyObject *__pyx_kp_u_gc;
-  PyObject *__pyx_n_s_gdna_lib_libmise_mise;
-  PyObject *__pyx_kp_s_gdna_lib_libmise_mise_pyx;
   PyObject *__pyx_n_s_get_points;
   PyObject *__pyx_n_s_getstate;
   PyObject *__pyx_kp_u_got;
@@ -3152,6 +3150,8 @@ typedef struct {
   PyObject *__pyx_n_s_k;
   PyObject *__pyx_n_s_known;
   PyObject *__pyx_n_s_level;
+  PyObject *__pyx_n_s_lib_libmise_mise;
+  PyObject *__pyx_kp_s_lib_libmise_mise_pyx;
   PyObject *__pyx_n_s_loc;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_n_s_memview;
@@ -3296,8 +3296,8 @@ static int __pyx_m_clear(PyObject *m) {
   #ifdef __Pyx_FusedFunction_USED
   Py_CLEAR(clear_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_CLEAR(clear_module_state->__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE);
-  Py_CLEAR(clear_module_state->__pyx_type_4gdna_3lib_7libmise_4mise_MISE);
+  Py_CLEAR(clear_module_state->__pyx_ptype_3lib_7libmise_4mise_MISE);
+  Py_CLEAR(clear_module_state->__pyx_type_3lib_7libmise_4mise_MISE);
   Py_CLEAR(clear_module_state->__pyx_array_type);
   Py_CLEAR(clear_module_state->__pyx_type___pyx_array);
   Py_CLEAR(clear_module_state->__pyx_MemviewEnum_type);
@@ -3381,8 +3381,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_fortran);
   Py_CLEAR(clear_module_state->__pyx_n_s_full);
   Py_CLEAR(clear_module_state->__pyx_kp_u_gc);
-  Py_CLEAR(clear_module_state->__pyx_n_s_gdna_lib_libmise_mise);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_gdna_lib_libmise_mise_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_get_points);
   Py_CLEAR(clear_module_state->__pyx_n_s_getstate);
   Py_CLEAR(clear_module_state->__pyx_kp_u_got);
@@ -3403,6 +3401,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_k);
   Py_CLEAR(clear_module_state->__pyx_n_s_known);
   Py_CLEAR(clear_module_state->__pyx_n_s_level);
+  Py_CLEAR(clear_module_state->__pyx_n_s_lib_libmise_mise);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_lib_libmise_mise_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_loc);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_n_s_memview);
@@ -3525,8 +3525,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #ifdef __Pyx_FusedFunction_USED
   Py_VISIT(traverse_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_VISIT(traverse_module_state->__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE);
-  Py_VISIT(traverse_module_state->__pyx_type_4gdna_3lib_7libmise_4mise_MISE);
+  Py_VISIT(traverse_module_state->__pyx_ptype_3lib_7libmise_4mise_MISE);
+  Py_VISIT(traverse_module_state->__pyx_type_3lib_7libmise_4mise_MISE);
   Py_VISIT(traverse_module_state->__pyx_array_type);
   Py_VISIT(traverse_module_state->__pyx_type___pyx_array);
   Py_VISIT(traverse_module_state->__pyx_MemviewEnum_type);
@@ -3610,8 +3610,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_fortran);
   Py_VISIT(traverse_module_state->__pyx_n_s_full);
   Py_VISIT(traverse_module_state->__pyx_kp_u_gc);
-  Py_VISIT(traverse_module_state->__pyx_n_s_gdna_lib_libmise_mise);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_gdna_lib_libmise_mise_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_get_points);
   Py_VISIT(traverse_module_state->__pyx_n_s_getstate);
   Py_VISIT(traverse_module_state->__pyx_kp_u_got);
@@ -3632,6 +3630,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_k);
   Py_VISIT(traverse_module_state->__pyx_n_s_known);
   Py_VISIT(traverse_module_state->__pyx_n_s_level);
+  Py_VISIT(traverse_module_state->__pyx_n_s_lib_libmise_mise);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_lib_libmise_mise_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_loc);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_n_s_memview);
@@ -3777,13 +3777,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #if CYTHON_USE_MODULE_STATE
 #endif
 #if CYTHON_USE_MODULE_STATE
-#define __pyx_type_4gdna_3lib_7libmise_4mise_MISE __pyx_mstate_global->__pyx_type_4gdna_3lib_7libmise_4mise_MISE
+#define __pyx_type_3lib_7libmise_4mise_MISE __pyx_mstate_global->__pyx_type_3lib_7libmise_4mise_MISE
 #define __pyx_type___pyx_array __pyx_mstate_global->__pyx_type___pyx_array
 #define __pyx_type___pyx_MemviewEnum __pyx_mstate_global->__pyx_type___pyx_MemviewEnum
 #define __pyx_type___pyx_memoryview __pyx_mstate_global->__pyx_type___pyx_memoryview
 #define __pyx_type___pyx_memoryviewslice __pyx_mstate_global->__pyx_type___pyx_memoryviewslice
 #endif
-#define __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE __pyx_mstate_global->__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE
+#define __pyx_ptype_3lib_7libmise_4mise_MISE __pyx_mstate_global->__pyx_ptype_3lib_7libmise_4mise_MISE
 #define __pyx_array_type __pyx_mstate_global->__pyx_array_type
 #define __pyx_MemviewEnum_type __pyx_mstate_global->__pyx_MemviewEnum_type
 #define __pyx_memoryview_type __pyx_mstate_global->__pyx_memoryview_type
@@ -3863,8 +3863,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_fortran __pyx_mstate_global->__pyx_n_u_fortran
 #define __pyx_n_s_full __pyx_mstate_global->__pyx_n_s_full
 #define __pyx_kp_u_gc __pyx_mstate_global->__pyx_kp_u_gc
-#define __pyx_n_s_gdna_lib_libmise_mise __pyx_mstate_global->__pyx_n_s_gdna_lib_libmise_mise
-#define __pyx_kp_s_gdna_lib_libmise_mise_pyx __pyx_mstate_global->__pyx_kp_s_gdna_lib_libmise_mise_pyx
 #define __pyx_n_s_get_points __pyx_mstate_global->__pyx_n_s_get_points
 #define __pyx_n_s_getstate __pyx_mstate_global->__pyx_n_s_getstate
 #define __pyx_kp_u_got __pyx_mstate_global->__pyx_kp_u_got
@@ -3885,6 +3883,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_k __pyx_mstate_global->__pyx_n_s_k
 #define __pyx_n_s_known __pyx_mstate_global->__pyx_n_s_known
 #define __pyx_n_s_level __pyx_mstate_global->__pyx_n_s_level
+#define __pyx_n_s_lib_libmise_mise __pyx_mstate_global->__pyx_n_s_lib_libmise_mise
+#define __pyx_kp_s_lib_libmise_mise_pyx __pyx_mstate_global->__pyx_kp_s_lib_libmise_mise_pyx
 #define __pyx_n_s_loc __pyx_mstate_global->__pyx_n_s_loc
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_n_s_memview __pyx_mstate_global->__pyx_n_s_memview
@@ -17295,7 +17295,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":27
+/* "lib/libmise/mise.pyx":27
  * 
  * 
  * cdef inline unsigned long vec_to_idx(Vector3D coord, long resolution):             # <<<<<<<<<<<<<<
@@ -17303,13 +17303,13 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
  *     idx = resolution * resolution * coord.x + resolution * coord.y + coord.z
  */
 
-static CYTHON_INLINE unsigned long __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_coord, long __pyx_v_resolution) {
+static CYTHON_INLINE unsigned long __pyx_f_3lib_7libmise_4mise_vec_to_idx(struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_coord, long __pyx_v_resolution) {
   unsigned long __pyx_v_idx;
   unsigned long __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("vec_to_idx", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":29
+  /* "lib/libmise/mise.pyx":29
  * cdef inline unsigned long vec_to_idx(Vector3D coord, long resolution):
  *     cdef unsigned long idx
  *     idx = resolution * resolution * coord.x + resolution * coord.y + coord.z             # <<<<<<<<<<<<<<
@@ -17318,7 +17318,7 @@ static CYTHON_INLINE unsigned long __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(
  */
   __pyx_v_idx = ((((__pyx_v_resolution * __pyx_v_resolution) * __pyx_v_coord.x) + (__pyx_v_resolution * __pyx_v_coord.y)) + __pyx_v_coord.z);
 
-  /* "gdna/lib/libmise/mise.pyx":30
+  /* "lib/libmise/mise.pyx":30
  *     cdef unsigned long idx
  *     idx = resolution * resolution * coord.x + resolution * coord.y + coord.z
  *     return idx             # <<<<<<<<<<<<<<
@@ -17328,7 +17328,7 @@ static CYTHON_INLINE unsigned long __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(
   __pyx_r = __pyx_v_idx;
   goto __pyx_L0;
 
-  /* "gdna/lib/libmise/mise.pyx":27
+  /* "lib/libmise/mise.pyx":27
  * 
  * 
  * cdef inline unsigned long vec_to_idx(Vector3D coord, long resolution):             # <<<<<<<<<<<<<<
@@ -17342,7 +17342,7 @@ static CYTHON_INLINE unsigned long __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":43
+/* "lib/libmise/mise.pyx":43
  *     cdef readonly int resolution
  * 
  *     def __cinit__(self, int resolution_0, int depth, double threshold):             # <<<<<<<<<<<<<<
@@ -17351,8 +17351,8 @@ static CYTHON_INLINE unsigned long __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(
  */
 
 /* Python wrapper */
-static int __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_3lib_7libmise_4mise_4MISE_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_3lib_7libmise_4mise_4MISE_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   int __pyx_v_resolution_0;
   int __pyx_v_depth;
   double __pyx_v_threshold;
@@ -17419,20 +17419,20 @@ static int __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_1__cinit__(PyObject *__pyx_v
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 43, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self), __pyx_v_resolution_0, __pyx_v_depth, __pyx_v_threshold);
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE___cinit__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self), __pyx_v_resolution_0, __pyx_v_depth, __pyx_v_threshold);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, int __pyx_v_resolution_0, int __pyx_v_depth, double __pyx_v_threshold) {
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel __pyx_v_voxel;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
+static int __pyx_pf_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, int __pyx_v_resolution_0, int __pyx_v_depth, double __pyx_v_threshold) {
+  struct __pyx_t_3lib_7libmise_4mise_Voxel __pyx_v_voxel;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
   int __pyx_v_i;
   int __pyx_v_j;
   int __pyx_v_k;
@@ -17447,8 +17447,8 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
   int __pyx_t_7;
   int __pyx_t_8;
   int __pyx_t_9;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_t_10;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel __pyx_t_11;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_t_10;
+  struct __pyx_t_3lib_7libmise_4mise_Voxel __pyx_t_11;
   unsigned long __pyx_t_12;
   int __pyx_t_13;
   long __pyx_t_14;
@@ -17462,7 +17462,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":44
+  /* "lib/libmise/mise.pyx":44
  * 
  *     def __cinit__(self, int resolution_0, int depth, double threshold):
  *         self.resolution_0 = resolution_0             # <<<<<<<<<<<<<<
@@ -17471,7 +17471,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
   __pyx_v_self->resolution_0 = __pyx_v_resolution_0;
 
-  /* "gdna/lib/libmise/mise.pyx":45
+  /* "lib/libmise/mise.pyx":45
  *     def __cinit__(self, int resolution_0, int depth, double threshold):
  *         self.resolution_0 = resolution_0
  *         self.depth = depth             # <<<<<<<<<<<<<<
@@ -17480,7 +17480,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
   __pyx_v_self->depth = __pyx_v_depth;
 
-  /* "gdna/lib/libmise/mise.pyx":46
+  /* "lib/libmise/mise.pyx":46
  *         self.resolution_0 = resolution_0
  *         self.depth = depth
  *         self.threshold = threshold             # <<<<<<<<<<<<<<
@@ -17489,7 +17489,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
   __pyx_v_self->threshold = __pyx_v_threshold;
 
-  /* "gdna/lib/libmise/mise.pyx":47
+  /* "lib/libmise/mise.pyx":47
  *         self.depth = depth
  *         self.threshold = threshold
  *         self.voxel_size_0 = (1 << depth)             # <<<<<<<<<<<<<<
@@ -17498,7 +17498,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
   __pyx_v_self->voxel_size_0 = (1 << __pyx_v_depth);
 
-  /* "gdna/lib/libmise/mise.pyx":48
+  /* "lib/libmise/mise.pyx":48
  *         self.threshold = threshold
  *         self.voxel_size_0 = (1 << depth)
  *         self.resolution = resolution_0 * self.voxel_size_0             # <<<<<<<<<<<<<<
@@ -17507,7 +17507,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
   __pyx_v_self->resolution = (__pyx_v_resolution_0 * __pyx_v_self->voxel_size_0);
 
-  /* "gdna/lib/libmise/mise.pyx":51
+  /* "lib/libmise/mise.pyx":51
  * 
  *         # Create initial voxels
  *         self.voxels.reserve(resolution_0 * resolution_0 * resolution_0)             # <<<<<<<<<<<<<<
@@ -17521,7 +17521,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
     __PYX_ERR(0, 51, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":57
+  /* "lib/libmise/mise.pyx":57
  *         cdef Vector3D loc
  *         cdef int i, j, k
  *         for i in range(resolution_0):             # <<<<<<<<<<<<<<
@@ -17533,7 +17533,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "gdna/lib/libmise/mise.pyx":58
+    /* "lib/libmise/mise.pyx":58
  *         cdef int i, j, k
  *         for i in range(resolution_0):
  *             for j in range(resolution_0):             # <<<<<<<<<<<<<<
@@ -17545,7 +17545,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "gdna/lib/libmise/mise.pyx":59
+      /* "lib/libmise/mise.pyx":59
  *         for i in range(resolution_0):
  *             for j in range(resolution_0):
  *                 for  k in range (resolution_0):             # <<<<<<<<<<<<<<
@@ -17557,7 +17557,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
       for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
         __pyx_v_k = __pyx_t_9;
 
-        /* "gdna/lib/libmise/mise.pyx":61
+        /* "lib/libmise/mise.pyx":61
  *                 for  k in range (resolution_0):
  *                     loc = Vector3D(
  *                         i * self.voxel_size_0,             # <<<<<<<<<<<<<<
@@ -17566,7 +17566,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
         __pyx_t_10.x = (__pyx_v_i * __pyx_v_self->voxel_size_0);
 
-        /* "gdna/lib/libmise/mise.pyx":62
+        /* "lib/libmise/mise.pyx":62
  *                     loc = Vector3D(
  *                         i * self.voxel_size_0,
  *                         j * self.voxel_size_0,             # <<<<<<<<<<<<<<
@@ -17575,7 +17575,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
         __pyx_t_10.y = (__pyx_v_j * __pyx_v_self->voxel_size_0);
 
-        /* "gdna/lib/libmise/mise.pyx":63
+        /* "lib/libmise/mise.pyx":63
  *                         i * self.voxel_size_0,
  *                         j * self.voxel_size_0,
  *                         k * self.voxel_size_0,             # <<<<<<<<<<<<<<
@@ -17585,7 +17585,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
         __pyx_t_10.z = (__pyx_v_k * __pyx_v_self->voxel_size_0);
         __pyx_v_loc = __pyx_t_10;
 
-        /* "gdna/lib/libmise/mise.pyx":66
+        /* "lib/libmise/mise.pyx":66
  *                     )
  *                     voxel = Voxel(
  *                         loc=loc,             # <<<<<<<<<<<<<<
@@ -17595,7 +17595,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
         __pyx_t_11.loc = __pyx_v_loc;
         __pyx_t_11.level = 0;
 
-        /* "gdna/lib/libmise/mise.pyx":68
+        /* "lib/libmise/mise.pyx":68
  *                         loc=loc,
  *                         level=0,
  *                         is_leaf=True,             # <<<<<<<<<<<<<<
@@ -17605,7 +17605,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
         __pyx_t_11.is_leaf = 1;
         __pyx_v_voxel = __pyx_t_11;
 
-        /* "gdna/lib/libmise/mise.pyx":71
+        /* "lib/libmise/mise.pyx":71
  *                     )
  * 
  *                     assert(self.voxels.size() == vec_to_idx(Vector3D(i, j, k), resolution_0))             # <<<<<<<<<<<<<<
@@ -17617,7 +17617,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
           __pyx_t_10.x = __pyx_v_i;
           __pyx_t_10.y = __pyx_v_j;
           __pyx_t_10.z = __pyx_v_k;
-          __pyx_t_12 = __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(__pyx_t_10, __pyx_v_resolution_0); if (unlikely(__pyx_t_12 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
+          __pyx_t_12 = __pyx_f_3lib_7libmise_4mise_vec_to_idx(__pyx_t_10, __pyx_v_resolution_0); if (unlikely(__pyx_t_12 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
           __pyx_t_13 = (__pyx_v_self->voxels.size() == __pyx_t_12);
           if (unlikely(!__pyx_t_13)) {
             __Pyx_Raise(__pyx_builtin_AssertionError, 0, 0, 0);
@@ -17628,7 +17628,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
         if ((1)); else __PYX_ERR(0, 71, __pyx_L1_error)
         #endif
 
-        /* "gdna/lib/libmise/mise.pyx":72
+        /* "lib/libmise/mise.pyx":72
  * 
  *                     assert(self.voxels.size() == vec_to_idx(Vector3D(i, j, k), resolution_0))
  *                     self.voxels.push_back(voxel)             # <<<<<<<<<<<<<<
@@ -17645,7 +17645,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
     }
   }
 
-  /* "gdna/lib/libmise/mise.pyx":75
+  /* "lib/libmise/mise.pyx":75
  * 
  *         # Create initial grid points
  *         self.grid_points.reserve((resolution_0 + 1) * (resolution_0 + 1) * (resolution_0 + 1))             # <<<<<<<<<<<<<<
@@ -17659,7 +17659,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
     __PYX_ERR(0, 75, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":76
+  /* "lib/libmise/mise.pyx":76
  *         # Create initial grid points
  *         self.grid_points.reserve((resolution_0 + 1) * (resolution_0 + 1) * (resolution_0 + 1))
  *         for i in range(resolution_0 + 1):             # <<<<<<<<<<<<<<
@@ -17671,7 +17671,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
   for (__pyx_t_1 = 0; __pyx_t_1 < __pyx_t_15; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "gdna/lib/libmise/mise.pyx":77
+    /* "lib/libmise/mise.pyx":77
  *         self.grid_points.reserve((resolution_0 + 1) * (resolution_0 + 1) * (resolution_0 + 1))
  *         for i in range(resolution_0 + 1):
  *             for j in range(resolution_0 + 1):             # <<<<<<<<<<<<<<
@@ -17683,7 +17683,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
     for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_17; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "gdna/lib/libmise/mise.pyx":78
+      /* "lib/libmise/mise.pyx":78
  *         for i in range(resolution_0 + 1):
  *             for j in range(resolution_0 + 1):
  *                 for k in range(resolution_0 + 1):             # <<<<<<<<<<<<<<
@@ -17695,7 +17695,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
       for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_19; __pyx_t_3+=1) {
         __pyx_v_k = __pyx_t_3;
 
-        /* "gdna/lib/libmise/mise.pyx":80
+        /* "lib/libmise/mise.pyx":80
  *                 for k in range(resolution_0 + 1):
  *                     loc = Vector3D(
  *                         i * self.voxel_size_0,             # <<<<<<<<<<<<<<
@@ -17704,7 +17704,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
         __pyx_t_10.x = (__pyx_v_i * __pyx_v_self->voxel_size_0);
 
-        /* "gdna/lib/libmise/mise.pyx":81
+        /* "lib/libmise/mise.pyx":81
  *                     loc = Vector3D(
  *                         i * self.voxel_size_0,
  *                         j * self.voxel_size_0,             # <<<<<<<<<<<<<<
@@ -17713,7 +17713,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
         __pyx_t_10.y = (__pyx_v_j * __pyx_v_self->voxel_size_0);
 
-        /* "gdna/lib/libmise/mise.pyx":82
+        /* "lib/libmise/mise.pyx":82
  *                         i * self.voxel_size_0,
  *                         j * self.voxel_size_0,
  *                         k * self.voxel_size_0,             # <<<<<<<<<<<<<<
@@ -17723,7 +17723,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
         __pyx_t_10.z = (__pyx_v_k * __pyx_v_self->voxel_size_0);
         __pyx_v_loc = __pyx_t_10;
 
-        /* "gdna/lib/libmise/mise.pyx":84
+        /* "lib/libmise/mise.pyx":84
  *                         k * self.voxel_size_0,
  *                     )
  *                     assert(self.grid_points.size() == vec_to_idx(Vector3D(i, j, k), resolution_0 + 1))             # <<<<<<<<<<<<<<
@@ -17735,7 +17735,7 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
           __pyx_t_10.x = __pyx_v_i;
           __pyx_t_10.y = __pyx_v_j;
           __pyx_t_10.z = __pyx_v_k;
-          __pyx_t_12 = __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(__pyx_t_10, (__pyx_v_resolution_0 + 1)); if (unlikely(__pyx_t_12 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L1_error)
+          __pyx_t_12 = __pyx_f_3lib_7libmise_4mise_vec_to_idx(__pyx_t_10, (__pyx_v_resolution_0 + 1)); if (unlikely(__pyx_t_12 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L1_error)
           __pyx_t_13 = (__pyx_v_self->grid_points.size() == __pyx_t_12);
           if (unlikely(!__pyx_t_13)) {
             __Pyx_Raise(__pyx_builtin_AssertionError, 0, 0, 0);
@@ -17746,19 +17746,19 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
         if ((1)); else __PYX_ERR(0, 84, __pyx_L1_error)
         #endif
 
-        /* "gdna/lib/libmise/mise.pyx":85
+        /* "lib/libmise/mise.pyx":85
  *                     )
  *                     assert(self.grid_points.size() == vec_to_idx(Vector3D(i, j, k), resolution_0 + 1))
  *                     self.add_grid_point(loc)             # <<<<<<<<<<<<<<
  * 
  *     def update(self, long[:, :] points, double[:] values):
  */
-        __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L1_error)
+        __pyx_f_3lib_7libmise_4mise_4MISE_add_grid_point(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L1_error)
       }
     }
   }
 
-  /* "gdna/lib/libmise/mise.pyx":43
+  /* "lib/libmise/mise.pyx":43
  *     cdef readonly int resolution
  * 
  *     def __cinit__(self, int resolution_0, int depth, double threshold):             # <<<<<<<<<<<<<<
@@ -17770,14 +17770,14 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":87
+/* "lib/libmise/mise.pyx":87
  *                     self.add_grid_point(loc)
  * 
  *     def update(self, long[:, :] points, double[:] values):             # <<<<<<<<<<<<<<
@@ -17786,16 +17786,16 @@ static int __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE___cinit__(struct __pyx_obj_4
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_3update(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_3update(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_2update, "Update points and set their values. Also determine all active voxels and subdivide them.");
-static PyMethodDef __pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_3update = {"update", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_3update, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_2update};
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_3update(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_3lib_7libmise_4mise_4MISE_2update, "Update points and set their values. Also determine all active voxels and subdivide them.");
+static PyMethodDef __pyx_mdef_3lib_7libmise_4mise_4MISE_3update = {"update", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_3update, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_3lib_7libmise_4mise_4MISE_2update};
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_3update(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -17860,11 +17860,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L3_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_points, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_values, 1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.update", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.update", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self), __pyx_v_points, __pyx_v_values);
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_2update(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self), __pyx_v_points, __pyx_v_values);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_points, 1);
@@ -17873,8 +17873,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, __Pyx_memviewslice __pyx_v_points, __Pyx_memviewslice __pyx_v_values) {
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_2update(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, __Pyx_memviewslice __pyx_v_points, __Pyx_memviewslice __pyx_v_values) {
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
   long __pyx_v_idx;
   int __pyx_v_i;
   PyObject *__pyx_r = NULL;
@@ -17883,7 +17883,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
   Py_ssize_t __pyx_t_2;
   Py_ssize_t __pyx_t_3;
   int __pyx_t_4;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_t_5;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_t_5;
   Py_ssize_t __pyx_t_6;
   Py_ssize_t __pyx_t_7;
   int __pyx_t_8;
@@ -17893,7 +17893,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":89
+  /* "lib/libmise/mise.pyx":89
  *     def update(self, long[:, :] points, double[:] values):
  *         """Update points and set their values. Also determine all active voxels and subdivide them."""
  *         assert(points.shape[0] == values.shape[0])             # <<<<<<<<<<<<<<
@@ -17912,7 +17912,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
   if ((1)); else __PYX_ERR(0, 89, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":90
+  /* "lib/libmise/mise.pyx":90
  *         """Update points and set their values. Also determine all active voxels and subdivide them."""
  *         assert(points.shape[0] == values.shape[0])
  *         assert(points.shape[1] == 3)             # <<<<<<<<<<<<<<
@@ -17931,7 +17931,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
   if ((1)); else __PYX_ERR(0, 90, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":96
+  /* "lib/libmise/mise.pyx":96
  * 
  *         # Find all indices of point and set value
  *         for i in range(points.shape[0]):             # <<<<<<<<<<<<<<
@@ -17943,7 +17943,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "gdna/lib/libmise/mise.pyx":97
+    /* "lib/libmise/mise.pyx":97
  *         # Find all indices of point and set value
  *         for i in range(points.shape[0]):
  *             loc = Vector3D(points[i, 0], points[i, 1], points[i, 2])             # <<<<<<<<<<<<<<
@@ -18000,17 +18000,17 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
     __pyx_t_5.z = (*((long *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_points.data + __pyx_t_6 * __pyx_v_points.strides[0]) ) + __pyx_t_7 * __pyx_v_points.strides[1]) )));
     __pyx_v_loc = __pyx_t_5;
 
-    /* "gdna/lib/libmise/mise.pyx":98
+    /* "lib/libmise/mise.pyx":98
  *         for i in range(points.shape[0]):
  *             loc = Vector3D(points[i, 0], points[i, 1], points[i, 2])
  *             idx = self.get_grid_point_idx(loc)             # <<<<<<<<<<<<<<
  *             if idx == -1:
  *                 raise ValueError('Point not in grid!')
  */
-    __pyx_t_8 = __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_idx(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_8 = __pyx_f_3lib_7libmise_4mise_4MISE_get_grid_point_idx(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
     __pyx_v_idx = __pyx_t_8;
 
-    /* "gdna/lib/libmise/mise.pyx":99
+    /* "lib/libmise/mise.pyx":99
  *             loc = Vector3D(points[i, 0], points[i, 1], points[i, 2])
  *             idx = self.get_grid_point_idx(loc)
  *             if idx == -1:             # <<<<<<<<<<<<<<
@@ -18020,7 +18020,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
     __pyx_t_1 = (__pyx_v_idx == -1L);
     if (unlikely(__pyx_t_1)) {
 
-      /* "gdna/lib/libmise/mise.pyx":100
+      /* "lib/libmise/mise.pyx":100
  *             idx = self.get_grid_point_idx(loc)
  *             if idx == -1:
  *                 raise ValueError('Point not in grid!')             # <<<<<<<<<<<<<<
@@ -18033,7 +18033,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __PYX_ERR(0, 100, __pyx_L1_error)
 
-      /* "gdna/lib/libmise/mise.pyx":99
+      /* "lib/libmise/mise.pyx":99
  *             loc = Vector3D(points[i, 0], points[i, 1], points[i, 2])
  *             idx = self.get_grid_point_idx(loc)
  *             if idx == -1:             # <<<<<<<<<<<<<<
@@ -18042,7 +18042,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
  */
     }
 
-    /* "gdna/lib/libmise/mise.pyx":101
+    /* "lib/libmise/mise.pyx":101
  *             if idx == -1:
  *                 raise ValueError('Point not in grid!')
  *             self.grid_points[idx].value = values[i]             # <<<<<<<<<<<<<<
@@ -18061,7 +18061,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
     }
     (__pyx_v_self->grid_points[__pyx_v_idx]).value = (*((double *) ( /* dim=0 */ (__pyx_v_values.data + __pyx_t_7 * __pyx_v_values.strides[0]) )));
 
-    /* "gdna/lib/libmise/mise.pyx":102
+    /* "lib/libmise/mise.pyx":102
  *                 raise ValueError('Point not in grid!')
  *             self.grid_points[idx].value = values[i]
  *             self.grid_points[idx].known = True             # <<<<<<<<<<<<<<
@@ -18071,7 +18071,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
     (__pyx_v_self->grid_points[__pyx_v_idx]).known = 1;
   }
 
-  /* "gdna/lib/libmise/mise.pyx":104
+  /* "lib/libmise/mise.pyx":104
  *             self.grid_points[idx].known = True
  *         # Subdivide activate voxels and add new points
  *         self.subdivide_voxels()             # <<<<<<<<<<<<<<
@@ -18079,13 +18079,13 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
  *     def query(self):
  */
   try {
-    ((struct __pyx_vtabstruct_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self->__pyx_vtab)->subdivide_voxels(__pyx_v_self);
+    ((struct __pyx_vtabstruct_3lib_7libmise_4mise_MISE *)__pyx_v_self->__pyx_vtab)->subdivide_voxels(__pyx_v_self);
   } catch(...) {
     __Pyx_CppExn2PyErr();
     __PYX_ERR(0, 104, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":87
+  /* "lib/libmise/mise.pyx":87
  *                     self.add_grid_point(loc)
  * 
  *     def update(self, long[:, :] points, double[:] values):             # <<<<<<<<<<<<<<
@@ -18098,7 +18098,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.update", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.update", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -18106,7 +18106,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":106
+/* "lib/libmise/mise.pyx":106
  *         self.subdivide_voxels()
  * 
  *     def query(self):             # <<<<<<<<<<<<<<
@@ -18115,16 +18115,16 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_2update(struct __pyx_o
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_5query(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_5query(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_4query, "Query points to evaluate.");
-static PyMethodDef __pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_5query = {"query", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_5query, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_4query};
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_5query(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_3lib_7libmise_4mise_4MISE_4query, "Query points to evaluate.");
+static PyMethodDef __pyx_mdef_3lib_7libmise_4mise_4MISE_5query = {"query", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_5query, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_3lib_7libmise_4mise_4MISE_4query};
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_5query(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -18141,24 +18141,24 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("query", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "query", 0))) return NULL;
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_4query(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D>  __pyx_v_points;
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_4query(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Vector3D>  __pyx_v_points;
   int __pyx_v_n_unknown;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_v_p;
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_v_p;
   PyObject *__pyx_v_points_np = NULL;
   __Pyx_memviewslice __pyx_v_points_view = { 0, 0, { 0 }, { 0 }, { 0 } };
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_v_i;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint> ::iterator __pyx_t_1;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_t_2;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_GridPoint> ::iterator __pyx_t_1;
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_t_2;
   int __pyx_t_3;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
@@ -18166,11 +18166,11 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   PyObject *__pyx_t_7 = NULL;
   PyObject *__pyx_t_8 = NULL;
   __Pyx_memviewslice __pyx_t_9 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_10;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_11;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_12;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_10;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_11;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_12;
   int __pyx_t_13;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_14;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Vector3D> ::size_type __pyx_t_14;
   Py_ssize_t __pyx_t_15;
   int __pyx_t_16;
   int __pyx_lineno = 0;
@@ -18178,7 +18178,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("query", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":110
+  /* "lib/libmise/mise.pyx":110
  *         # Find all points with unknown value
  *         cdef vector[Vector3D] points
  *         cdef int n_unknown = 0             # <<<<<<<<<<<<<<
@@ -18187,7 +18187,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
  */
   __pyx_v_n_unknown = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":111
+  /* "lib/libmise/mise.pyx":111
  *         cdef vector[Vector3D] points
  *         cdef int n_unknown = 0
  *         for p in self.grid_points:             # <<<<<<<<<<<<<<
@@ -18201,7 +18201,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     ++__pyx_t_1;
     __pyx_v_p = __pyx_t_2;
 
-    /* "gdna/lib/libmise/mise.pyx":112
+    /* "lib/libmise/mise.pyx":112
  *         cdef int n_unknown = 0
  *         for p in self.grid_points:
  *             if not p.known:             # <<<<<<<<<<<<<<
@@ -18211,7 +18211,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     __pyx_t_3 = (!__pyx_v_p.known);
     if (__pyx_t_3) {
 
-      /* "gdna/lib/libmise/mise.pyx":113
+      /* "lib/libmise/mise.pyx":113
  *         for p in self.grid_points:
  *             if not p.known:
  *                 n_unknown += 1             # <<<<<<<<<<<<<<
@@ -18220,7 +18220,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
  */
       __pyx_v_n_unknown = (__pyx_v_n_unknown + 1);
 
-      /* "gdna/lib/libmise/mise.pyx":112
+      /* "lib/libmise/mise.pyx":112
  *         cdef int n_unknown = 0
  *         for p in self.grid_points:
  *             if not p.known:             # <<<<<<<<<<<<<<
@@ -18229,7 +18229,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
  */
     }
 
-    /* "gdna/lib/libmise/mise.pyx":111
+    /* "lib/libmise/mise.pyx":111
  *         cdef vector[Vector3D] points
  *         cdef int n_unknown = 0
  *         for p in self.grid_points:             # <<<<<<<<<<<<<<
@@ -18238,7 +18238,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
  */
   }
 
-  /* "gdna/lib/libmise/mise.pyx":115
+  /* "lib/libmise/mise.pyx":115
  *                 n_unknown += 1
  * 
  *         points.reserve(n_unknown)             # <<<<<<<<<<<<<<
@@ -18252,7 +18252,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     __PYX_ERR(0, 115, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":116
+  /* "lib/libmise/mise.pyx":116
  * 
  *         points.reserve(n_unknown)
  *         for p in self.grid_points:             # <<<<<<<<<<<<<<
@@ -18266,7 +18266,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     ++__pyx_t_1;
     __pyx_v_p = __pyx_t_2;
 
-    /* "gdna/lib/libmise/mise.pyx":117
+    /* "lib/libmise/mise.pyx":117
  *         points.reserve(n_unknown)
  *         for p in self.grid_points:
  *             if not p.known:             # <<<<<<<<<<<<<<
@@ -18276,7 +18276,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     __pyx_t_3 = (!__pyx_v_p.known);
     if (__pyx_t_3) {
 
-      /* "gdna/lib/libmise/mise.pyx":118
+      /* "lib/libmise/mise.pyx":118
  *         for p in self.grid_points:
  *             if not p.known:
  *                 points.push_back(p.loc)             # <<<<<<<<<<<<<<
@@ -18290,7 +18290,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
         __PYX_ERR(0, 118, __pyx_L1_error)
       }
 
-      /* "gdna/lib/libmise/mise.pyx":117
+      /* "lib/libmise/mise.pyx":117
  *         points.reserve(n_unknown)
  *         for p in self.grid_points:
  *             if not p.known:             # <<<<<<<<<<<<<<
@@ -18299,7 +18299,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
  */
     }
 
-    /* "gdna/lib/libmise/mise.pyx":116
+    /* "lib/libmise/mise.pyx":116
  * 
  *         points.reserve(n_unknown)
  *         for p in self.grid_points:             # <<<<<<<<<<<<<<
@@ -18308,7 +18308,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
  */
   }
 
-  /* "gdna/lib/libmise/mise.pyx":121
+  /* "lib/libmise/mise.pyx":121
  * 
  *         # Convert to numpy
  *         points_np = np.zeros((points.size(), 3), dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -18352,7 +18352,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   __pyx_v_points_np = __pyx_t_8;
   __pyx_t_8 = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":122
+  /* "lib/libmise/mise.pyx":122
  *         # Convert to numpy
  *         points_np = np.zeros((points.size(), 3), dtype=np.int64)
  *         cdef long[:, :] points_view = points_np             # <<<<<<<<<<<<<<
@@ -18364,7 +18364,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "gdna/lib/libmise/mise.pyx":123
+  /* "lib/libmise/mise.pyx":123
  *         points_np = np.zeros((points.size(), 3), dtype=np.int64)
  *         cdef long[:, :] points_view = points_np
  *         for i in range(points.size()):             # <<<<<<<<<<<<<<
@@ -18376,7 +18376,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
     __pyx_v_i = __pyx_t_12;
 
-    /* "gdna/lib/libmise/mise.pyx":124
+    /* "lib/libmise/mise.pyx":124
  *         cdef long[:, :] points_view = points_np
  *         for i in range(points.size()):
  *             points_view[i, 0] = points[i].x             # <<<<<<<<<<<<<<
@@ -18398,7 +18398,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     }
     *((long *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_points_view.data + __pyx_t_14 * __pyx_v_points_view.strides[0]) ) + __pyx_t_15 * __pyx_v_points_view.strides[1]) )) = __pyx_t_13;
 
-    /* "gdna/lib/libmise/mise.pyx":125
+    /* "lib/libmise/mise.pyx":125
  *         for i in range(points.size()):
  *             points_view[i, 0] = points[i].x
  *             points_view[i, 1] = points[i].y             # <<<<<<<<<<<<<<
@@ -18420,7 +18420,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     }
     *((long *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_points_view.data + __pyx_t_14 * __pyx_v_points_view.strides[0]) ) + __pyx_t_15 * __pyx_v_points_view.strides[1]) )) = __pyx_t_13;
 
-    /* "gdna/lib/libmise/mise.pyx":126
+    /* "lib/libmise/mise.pyx":126
  *             points_view[i, 0] = points[i].x
  *             points_view[i, 1] = points[i].y
  *             points_view[i, 2] = points[i].z             # <<<<<<<<<<<<<<
@@ -18443,7 +18443,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
     *((long *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_points_view.data + __pyx_t_14 * __pyx_v_points_view.strides[0]) ) + __pyx_t_15 * __pyx_v_points_view.strides[1]) )) = __pyx_t_13;
   }
 
-  /* "gdna/lib/libmise/mise.pyx":128
+  /* "lib/libmise/mise.pyx":128
  *             points_view[i, 2] = points[i].z
  * 
  *         return points_np             # <<<<<<<<<<<<<<
@@ -18455,7 +18455,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   __pyx_r = __pyx_v_points_np;
   goto __pyx_L0;
 
-  /* "gdna/lib/libmise/mise.pyx":106
+  /* "lib/libmise/mise.pyx":106
  *         self.subdivide_voxels()
  * 
  *     def query(self):             # <<<<<<<<<<<<<<
@@ -18471,7 +18471,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_9, 1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.query", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.query", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_points_np);
@@ -18481,7 +18481,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":130
+/* "lib/libmise/mise.pyx":130
  *         return points_np
  * 
  *     def to_dense(self):             # <<<<<<<<<<<<<<
@@ -18490,16 +18490,16 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_4query(struct __pyx_ob
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_7to_dense(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_7to_dense(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_6to_dense, "Output dense matrix at highest resolution.");
-static PyMethodDef __pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_7to_dense = {"to_dense", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_7to_dense, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_6to_dense};
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_7to_dense(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_3lib_7libmise_4mise_4MISE_6to_dense, "Output dense matrix at highest resolution.");
+static PyMethodDef __pyx_mdef_3lib_7libmise_4mise_4MISE_7to_dense = {"to_dense", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_7to_dense, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_3lib_7libmise_4mise_4MISE_6to_dense};
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_7to_dense(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -18516,17 +18516,17 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("to_dense", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "to_dense", 0))) return NULL;
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_6to_dense(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_v_out_array = NULL;
   __Pyx_memviewslice __pyx_v_out_view = { 0, 0, { 0 }, { 0 }, { 0 } };
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_v_point;
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_v_point;
   int __pyx_v_i;
   int __pyx_v_j;
   int __pyx_v_k;
@@ -18539,8 +18539,8 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   PyObject *__pyx_t_5 = NULL;
   int __pyx_t_6;
   __Pyx_memviewslice __pyx_t_7 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint> ::iterator __pyx_t_8;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_t_9;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_GridPoint> ::iterator __pyx_t_8;
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_t_9;
   double __pyx_t_10;
   Py_ssize_t __pyx_t_11;
   Py_ssize_t __pyx_t_12;
@@ -18563,7 +18563,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_dense", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":132
+  /* "lib/libmise/mise.pyx":132
  *     def to_dense(self):
  *         """Output dense matrix at highest resolution."""
  *         out_array = np.full((self.resolution + 1,) * 3, np.nan)             # <<<<<<<<<<<<<<
@@ -18617,7 +18617,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   __pyx_v_out_array = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":133
+  /* "lib/libmise/mise.pyx":133
  *         """Output dense matrix at highest resolution."""
  *         out_array = np.full((self.resolution + 1,) * 3, np.nan)
  *         cdef double[:, :, :] out_view = out_array             # <<<<<<<<<<<<<<
@@ -18629,7 +18629,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "gdna/lib/libmise/mise.pyx":137
+  /* "lib/libmise/mise.pyx":137
  *         cdef int i, j, k
  * 
  *         for point in self.grid_points:             # <<<<<<<<<<<<<<
@@ -18643,7 +18643,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     ++__pyx_t_8;
     __pyx_v_point = __pyx_t_9;
 
-    /* "gdna/lib/libmise/mise.pyx":140
+    /* "lib/libmise/mise.pyx":140
  *             # Take voxel for which points is upper left corner
  *             # assert(point.known)
  *             out_view[point.loc.x, point.loc.y, point.loc.z] = point.value             # <<<<<<<<<<<<<<
@@ -18673,7 +18673,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     }
     *((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_11 * __pyx_v_out_view.strides[0]) ) + __pyx_t_12 * __pyx_v_out_view.strides[1]) ) + __pyx_t_13 * __pyx_v_out_view.strides[2]) )) = __pyx_t_10;
 
-    /* "gdna/lib/libmise/mise.pyx":137
+    /* "lib/libmise/mise.pyx":137
  *         cdef int i, j, k
  * 
  *         for point in self.grid_points:             # <<<<<<<<<<<<<<
@@ -18682,7 +18682,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
  */
   }
 
-  /* "gdna/lib/libmise/mise.pyx":143
+  /* "lib/libmise/mise.pyx":143
  * 
  *         # Complete along x axis
  *         for i in range(1, self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18694,7 +18694,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_15; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "gdna/lib/libmise/mise.pyx":144
+    /* "lib/libmise/mise.pyx":144
  *         # Complete along x axis
  *         for i in range(1, self.resolution + 1):
  *             for j in range(self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18706,7 +18706,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     for (__pyx_t_18 = 0; __pyx_t_18 < __pyx_t_17; __pyx_t_18+=1) {
       __pyx_v_j = __pyx_t_18;
 
-      /* "gdna/lib/libmise/mise.pyx":145
+      /* "lib/libmise/mise.pyx":145
  *         for i in range(1, self.resolution + 1):
  *             for j in range(self.resolution + 1):
  *                 for k in range(self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18718,7 +18718,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
       for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
         __pyx_v_k = __pyx_t_21;
 
-        /* "gdna/lib/libmise/mise.pyx":146
+        /* "lib/libmise/mise.pyx":146
  *             for j in range(self.resolution + 1):
  *                 for k in range(self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):             # <<<<<<<<<<<<<<
@@ -18748,7 +18748,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
         __pyx_t_23 = isnan((*((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_13 * __pyx_v_out_view.strides[0]) ) + __pyx_t_12 * __pyx_v_out_view.strides[1]) ) + __pyx_t_11 * __pyx_v_out_view.strides[2]) ))));
         if (__pyx_t_23) {
 
-          /* "gdna/lib/libmise/mise.pyx":147
+          /* "lib/libmise/mise.pyx":147
  *                 for k in range(self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):
  *                         out_view[i, j, k] = out_view[i-1, j, k]             # <<<<<<<<<<<<<<
@@ -18797,7 +18797,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
           }
           *((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_24 * __pyx_v_out_view.strides[0]) ) + __pyx_t_25 * __pyx_v_out_view.strides[1]) ) + __pyx_t_26 * __pyx_v_out_view.strides[2]) )) = (*((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_11 * __pyx_v_out_view.strides[0]) ) + __pyx_t_12 * __pyx_v_out_view.strides[1]) ) + __pyx_t_13 * __pyx_v_out_view.strides[2]) )));
 
-          /* "gdna/lib/libmise/mise.pyx":146
+          /* "lib/libmise/mise.pyx":146
  *             for j in range(self.resolution + 1):
  *                 for k in range(self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):             # <<<<<<<<<<<<<<
@@ -18809,7 +18809,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     }
   }
 
-  /* "gdna/lib/libmise/mise.pyx":150
+  /* "lib/libmise/mise.pyx":150
  * 
  *         # Complete along y axis
  *         for i in range(self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18821,7 +18821,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_15; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "gdna/lib/libmise/mise.pyx":151
+    /* "lib/libmise/mise.pyx":151
  *         # Complete along y axis
  *         for i in range(self.resolution + 1):
  *             for j in range(1, self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18833,7 +18833,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     for (__pyx_t_18 = 1; __pyx_t_18 < __pyx_t_17; __pyx_t_18+=1) {
       __pyx_v_j = __pyx_t_18;
 
-      /* "gdna/lib/libmise/mise.pyx":152
+      /* "lib/libmise/mise.pyx":152
  *         for i in range(self.resolution + 1):
  *             for j in range(1, self.resolution + 1):
  *                 for k in range(self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18845,7 +18845,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
       for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
         __pyx_v_k = __pyx_t_21;
 
-        /* "gdna/lib/libmise/mise.pyx":153
+        /* "lib/libmise/mise.pyx":153
  *             for j in range(1, self.resolution + 1):
  *                 for k in range(self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):             # <<<<<<<<<<<<<<
@@ -18875,7 +18875,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
         __pyx_t_23 = isnan((*((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_13 * __pyx_v_out_view.strides[0]) ) + __pyx_t_12 * __pyx_v_out_view.strides[1]) ) + __pyx_t_11 * __pyx_v_out_view.strides[2]) ))));
         if (__pyx_t_23) {
 
-          /* "gdna/lib/libmise/mise.pyx":154
+          /* "lib/libmise/mise.pyx":154
  *                 for k in range(self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):
  *                         out_view[i, j, k] = out_view[i, j-1, k]             # <<<<<<<<<<<<<<
@@ -18924,7 +18924,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
           }
           *((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_26 * __pyx_v_out_view.strides[0]) ) + __pyx_t_25 * __pyx_v_out_view.strides[1]) ) + __pyx_t_24 * __pyx_v_out_view.strides[2]) )) = (*((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_11 * __pyx_v_out_view.strides[0]) ) + __pyx_t_12 * __pyx_v_out_view.strides[1]) ) + __pyx_t_13 * __pyx_v_out_view.strides[2]) )));
 
-          /* "gdna/lib/libmise/mise.pyx":153
+          /* "lib/libmise/mise.pyx":153
  *             for j in range(1, self.resolution + 1):
  *                 for k in range(self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):             # <<<<<<<<<<<<<<
@@ -18936,7 +18936,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     }
   }
 
-  /* "gdna/lib/libmise/mise.pyx":158
+  /* "lib/libmise/mise.pyx":158
  * 
  *         # Complete along z axis
  *         for i in range(self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18948,7 +18948,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_15; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "gdna/lib/libmise/mise.pyx":159
+    /* "lib/libmise/mise.pyx":159
  *         # Complete along z axis
  *         for i in range(self.resolution + 1):
  *             for j in range(self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18960,7 +18960,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     for (__pyx_t_18 = 0; __pyx_t_18 < __pyx_t_17; __pyx_t_18+=1) {
       __pyx_v_j = __pyx_t_18;
 
-      /* "gdna/lib/libmise/mise.pyx":160
+      /* "lib/libmise/mise.pyx":160
  *         for i in range(self.resolution + 1):
  *             for j in range(self.resolution + 1):
  *                 for k in range(1, self.resolution + 1):             # <<<<<<<<<<<<<<
@@ -18972,7 +18972,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
       for (__pyx_t_21 = 1; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
         __pyx_v_k = __pyx_t_21;
 
-        /* "gdna/lib/libmise/mise.pyx":161
+        /* "lib/libmise/mise.pyx":161
  *             for j in range(self.resolution + 1):
  *                 for k in range(1, self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):             # <<<<<<<<<<<<<<
@@ -19002,7 +19002,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
         __pyx_t_23 = isnan((*((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_13 * __pyx_v_out_view.strides[0]) ) + __pyx_t_12 * __pyx_v_out_view.strides[1]) ) + __pyx_t_11 * __pyx_v_out_view.strides[2]) ))));
         if (__pyx_t_23) {
 
-          /* "gdna/lib/libmise/mise.pyx":162
+          /* "lib/libmise/mise.pyx":162
  *                 for k in range(1, self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):
  *                         out_view[i, j, k] = out_view[i, j, k-1]             # <<<<<<<<<<<<<<
@@ -19051,7 +19051,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
           }
           *((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_24 * __pyx_v_out_view.strides[0]) ) + __pyx_t_25 * __pyx_v_out_view.strides[1]) ) + __pyx_t_26 * __pyx_v_out_view.strides[2]) )) = (*((double *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_out_view.data + __pyx_t_11 * __pyx_v_out_view.strides[0]) ) + __pyx_t_12 * __pyx_v_out_view.strides[1]) ) + __pyx_t_13 * __pyx_v_out_view.strides[2]) )));
 
-          /* "gdna/lib/libmise/mise.pyx":161
+          /* "lib/libmise/mise.pyx":161
  *             for j in range(self.resolution + 1):
  *                 for k in range(1, self.resolution + 1):
  *                     if isnan(out_view[i, j, k]):             # <<<<<<<<<<<<<<
@@ -19060,7 +19060,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
  */
         }
 
-        /* "gdna/lib/libmise/mise.pyx":163
+        /* "lib/libmise/mise.pyx":163
  *                     if isnan(out_view[i, j, k]):
  *                         out_view[i, j, k] = out_view[i, j, k-1]
  *                     assert(not isnan(out_view[i, j, k]))             # <<<<<<<<<<<<<<
@@ -19102,7 +19102,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
     }
   }
 
-  /* "gdna/lib/libmise/mise.pyx":164
+  /* "lib/libmise/mise.pyx":164
  *                         out_view[i, j, k] = out_view[i, j, k-1]
  *                     assert(not isnan(out_view[i, j, k]))
  *         return out_array             # <<<<<<<<<<<<<<
@@ -19114,7 +19114,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   __pyx_r = __pyx_v_out_array;
   goto __pyx_L0;
 
-  /* "gdna/lib/libmise/mise.pyx":130
+  /* "lib/libmise/mise.pyx":130
  *         return points_np
  * 
  *     def to_dense(self):             # <<<<<<<<<<<<<<
@@ -19130,7 +19130,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_7, 1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.to_dense", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.to_dense", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_out_array);
@@ -19140,7 +19140,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":166
+/* "lib/libmise/mise.pyx":166
  *         return out_array
  * 
  *     def get_points(self):             # <<<<<<<<<<<<<<
@@ -19149,15 +19149,15 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_6to_dense(struct __pyx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_9get_points(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_9get_points(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_9get_points = {"get_points", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_9get_points, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_9get_points(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_3lib_7libmise_4mise_4MISE_9get_points = {"get_points", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_9get_points, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_9get_points(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19174,19 +19174,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("get_points", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "get_points", 0))) return NULL;
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_8get_points(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_8get_points(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_v_points_np = NULL;
   PyObject *__pyx_v_values_np = NULL;
   __Pyx_memviewslice __pyx_v_points_view = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_values_view = { 0, 0, { 0 }, { 0 }, { 0 } };
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
   int __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -19197,10 +19197,10 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   PyObject *__pyx_t_5 = NULL;
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_t_7 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint> ::size_type __pyx_t_8;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint> ::size_type __pyx_t_9;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_GridPoint> ::size_type __pyx_t_8;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_GridPoint> ::size_type __pyx_t_9;
   int __pyx_t_10;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_t_11;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_t_11;
   int __pyx_t_12;
   Py_ssize_t __pyx_t_13;
   Py_ssize_t __pyx_t_14;
@@ -19211,7 +19211,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_points", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":167
+  /* "lib/libmise/mise.pyx":167
  * 
  *     def get_points(self):
  *         points_np = np.zeros((self.grid_points.size(), 3), dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -19255,7 +19255,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   __pyx_v_points_np = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":168
+  /* "lib/libmise/mise.pyx":168
  *     def get_points(self):
  *         points_np = np.zeros((self.grid_points.size(), 3), dtype=np.int64)
  *         values_np = np.zeros((self.grid_points.size()), dtype=np.float64)             # <<<<<<<<<<<<<<
@@ -19291,7 +19291,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   __pyx_v_values_np = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":170
+  /* "lib/libmise/mise.pyx":170
  *         values_np = np.zeros((self.grid_points.size()), dtype=np.float64)
  * 
  *         cdef long[:, :] points_view = points_np             # <<<<<<<<<<<<<<
@@ -19303,7 +19303,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "gdna/lib/libmise/mise.pyx":171
+  /* "lib/libmise/mise.pyx":171
  * 
  *         cdef long[:, :] points_view = points_np
  *         cdef double[:] values_view = values_np             # <<<<<<<<<<<<<<
@@ -19315,7 +19315,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "gdna/lib/libmise/mise.pyx":175
+  /* "lib/libmise/mise.pyx":175
  *         cdef int i
  * 
  *         for i in range(self.grid_points.size()):             # <<<<<<<<<<<<<<
@@ -19327,7 +19327,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_i = __pyx_t_10;
 
-    /* "gdna/lib/libmise/mise.pyx":176
+    /* "lib/libmise/mise.pyx":176
  * 
  *         for i in range(self.grid_points.size()):
  *             loc = self.grid_points[i].loc             # <<<<<<<<<<<<<<
@@ -19337,7 +19337,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
     __pyx_t_11 = (__pyx_v_self->grid_points[__pyx_v_i]).loc;
     __pyx_v_loc = __pyx_t_11;
 
-    /* "gdna/lib/libmise/mise.pyx":177
+    /* "lib/libmise/mise.pyx":177
  *         for i in range(self.grid_points.size()):
  *             loc = self.grid_points[i].loc
  *             points_view[i, 0] = loc.x             # <<<<<<<<<<<<<<
@@ -19362,7 +19362,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
     }
     *((long *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_points_view.data + __pyx_t_13 * __pyx_v_points_view.strides[0]) ) + __pyx_t_14 * __pyx_v_points_view.strides[1]) )) = __pyx_t_12;
 
-    /* "gdna/lib/libmise/mise.pyx":178
+    /* "lib/libmise/mise.pyx":178
  *             loc = self.grid_points[i].loc
  *             points_view[i, 0] = loc.x
  *             points_view[i, 1] = loc.y             # <<<<<<<<<<<<<<
@@ -19387,7 +19387,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
     }
     *((long *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_points_view.data + __pyx_t_14 * __pyx_v_points_view.strides[0]) ) + __pyx_t_13 * __pyx_v_points_view.strides[1]) )) = __pyx_t_12;
 
-    /* "gdna/lib/libmise/mise.pyx":179
+    /* "lib/libmise/mise.pyx":179
  *             points_view[i, 0] = loc.x
  *             points_view[i, 1] = loc.y
  *             points_view[i, 2] = loc.z             # <<<<<<<<<<<<<<
@@ -19412,7 +19412,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
     }
     *((long *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_points_view.data + __pyx_t_13 * __pyx_v_points_view.strides[0]) ) + __pyx_t_14 * __pyx_v_points_view.strides[1]) )) = __pyx_t_12;
 
-    /* "gdna/lib/libmise/mise.pyx":180
+    /* "lib/libmise/mise.pyx":180
  *             points_view[i, 1] = loc.y
  *             points_view[i, 2] = loc.z
  *             values_view[i] = self.grid_points[i].value             # <<<<<<<<<<<<<<
@@ -19433,7 +19433,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
     *((double *) ( /* dim=0 */ (__pyx_v_values_view.data + __pyx_t_14 * __pyx_v_values_view.strides[0]) )) = __pyx_t_16;
   }
 
-  /* "gdna/lib/libmise/mise.pyx":182
+  /* "lib/libmise/mise.pyx":182
  *             values_view[i] = self.grid_points[i].value
  * 
  *         return points_np, values_np             # <<<<<<<<<<<<<<
@@ -19453,7 +19453,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "gdna/lib/libmise/mise.pyx":166
+  /* "lib/libmise/mise.pyx":166
  *         return out_array
  * 
  *     def get_points(self):             # <<<<<<<<<<<<<<
@@ -19470,7 +19470,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_7, 1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.get_points", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.get_points", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_points_np);
@@ -19482,7 +19482,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":184
+/* "lib/libmise/mise.pyx":184
  *         return points_np, values_np
  * 
  *     cdef void subdivide_voxels(self) except +:             # <<<<<<<<<<<<<<
@@ -19490,35 +19490,35 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_8get_points(struct __p
  *         cdef vector[bint] next_to_negative
  */
 
-static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static void __pyx_f_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   std::vector<int>  __pyx_v_next_to_positive;
   std::vector<int>  __pyx_v_next_to_negative;
   int __pyx_v_i;
   int __pyx_v_j;
   int __pyx_v_k;
   long __pyx_v_idx;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_adj_loc;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_v_grid_point;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_adj_loc;
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_v_grid_point;
   int __pyx_v_n_subdivide;
   __Pyx_RefNannyDeclarations
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint> ::iterator __pyx_t_1;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_t_2;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_t_3;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_GridPoint> ::iterator __pyx_t_1;
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_t_2;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_t_3;
   int __pyx_t_4;
   int __pyx_t_5;
   int __pyx_t_6;
   int __pyx_t_7;
   long __pyx_t_8;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel> ::size_type __pyx_t_9;
-  std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel> ::size_type __pyx_t_10;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Voxel> ::size_type __pyx_t_9;
+  std::vector<struct __pyx_t_3lib_7libmise_4mise_Voxel> ::size_type __pyx_t_10;
   int __pyx_t_11;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("subdivide_voxels", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":192
+  /* "lib/libmise/mise.pyx":192
  * 
  *         # Initialize vectors
  *         next_to_positive.resize(self.voxels.size(), False)             # <<<<<<<<<<<<<<
@@ -19532,7 +19532,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __PYX_ERR(0, 192, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":193
+  /* "lib/libmise/mise.pyx":193
  *         # Initialize vectors
  *         next_to_positive.resize(self.voxels.size(), False)
  *         next_to_negative.resize(self.voxels.size(), False)             # <<<<<<<<<<<<<<
@@ -19546,7 +19546,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __PYX_ERR(0, 193, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":197
+  /* "lib/libmise/mise.pyx":197
  *         # Iterate over grid points and mark voxels active
  *         # TODO: can move this to update operation and add attibute to voxel
  *         for grid_point in self.grid_points:             # <<<<<<<<<<<<<<
@@ -19560,7 +19560,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     ++__pyx_t_1;
     __pyx_v_grid_point = __pyx_t_2;
 
-    /* "gdna/lib/libmise/mise.pyx":198
+    /* "lib/libmise/mise.pyx":198
  *         # TODO: can move this to update operation and add attibute to voxel
  *         for grid_point in self.grid_points:
  *             loc = grid_point.loc             # <<<<<<<<<<<<<<
@@ -19570,7 +19570,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_t_3 = __pyx_v_grid_point.loc;
     __pyx_v_loc = __pyx_t_3;
 
-    /* "gdna/lib/libmise/mise.pyx":199
+    /* "lib/libmise/mise.pyx":199
  *         for grid_point in self.grid_points:
  *             loc = grid_point.loc
  *             if not grid_point.known:             # <<<<<<<<<<<<<<
@@ -19580,7 +19580,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_t_4 = (!__pyx_v_grid_point.known);
     if (__pyx_t_4) {
 
-      /* "gdna/lib/libmise/mise.pyx":200
+      /* "lib/libmise/mise.pyx":200
  *             loc = grid_point.loc
  *             if not grid_point.known:
  *                 continue             # <<<<<<<<<<<<<<
@@ -19589,7 +19589,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
       goto __pyx_L3_continue;
 
-      /* "gdna/lib/libmise/mise.pyx":199
+      /* "lib/libmise/mise.pyx":199
  *         for grid_point in self.grid_points:
  *             loc = grid_point.loc
  *             if not grid_point.known:             # <<<<<<<<<<<<<<
@@ -19598,7 +19598,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
     }
 
-    /* "gdna/lib/libmise/mise.pyx":203
+    /* "lib/libmise/mise.pyx":203
  * 
  *             # Iterate over the 8 adjacent voxels
  *             for i in range(-1, 1):             # <<<<<<<<<<<<<<
@@ -19608,7 +19608,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     for (__pyx_t_5 = -1; __pyx_t_5 < 1; __pyx_t_5+=1) {
       __pyx_v_i = __pyx_t_5;
 
-      /* "gdna/lib/libmise/mise.pyx":204
+      /* "lib/libmise/mise.pyx":204
  *             # Iterate over the 8 adjacent voxels
  *             for i in range(-1, 1):
  *                 for j in range(-1, 1):             # <<<<<<<<<<<<<<
@@ -19618,7 +19618,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
       for (__pyx_t_6 = -1; __pyx_t_6 < 1; __pyx_t_6+=1) {
         __pyx_v_j = __pyx_t_6;
 
-        /* "gdna/lib/libmise/mise.pyx":205
+        /* "lib/libmise/mise.pyx":205
  *             for i in range(-1, 1):
  *                 for j in range(-1, 1):
  *                     for k in range(-1, 1):             # <<<<<<<<<<<<<<
@@ -19628,7 +19628,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
         for (__pyx_t_7 = -1; __pyx_t_7 < 1; __pyx_t_7+=1) {
           __pyx_v_k = __pyx_t_7;
 
-          /* "gdna/lib/libmise/mise.pyx":207
+          /* "lib/libmise/mise.pyx":207
  *                     for k in range(-1, 1):
  *                         adj_loc = Vector3D(
  *                             x=loc.x + i,             # <<<<<<<<<<<<<<
@@ -19637,7 +19637,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
           __pyx_t_3.x = (__pyx_v_loc.x + __pyx_v_i);
 
-          /* "gdna/lib/libmise/mise.pyx":208
+          /* "lib/libmise/mise.pyx":208
  *                         adj_loc = Vector3D(
  *                             x=loc.x + i,
  *                             y=loc.y + j,             # <<<<<<<<<<<<<<
@@ -19646,7 +19646,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
           __pyx_t_3.y = (__pyx_v_loc.y + __pyx_v_j);
 
-          /* "gdna/lib/libmise/mise.pyx":209
+          /* "lib/libmise/mise.pyx":209
  *                             x=loc.x + i,
  *                             y=loc.y + j,
  *                             z=loc.z + k,             # <<<<<<<<<<<<<<
@@ -19656,7 +19656,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
           __pyx_t_3.z = (__pyx_v_loc.z + __pyx_v_k);
           __pyx_v_adj_loc = __pyx_t_3;
 
-          /* "gdna/lib/libmise/mise.pyx":211
+          /* "lib/libmise/mise.pyx":211
  *                             z=loc.z + k,
  *                         )
  *                         idx = self.get_voxel_idx(adj_loc)             # <<<<<<<<<<<<<<
@@ -19664,14 +19664,14 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  *                             continue
  */
           try {
-            __pyx_t_8 = ((struct __pyx_vtabstruct_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self->__pyx_vtab)->get_voxel_idx(__pyx_v_self, __pyx_v_adj_loc);
+            __pyx_t_8 = ((struct __pyx_vtabstruct_3lib_7libmise_4mise_MISE *)__pyx_v_self->__pyx_vtab)->get_voxel_idx(__pyx_v_self, __pyx_v_adj_loc);
           } catch(...) {
             __Pyx_CppExn2PyErr();
             __PYX_ERR(0, 211, __pyx_L1_error)
           }
           __pyx_v_idx = __pyx_t_8;
 
-          /* "gdna/lib/libmise/mise.pyx":212
+          /* "lib/libmise/mise.pyx":212
  *                         )
  *                         idx = self.get_voxel_idx(adj_loc)
  *                         if idx == -1:             # <<<<<<<<<<<<<<
@@ -19681,7 +19681,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
           __pyx_t_4 = (__pyx_v_idx == -1L);
           if (__pyx_t_4) {
 
-            /* "gdna/lib/libmise/mise.pyx":213
+            /* "lib/libmise/mise.pyx":213
  *                         idx = self.get_voxel_idx(adj_loc)
  *                         if idx == -1:
  *                             continue             # <<<<<<<<<<<<<<
@@ -19690,7 +19690,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
             goto __pyx_L10_continue;
 
-            /* "gdna/lib/libmise/mise.pyx":212
+            /* "lib/libmise/mise.pyx":212
  *                         )
  *                         idx = self.get_voxel_idx(adj_loc)
  *                         if idx == -1:             # <<<<<<<<<<<<<<
@@ -19699,7 +19699,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
           }
 
-          /* "gdna/lib/libmise/mise.pyx":215
+          /* "lib/libmise/mise.pyx":215
  *                             continue
  * 
  *                         if grid_point.value >= self.threshold:             # <<<<<<<<<<<<<<
@@ -19709,7 +19709,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
           __pyx_t_4 = (__pyx_v_grid_point.value >= __pyx_v_self->threshold);
           if (__pyx_t_4) {
 
-            /* "gdna/lib/libmise/mise.pyx":216
+            /* "lib/libmise/mise.pyx":216
  * 
  *                         if grid_point.value >= self.threshold:
  *                             next_to_positive[idx] = True             # <<<<<<<<<<<<<<
@@ -19718,7 +19718,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
             (__pyx_v_next_to_positive[__pyx_v_idx]) = 1;
 
-            /* "gdna/lib/libmise/mise.pyx":215
+            /* "lib/libmise/mise.pyx":215
  *                             continue
  * 
  *                         if grid_point.value >= self.threshold:             # <<<<<<<<<<<<<<
@@ -19727,7 +19727,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
           }
 
-          /* "gdna/lib/libmise/mise.pyx":217
+          /* "lib/libmise/mise.pyx":217
  *                         if grid_point.value >= self.threshold:
  *                             next_to_positive[idx] = True
  *                         if grid_point.value <= self.threshold:             # <<<<<<<<<<<<<<
@@ -19737,7 +19737,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
           __pyx_t_4 = (__pyx_v_grid_point.value <= __pyx_v_self->threshold);
           if (__pyx_t_4) {
 
-            /* "gdna/lib/libmise/mise.pyx":218
+            /* "lib/libmise/mise.pyx":218
  *                             next_to_positive[idx] = True
  *                         if grid_point.value <= self.threshold:
  *                             next_to_negative[idx] = True             # <<<<<<<<<<<<<<
@@ -19746,7 +19746,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
             (__pyx_v_next_to_negative[__pyx_v_idx]) = 1;
 
-            /* "gdna/lib/libmise/mise.pyx":217
+            /* "lib/libmise/mise.pyx":217
  *                         if grid_point.value >= self.threshold:
  *                             next_to_positive[idx] = True
  *                         if grid_point.value <= self.threshold:             # <<<<<<<<<<<<<<
@@ -19759,7 +19759,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
       }
     }
 
-    /* "gdna/lib/libmise/mise.pyx":197
+    /* "lib/libmise/mise.pyx":197
  *         # Iterate over grid points and mark voxels active
  *         # TODO: can move this to update operation and add attibute to voxel
  *         for grid_point in self.grid_points:             # <<<<<<<<<<<<<<
@@ -19769,7 +19769,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_L3_continue:;
   }
 
-  /* "gdna/lib/libmise/mise.pyx":220
+  /* "lib/libmise/mise.pyx":220
  *                             next_to_negative[idx] = True
  * 
  *         cdef int n_subdivide = 0             # <<<<<<<<<<<<<<
@@ -19778,7 +19778,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
   __pyx_v_n_subdivide = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":222
+  /* "lib/libmise/mise.pyx":222
  *         cdef int n_subdivide = 0
  * 
  *         for idx in range(self.voxels.size()):             # <<<<<<<<<<<<<<
@@ -19790,7 +19790,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_10; __pyx_t_8+=1) {
     __pyx_v_idx = __pyx_t_8;
 
-    /* "gdna/lib/libmise/mise.pyx":223
+    /* "lib/libmise/mise.pyx":223
  * 
  *         for idx in range(self.voxels.size()):
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:             # <<<<<<<<<<<<<<
@@ -19808,7 +19808,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_L19_bool_binop_done:;
     if (__pyx_t_4) {
 
-      /* "gdna/lib/libmise/mise.pyx":224
+      /* "lib/libmise/mise.pyx":224
  *         for idx in range(self.voxels.size()):
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:
  *                 continue             # <<<<<<<<<<<<<<
@@ -19817,7 +19817,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
       goto __pyx_L16_continue;
 
-      /* "gdna/lib/libmise/mise.pyx":223
+      /* "lib/libmise/mise.pyx":223
  * 
  *         for idx in range(self.voxels.size()):
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:             # <<<<<<<<<<<<<<
@@ -19826,7 +19826,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
     }
 
-    /* "gdna/lib/libmise/mise.pyx":225
+    /* "lib/libmise/mise.pyx":225
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:
  *                 continue
  *             if next_to_positive[idx] and next_to_negative[idx]:             # <<<<<<<<<<<<<<
@@ -19844,7 +19844,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_L22_bool_binop_done:;
     if (__pyx_t_4) {
 
-      /* "gdna/lib/libmise/mise.pyx":226
+      /* "lib/libmise/mise.pyx":226
  *                 continue
  *             if next_to_positive[idx] and next_to_negative[idx]:
  *                 n_subdivide += 1             # <<<<<<<<<<<<<<
@@ -19853,7 +19853,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
       __pyx_v_n_subdivide = (__pyx_v_n_subdivide + 1);
 
-      /* "gdna/lib/libmise/mise.pyx":225
+      /* "lib/libmise/mise.pyx":225
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:
  *                 continue
  *             if next_to_positive[idx] and next_to_negative[idx]:             # <<<<<<<<<<<<<<
@@ -19864,7 +19864,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_L16_continue:;
   }
 
-  /* "gdna/lib/libmise/mise.pyx":228
+  /* "lib/libmise/mise.pyx":228
  *                 n_subdivide += 1
  * 
  *         self.voxels.reserve(self.voxels.size() + 8 * n_subdivide)             # <<<<<<<<<<<<<<
@@ -19878,7 +19878,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __PYX_ERR(0, 228, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":229
+  /* "lib/libmise/mise.pyx":229
  * 
  *         self.voxels.reserve(self.voxels.size() + 8 * n_subdivide)
  *         self.grid_points.reserve(self.voxels.size() + 19 * n_subdivide)             # <<<<<<<<<<<<<<
@@ -19892,7 +19892,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __PYX_ERR(0, 229, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":231
+  /* "lib/libmise/mise.pyx":231
  *         self.grid_points.reserve(self.voxels.size() + 19 * n_subdivide)
  * 
  *         for idx in range(self.voxels.size()):             # <<<<<<<<<<<<<<
@@ -19904,7 +19904,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_10; __pyx_t_8+=1) {
     __pyx_v_idx = __pyx_t_8;
 
-    /* "gdna/lib/libmise/mise.pyx":232
+    /* "lib/libmise/mise.pyx":232
  * 
  *         for idx in range(self.voxels.size()):
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:             # <<<<<<<<<<<<<<
@@ -19922,7 +19922,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_L27_bool_binop_done:;
     if (__pyx_t_4) {
 
-      /* "gdna/lib/libmise/mise.pyx":233
+      /* "lib/libmise/mise.pyx":233
  *         for idx in range(self.voxels.size()):
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:
  *                 continue             # <<<<<<<<<<<<<<
@@ -19931,7 +19931,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
       goto __pyx_L24_continue;
 
-      /* "gdna/lib/libmise/mise.pyx":232
+      /* "lib/libmise/mise.pyx":232
  * 
  *         for idx in range(self.voxels.size()):
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:             # <<<<<<<<<<<<<<
@@ -19940,7 +19940,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  */
     }
 
-    /* "gdna/lib/libmise/mise.pyx":234
+    /* "lib/libmise/mise.pyx":234
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:
  *                 continue
  *             if next_to_positive[idx] and next_to_negative[idx]:             # <<<<<<<<<<<<<<
@@ -19958,16 +19958,16 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_L30_bool_binop_done:;
     if (__pyx_t_4) {
 
-      /* "gdna/lib/libmise/mise.pyx":235
+      /* "lib/libmise/mise.pyx":235
  *                 continue
  *             if next_to_positive[idx] and next_to_negative[idx]:
  *                 self.subdivide_voxel(idx)             # <<<<<<<<<<<<<<
  * 
  *     cdef void subdivide_voxel(self, long idx):
  */
-      ((struct __pyx_vtabstruct_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self->__pyx_vtab)->subdivide_voxel(__pyx_v_self, __pyx_v_idx); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 235, __pyx_L1_error)
+      ((struct __pyx_vtabstruct_3lib_7libmise_4mise_MISE *)__pyx_v_self->__pyx_vtab)->subdivide_voxel(__pyx_v_self, __pyx_v_idx); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 235, __pyx_L1_error)
 
-      /* "gdna/lib/libmise/mise.pyx":234
+      /* "lib/libmise/mise.pyx":234
  *             if not self.voxels[idx].is_leaf or self.voxels[idx].level == self.depth:
  *                 continue
  *             if next_to_positive[idx] and next_to_negative[idx]:             # <<<<<<<<<<<<<<
@@ -19978,7 +19978,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
     __pyx_L24_continue:;
   }
 
-  /* "gdna/lib/libmise/mise.pyx":184
+  /* "lib/libmise/mise.pyx":184
  *         return points_np, values_np
  * 
  *     cdef void subdivide_voxels(self) except +:             # <<<<<<<<<<<<<<
@@ -19989,12 +19989,12 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
   /* function exit code */
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.subdivide_voxels", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.subdivide_voxels", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
 }
 
-/* "gdna/lib/libmise/mise.pyx":237
+/* "lib/libmise/mise.pyx":237
  *                 self.subdivide_voxel(idx)
  * 
  *     cdef void subdivide_voxel(self, long idx):             # <<<<<<<<<<<<<<
@@ -20002,29 +20002,29 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels(struct __py
  *         cdef GridPoint point
  */
 
-static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, long __pyx_v_idx) {
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel __pyx_v_voxel;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc0;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
+static void __pyx_f_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, long __pyx_v_idx) {
+  struct __pyx_t_3lib_7libmise_4mise_Voxel __pyx_v_voxel;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc0;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc;
   int __pyx_v_new_level;
   int __pyx_v_new_size;
   int __pyx_v_i;
   int __pyx_v_j;
   int __pyx_v_k;
   __Pyx_RefNannyDeclarations
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_t_1;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_t_1;
   int __pyx_t_2;
   int __pyx_t_3;
   int __pyx_t_4;
   int __pyx_t_5;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel __pyx_t_6;
+  struct __pyx_t_3lib_7libmise_4mise_Voxel __pyx_t_6;
   int __pyx_t_7;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("subdivide_voxel", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":240
+  /* "lib/libmise/mise.pyx":240
  *         cdef Voxel voxel
  *         cdef GridPoint point
  *         cdef Vector3D loc0 = self.voxels[idx].loc             # <<<<<<<<<<<<<<
@@ -20034,7 +20034,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
   __pyx_t_1 = (__pyx_v_self->voxels[__pyx_v_idx]).loc;
   __pyx_v_loc0 = __pyx_t_1;
 
-  /* "gdna/lib/libmise/mise.pyx":242
+  /* "lib/libmise/mise.pyx":242
  *         cdef Vector3D loc0 = self.voxels[idx].loc
  *         cdef Vector3D loc
  *         cdef int new_level = self.voxels[idx].level + 1             # <<<<<<<<<<<<<<
@@ -20043,7 +20043,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
   __pyx_v_new_level = ((__pyx_v_self->voxels[__pyx_v_idx]).level + 1);
 
-  /* "gdna/lib/libmise/mise.pyx":243
+  /* "lib/libmise/mise.pyx":243
  *         cdef Vector3D loc
  *         cdef int new_level = self.voxels[idx].level + 1
  *         cdef int new_size = 1 << (self.depth - new_level)             # <<<<<<<<<<<<<<
@@ -20052,7 +20052,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
   __pyx_v_new_size = (1 << (__pyx_v_self->depth - __pyx_v_new_level));
 
-  /* "gdna/lib/libmise/mise.pyx":244
+  /* "lib/libmise/mise.pyx":244
  *         cdef int new_level = self.voxels[idx].level + 1
  *         cdef int new_size = 1 << (self.depth - new_level)
  *         assert(new_level <= self.depth)             # <<<<<<<<<<<<<<
@@ -20071,7 +20071,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
   if ((1)); else __PYX_ERR(0, 244, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":245
+  /* "lib/libmise/mise.pyx":245
  *         cdef int new_size = 1 << (self.depth - new_level)
  *         assert(new_level <= self.depth)
  *         assert(1 <= new_size <= self.voxel_size_0)             # <<<<<<<<<<<<<<
@@ -20093,7 +20093,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
   if ((1)); else __PYX_ERR(0, 245, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":248
+  /* "lib/libmise/mise.pyx":248
  * 
  *         # Current voxel is not leaf anymore
  *         self.voxels[idx].is_leaf = False             # <<<<<<<<<<<<<<
@@ -20102,7 +20102,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
   (__pyx_v_self->voxels[__pyx_v_idx]).is_leaf = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":251
+  /* "lib/libmise/mise.pyx":251
  *         # Add new voxels
  *         cdef int i, j, k
  *         for i in range(2):             # <<<<<<<<<<<<<<
@@ -20112,7 +20112,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
   for (__pyx_t_3 = 0; __pyx_t_3 < 2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "gdna/lib/libmise/mise.pyx":252
+    /* "lib/libmise/mise.pyx":252
  *         cdef int i, j, k
  *         for i in range(2):
  *             for j in range(2):             # <<<<<<<<<<<<<<
@@ -20122,7 +20122,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
     for (__pyx_t_4 = 0; __pyx_t_4 < 2; __pyx_t_4+=1) {
       __pyx_v_j = __pyx_t_4;
 
-      /* "gdna/lib/libmise/mise.pyx":253
+      /* "lib/libmise/mise.pyx":253
  *         for i in range(2):
  *             for j in range(2):
  *                 for k in range(2):             # <<<<<<<<<<<<<<
@@ -20132,7 +20132,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
       for (__pyx_t_5 = 0; __pyx_t_5 < 2; __pyx_t_5+=1) {
         __pyx_v_k = __pyx_t_5;
 
-        /* "gdna/lib/libmise/mise.pyx":255
+        /* "lib/libmise/mise.pyx":255
  *                 for k in range(2):
  *                     loc = Vector3D(
  *                         x=loc0.x + i * new_size,             # <<<<<<<<<<<<<<
@@ -20141,7 +20141,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
         __pyx_t_1.x = (__pyx_v_loc0.x + (__pyx_v_i * __pyx_v_new_size));
 
-        /* "gdna/lib/libmise/mise.pyx":256
+        /* "lib/libmise/mise.pyx":256
  *                     loc = Vector3D(
  *                         x=loc0.x + i * new_size,
  *                         y=loc0.y + j * new_size,             # <<<<<<<<<<<<<<
@@ -20150,7 +20150,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
         __pyx_t_1.y = (__pyx_v_loc0.y + (__pyx_v_j * __pyx_v_new_size));
 
-        /* "gdna/lib/libmise/mise.pyx":257
+        /* "lib/libmise/mise.pyx":257
  *                         x=loc0.x + i * new_size,
  *                         y=loc0.y + j * new_size,
  *                         z=loc0.z + k * new_size,             # <<<<<<<<<<<<<<
@@ -20160,7 +20160,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
         __pyx_t_1.z = (__pyx_v_loc0.z + (__pyx_v_k * __pyx_v_new_size));
         __pyx_v_loc = __pyx_t_1;
 
-        /* "gdna/lib/libmise/mise.pyx":260
+        /* "lib/libmise/mise.pyx":260
  *                     )
  *                     voxel = Voxel(
  *                         loc=loc,             # <<<<<<<<<<<<<<
@@ -20169,7 +20169,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
         __pyx_t_6.loc = __pyx_v_loc;
 
-        /* "gdna/lib/libmise/mise.pyx":261
+        /* "lib/libmise/mise.pyx":261
  *                     voxel = Voxel(
  *                         loc=loc,
  *                         level=new_level,             # <<<<<<<<<<<<<<
@@ -20178,7 +20178,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
         __pyx_t_6.level = __pyx_v_new_level;
 
-        /* "gdna/lib/libmise/mise.pyx":262
+        /* "lib/libmise/mise.pyx":262
  *                         loc=loc,
  *                         level=new_level,
  *                         is_leaf=True             # <<<<<<<<<<<<<<
@@ -20188,7 +20188,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
         __pyx_t_6.is_leaf = 1;
         __pyx_v_voxel = __pyx_t_6;
 
-        /* "gdna/lib/libmise/mise.pyx":265
+        /* "lib/libmise/mise.pyx":265
  *                     )
  * 
  *                     self.voxels[idx].children[i][j][k] = self.voxels.size()             # <<<<<<<<<<<<<<
@@ -20197,7 +20197,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
         ((((__pyx_v_self->voxels[__pyx_v_idx]).children[__pyx_v_i])[__pyx_v_j])[__pyx_v_k]) = __pyx_v_self->voxels.size();
 
-        /* "gdna/lib/libmise/mise.pyx":266
+        /* "lib/libmise/mise.pyx":266
  * 
  *                     self.voxels[idx].children[i][j][k] = self.voxels.size()
  *                     self.voxels.push_back(voxel)             # <<<<<<<<<<<<<<
@@ -20214,7 +20214,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
     }
   }
 
-  /* "gdna/lib/libmise/mise.pyx":269
+  /* "lib/libmise/mise.pyx":269
  * 
  *         # Add new grid points
  *         for i in range(3):             # <<<<<<<<<<<<<<
@@ -20224,7 +20224,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
   for (__pyx_t_3 = 0; __pyx_t_3 < 3; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "gdna/lib/libmise/mise.pyx":270
+    /* "lib/libmise/mise.pyx":270
  *         # Add new grid points
  *         for i in range(3):
  *             for j in range(3):             # <<<<<<<<<<<<<<
@@ -20234,7 +20234,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
     for (__pyx_t_4 = 0; __pyx_t_4 < 3; __pyx_t_4+=1) {
       __pyx_v_j = __pyx_t_4;
 
-      /* "gdna/lib/libmise/mise.pyx":271
+      /* "lib/libmise/mise.pyx":271
  *         for i in range(3):
  *             for j in range(3):
  *                 for k in range(3):             # <<<<<<<<<<<<<<
@@ -20244,7 +20244,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
       for (__pyx_t_5 = 0; __pyx_t_5 < 3; __pyx_t_5+=1) {
         __pyx_v_k = __pyx_t_5;
 
-        /* "gdna/lib/libmise/mise.pyx":273
+        /* "lib/libmise/mise.pyx":273
  *                 for k in range(3):
  *                     loc = Vector3D(
  *                         loc0.x + i * new_size,             # <<<<<<<<<<<<<<
@@ -20253,7 +20253,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
         __pyx_t_1.x = (__pyx_v_loc0.x + (__pyx_v_i * __pyx_v_new_size));
 
-        /* "gdna/lib/libmise/mise.pyx":274
+        /* "lib/libmise/mise.pyx":274
  *                     loc = Vector3D(
  *                         loc0.x + i * new_size,
  *                         loc0.y + j * new_size,             # <<<<<<<<<<<<<<
@@ -20262,7 +20262,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  */
         __pyx_t_1.y = (__pyx_v_loc0.y + (__pyx_v_j * __pyx_v_new_size));
 
-        /* "gdna/lib/libmise/mise.pyx":275
+        /* "lib/libmise/mise.pyx":275
  *                         loc0.x + i * new_size,
  *                         loc0.y + j * new_size,
  *                         loc0.z + k * new_size,             # <<<<<<<<<<<<<<
@@ -20272,27 +20272,27 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
         __pyx_t_1.z = (__pyx_v_loc0.z + (__pyx_v_k * __pyx_v_new_size));
         __pyx_v_loc = __pyx_t_1;
 
-        /* "gdna/lib/libmise/mise.pyx":279
+        /* "lib/libmise/mise.pyx":279
  * 
  *                     # Only add new grid points
  *                     if self.get_grid_point_idx(loc) == -1:             # <<<<<<<<<<<<<<
  *                         self.add_grid_point(loc)
  * 
  */
-        __pyx_t_7 = __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_idx(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 279, __pyx_L1_error)
+        __pyx_t_7 = __pyx_f_3lib_7libmise_4mise_4MISE_get_grid_point_idx(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 279, __pyx_L1_error)
         __pyx_t_2 = (__pyx_t_7 == -1L);
         if (__pyx_t_2) {
 
-          /* "gdna/lib/libmise/mise.pyx":280
+          /* "lib/libmise/mise.pyx":280
  *                     # Only add new grid points
  *                     if self.get_grid_point_idx(loc) == -1:
  *                         self.add_grid_point(loc)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-          __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L1_error)
+          __pyx_f_3lib_7libmise_4mise_4MISE_add_grid_point(__pyx_v_self, __pyx_v_loc); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L1_error)
 
-          /* "gdna/lib/libmise/mise.pyx":279
+          /* "lib/libmise/mise.pyx":279
  * 
  *                     # Only add new grid points
  *                     if self.get_grid_point_idx(loc) == -1:             # <<<<<<<<<<<<<<
@@ -20304,7 +20304,7 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
     }
   }
 
-  /* "gdna/lib/libmise/mise.pyx":237
+  /* "lib/libmise/mise.pyx":237
  *                 self.subdivide_voxel(idx)
  * 
  *     cdef void subdivide_voxel(self, long idx):             # <<<<<<<<<<<<<<
@@ -20315,12 +20315,12 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
   /* function exit code */
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.subdivide_voxel", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.subdivide_voxel", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
 }
 
-/* "gdna/lib/libmise/mise.pyx":284
+/* "lib/libmise/mise.pyx":284
  * 
  *     @cython.cdivision(True)
  *     cdef long get_voxel_idx(self, Vector3D loc) except +:             # <<<<<<<<<<<<<<
@@ -20328,30 +20328,30 @@ static void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel(struct __pyx
  *         # Shorthands
  */
 
-static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc) {
+static long __pyx_f_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc) {
   long __pyx_v_resolution;
   long __pyx_v_resolution_0;
   long __pyx_v_depth;
   long __pyx_v_voxel_size_0;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc0;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc0;
   int __pyx_v_idx;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel __pyx_v_voxel;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc_rel;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc_offset;
+  struct __pyx_t_3lib_7libmise_4mise_Voxel __pyx_v_voxel;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc_rel;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc_offset;
   long __pyx_v_voxel_size;
   long __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
   int __pyx_t_3;
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_t_4;
+  struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_t_4;
   unsigned long __pyx_t_5;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_voxel_idx", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":287
+  /* "lib/libmise/mise.pyx":287
  *         """Utility function for getting voxel index corresponding to 3D coordinates."""
  *         # Shorthands
  *         cdef long resolution = self.resolution             # <<<<<<<<<<<<<<
@@ -20361,7 +20361,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_t_1 = __pyx_v_self->resolution;
   __pyx_v_resolution = __pyx_t_1;
 
-  /* "gdna/lib/libmise/mise.pyx":288
+  /* "lib/libmise/mise.pyx":288
  *         # Shorthands
  *         cdef long resolution = self.resolution
  *         cdef long resolution_0 = self.resolution_0             # <<<<<<<<<<<<<<
@@ -20371,7 +20371,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_t_1 = __pyx_v_self->resolution_0;
   __pyx_v_resolution_0 = __pyx_t_1;
 
-  /* "gdna/lib/libmise/mise.pyx":289
+  /* "lib/libmise/mise.pyx":289
  *         cdef long resolution = self.resolution
  *         cdef long resolution_0 = self.resolution_0
  *         cdef long depth = self.depth             # <<<<<<<<<<<<<<
@@ -20381,7 +20381,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_t_1 = __pyx_v_self->depth;
   __pyx_v_depth = __pyx_t_1;
 
-  /* "gdna/lib/libmise/mise.pyx":290
+  /* "lib/libmise/mise.pyx":290
  *         cdef long resolution_0 = self.resolution_0
  *         cdef long depth = self.depth
  *         cdef long voxel_size_0 = self.voxel_size_0             # <<<<<<<<<<<<<<
@@ -20391,7 +20391,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_t_1 = __pyx_v_self->voxel_size_0;
   __pyx_v_voxel_size_0 = __pyx_t_1;
 
-  /* "gdna/lib/libmise/mise.pyx":293
+  /* "lib/libmise/mise.pyx":293
  * 
  *         # Return -1 if point lies outside bounds
  *         if not (0 <= loc.x < resolution and 0<= loc.y < resolution and 0 <= loc.z < resolution):             # <<<<<<<<<<<<<<
@@ -20425,7 +20425,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_t_3 = (!__pyx_t_2);
   if (__pyx_t_3) {
 
-    /* "gdna/lib/libmise/mise.pyx":294
+    /* "lib/libmise/mise.pyx":294
  *         # Return -1 if point lies outside bounds
  *         if not (0 <= loc.x < resolution and 0<= loc.y < resolution and 0 <= loc.z < resolution):
  *             return -1             # <<<<<<<<<<<<<<
@@ -20435,7 +20435,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     __pyx_r = -1L;
     goto __pyx_L0;
 
-    /* "gdna/lib/libmise/mise.pyx":293
+    /* "lib/libmise/mise.pyx":293
  * 
  *         # Return -1 if point lies outside bounds
  *         if not (0 <= loc.x < resolution and 0<= loc.y < resolution and 0 <= loc.z < resolution):             # <<<<<<<<<<<<<<
@@ -20444,7 +20444,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
   }
 
-  /* "gdna/lib/libmise/mise.pyx":298
+  /* "lib/libmise/mise.pyx":298
  *         # Coordinates in coarse voxel grid
  *         cdef Vector3D loc0 = Vector3D(
  *             x=loc.x >> depth,             # <<<<<<<<<<<<<<
@@ -20453,7 +20453,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
   __pyx_t_4.x = (__pyx_v_loc.x >> __pyx_v_depth);
 
-  /* "gdna/lib/libmise/mise.pyx":299
+  /* "lib/libmise/mise.pyx":299
  *         cdef Vector3D loc0 = Vector3D(
  *             x=loc.x >> depth,
  *             y=loc.y >> depth,             # <<<<<<<<<<<<<<
@@ -20462,7 +20462,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
   __pyx_t_4.y = (__pyx_v_loc.y >> __pyx_v_depth);
 
-  /* "gdna/lib/libmise/mise.pyx":300
+  /* "lib/libmise/mise.pyx":300
  *             x=loc.x >> depth,
  *             y=loc.y >> depth,
  *             z=loc.z >> depth,             # <<<<<<<<<<<<<<
@@ -20472,17 +20472,17 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_t_4.z = (__pyx_v_loc.z >> __pyx_v_depth);
   __pyx_v_loc0 = __pyx_t_4;
 
-  /* "gdna/lib/libmise/mise.pyx":304
+  /* "lib/libmise/mise.pyx":304
  * 
  *         # Initial voxels
  *         cdef int idx = vec_to_idx(loc0, resolution_0)             # <<<<<<<<<<<<<<
  *         cdef Voxel voxel = self.voxels[idx]
  *         assert(voxel.loc.x == loc0.x * voxel_size_0)
  */
-  __pyx_t_5 = __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(__pyx_v_loc0, __pyx_v_resolution_0); if (unlikely(__pyx_t_5 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_5 = __pyx_f_3lib_7libmise_4mise_vec_to_idx(__pyx_v_loc0, __pyx_v_resolution_0); if (unlikely(__pyx_t_5 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 304, __pyx_L1_error)
   __pyx_v_idx = __pyx_t_5;
 
-  /* "gdna/lib/libmise/mise.pyx":305
+  /* "lib/libmise/mise.pyx":305
  *         # Initial voxels
  *         cdef int idx = vec_to_idx(loc0, resolution_0)
  *         cdef Voxel voxel = self.voxels[idx]             # <<<<<<<<<<<<<<
@@ -20491,7 +20491,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
   __pyx_v_voxel = (__pyx_v_self->voxels[__pyx_v_idx]);
 
-  /* "gdna/lib/libmise/mise.pyx":306
+  /* "lib/libmise/mise.pyx":306
  *         cdef int idx = vec_to_idx(loc0, resolution_0)
  *         cdef Voxel voxel = self.voxels[idx]
  *         assert(voxel.loc.x == loc0.x * voxel_size_0)             # <<<<<<<<<<<<<<
@@ -20510,7 +20510,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   if ((1)); else __PYX_ERR(0, 306, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":307
+  /* "lib/libmise/mise.pyx":307
  *         cdef Voxel voxel = self.voxels[idx]
  *         assert(voxel.loc.x == loc0.x * voxel_size_0)
  *         assert(voxel.loc.y == loc0.y * voxel_size_0)             # <<<<<<<<<<<<<<
@@ -20529,7 +20529,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   if ((1)); else __PYX_ERR(0, 307, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":308
+  /* "lib/libmise/mise.pyx":308
  *         assert(voxel.loc.x == loc0.x * voxel_size_0)
  *         assert(voxel.loc.y == loc0.y * voxel_size_0)
  *         assert(voxel.loc.z == loc0.z * voxel_size_0)             # <<<<<<<<<<<<<<
@@ -20548,7 +20548,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   if ((1)); else __PYX_ERR(0, 308, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":312
+  /* "lib/libmise/mise.pyx":312
  *         # Relative coordinates
  *         cdef Vector3D loc_rel = Vector3D(
  *             x=loc.x - (loc0.x << depth),             # <<<<<<<<<<<<<<
@@ -20557,7 +20557,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
   __pyx_t_4.x = (__pyx_v_loc.x - (__pyx_v_loc0.x << __pyx_v_depth));
 
-  /* "gdna/lib/libmise/mise.pyx":313
+  /* "lib/libmise/mise.pyx":313
  *         cdef Vector3D loc_rel = Vector3D(
  *             x=loc.x - (loc0.x << depth),
  *             y=loc.y - (loc0.y << depth),             # <<<<<<<<<<<<<<
@@ -20566,7 +20566,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
   __pyx_t_4.y = (__pyx_v_loc.y - (__pyx_v_loc0.y << __pyx_v_depth));
 
-  /* "gdna/lib/libmise/mise.pyx":314
+  /* "lib/libmise/mise.pyx":314
  *             x=loc.x - (loc0.x << depth),
  *             y=loc.y - (loc0.y << depth),
  *             z=loc.z - (loc0.z << depth),             # <<<<<<<<<<<<<<
@@ -20576,7 +20576,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_t_4.z = (__pyx_v_loc.z - (__pyx_v_loc0.z << __pyx_v_depth));
   __pyx_v_loc_rel = __pyx_t_4;
 
-  /* "gdna/lib/libmise/mise.pyx":318
+  /* "lib/libmise/mise.pyx":318
  * 
  *         cdef Vector3D loc_offset
  *         cdef long voxel_size = voxel_size_0             # <<<<<<<<<<<<<<
@@ -20585,7 +20585,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
   __pyx_v_voxel_size = __pyx_v_voxel_size_0;
 
-  /* "gdna/lib/libmise/mise.pyx":320
+  /* "lib/libmise/mise.pyx":320
  *         cdef long voxel_size = voxel_size_0
  * 
  *         while not voxel.is_leaf:             # <<<<<<<<<<<<<<
@@ -20596,7 +20596,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     __pyx_t_3 = (!__pyx_v_voxel.is_leaf);
     if (!__pyx_t_3) break;
 
-    /* "gdna/lib/libmise/mise.pyx":321
+    /* "lib/libmise/mise.pyx":321
  * 
  *         while not voxel.is_leaf:
  *             voxel_size = voxel_size >> 1             # <<<<<<<<<<<<<<
@@ -20605,7 +20605,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
     __pyx_v_voxel_size = (__pyx_v_voxel_size >> 1);
 
-    /* "gdna/lib/libmise/mise.pyx":322
+    /* "lib/libmise/mise.pyx":322
  *         while not voxel.is_leaf:
  *             voxel_size = voxel_size >> 1
  *             assert(voxel_size >= 1)             # <<<<<<<<<<<<<<
@@ -20624,7 +20624,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     if ((1)); else __PYX_ERR(0, 322, __pyx_L1_error)
     #endif
 
-    /* "gdna/lib/libmise/mise.pyx":326
+    /* "lib/libmise/mise.pyx":326
  *             # Determine child
  *             loc_offset = Vector3D(
  *                 x=1 if (loc_rel.x >= voxel_size) else 0,             # <<<<<<<<<<<<<<
@@ -20638,7 +20638,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     }
     __pyx_t_4.x = __pyx_t_1;
 
-    /* "gdna/lib/libmise/mise.pyx":327
+    /* "lib/libmise/mise.pyx":327
  *             loc_offset = Vector3D(
  *                 x=1 if (loc_rel.x >= voxel_size) else 0,
  *                 y=1 if (loc_rel.y >= voxel_size) else 0,             # <<<<<<<<<<<<<<
@@ -20652,7 +20652,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     }
     __pyx_t_4.y = __pyx_t_1;
 
-    /* "gdna/lib/libmise/mise.pyx":328
+    /* "lib/libmise/mise.pyx":328
  *                 x=1 if (loc_rel.x >= voxel_size) else 0,
  *                 y=1 if (loc_rel.y >= voxel_size) else 0,
  *                 z=1 if (loc_rel.z >= voxel_size) else 0,             # <<<<<<<<<<<<<<
@@ -20667,7 +20667,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     __pyx_t_4.z = __pyx_t_1;
     __pyx_v_loc_offset = __pyx_t_4;
 
-    /* "gdna/lib/libmise/mise.pyx":331
+    /* "lib/libmise/mise.pyx":331
  *             )
  *             # New voxel
  *             idx = voxel.children[loc_offset.x][loc_offset.y][loc_offset.z]             # <<<<<<<<<<<<<<
@@ -20676,7 +20676,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
     __pyx_v_idx = (((__pyx_v_voxel.children[__pyx_v_loc_offset.x])[__pyx_v_loc_offset.y])[__pyx_v_loc_offset.z]);
 
-    /* "gdna/lib/libmise/mise.pyx":332
+    /* "lib/libmise/mise.pyx":332
  *             # New voxel
  *             idx = voxel.children[loc_offset.x][loc_offset.y][loc_offset.z]
  *             voxel = self.voxels[idx]             # <<<<<<<<<<<<<<
@@ -20685,7 +20685,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
     __pyx_v_voxel = (__pyx_v_self->voxels[__pyx_v_idx]);
 
-    /* "gdna/lib/libmise/mise.pyx":336
+    /* "lib/libmise/mise.pyx":336
  *             # New relative coordinates
  *             loc_rel = Vector3D(
  *                 x=loc_rel.x - loc_offset.x * voxel_size,             # <<<<<<<<<<<<<<
@@ -20694,7 +20694,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
     __pyx_t_4.x = (__pyx_v_loc_rel.x - (__pyx_v_loc_offset.x * __pyx_v_voxel_size));
 
-    /* "gdna/lib/libmise/mise.pyx":337
+    /* "lib/libmise/mise.pyx":337
  *             loc_rel = Vector3D(
  *                 x=loc_rel.x - loc_offset.x * voxel_size,
  *                 y=loc_rel.y - loc_offset.y * voxel_size,             # <<<<<<<<<<<<<<
@@ -20703,7 +20703,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  */
     __pyx_t_4.y = (__pyx_v_loc_rel.y - (__pyx_v_loc_offset.y * __pyx_v_voxel_size));
 
-    /* "gdna/lib/libmise/mise.pyx":338
+    /* "lib/libmise/mise.pyx":338
  *                 x=loc_rel.x - loc_offset.x * voxel_size,
  *                 y=loc_rel.y - loc_offset.y * voxel_size,
  *                 z=loc_rel.z - loc_offset.z * voxel_size,             # <<<<<<<<<<<<<<
@@ -20713,7 +20713,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     __pyx_t_4.z = (__pyx_v_loc_rel.z - (__pyx_v_loc_offset.z * __pyx_v_voxel_size));
     __pyx_v_loc_rel = __pyx_t_4;
 
-    /* "gdna/lib/libmise/mise.pyx":341
+    /* "lib/libmise/mise.pyx":341
  *             )
  * 
  *             assert(0<= loc_rel.x < voxel_size)             # <<<<<<<<<<<<<<
@@ -20735,7 +20735,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     if ((1)); else __PYX_ERR(0, 341, __pyx_L1_error)
     #endif
 
-    /* "gdna/lib/libmise/mise.pyx":342
+    /* "lib/libmise/mise.pyx":342
  * 
  *             assert(0<= loc_rel.x < voxel_size)
  *             assert(0<= loc_rel.y < voxel_size)             # <<<<<<<<<<<<<<
@@ -20757,7 +20757,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     if ((1)); else __PYX_ERR(0, 342, __pyx_L1_error)
     #endif
 
-    /* "gdna/lib/libmise/mise.pyx":343
+    /* "lib/libmise/mise.pyx":343
  *             assert(0<= loc_rel.x < voxel_size)
  *             assert(0<= loc_rel.y < voxel_size)
  *             assert(0<= loc_rel.z < voxel_size)             # <<<<<<<<<<<<<<
@@ -20780,7 +20780,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
     #endif
   }
 
-  /* "gdna/lib/libmise/mise.pyx":347
+  /* "lib/libmise/mise.pyx":347
  * 
  *         # Return idx
  *         return idx             # <<<<<<<<<<<<<<
@@ -20790,7 +20790,7 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
   __pyx_r = __pyx_v_idx;
   goto __pyx_L0;
 
-  /* "gdna/lib/libmise/mise.pyx":284
+  /* "lib/libmise/mise.pyx":284
  * 
  *     @cython.cdivision(True)
  *     cdef long get_voxel_idx(self, Vector3D loc) except +:             # <<<<<<<<<<<<<<
@@ -20800,14 +20800,14 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.get_voxel_idx", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.get_voxel_idx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":350
+/* "lib/libmise/mise.pyx":350
  * 
  * 
  *     cdef inline void add_grid_point(self, Vector3D loc):             # <<<<<<<<<<<<<<
@@ -20815,17 +20815,17 @@ static long __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx(struct __pyx_o
  *             loc=loc,
  */
 
-static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc) {
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_v_point;
+static CYTHON_INLINE void __pyx_f_3lib_7libmise_4mise_4MISE_add_grid_point(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc) {
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_v_point;
   __Pyx_RefNannyDeclarations
-  struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint __pyx_t_1;
+  struct __pyx_t_3lib_7libmise_4mise_GridPoint __pyx_t_1;
   unsigned long __pyx_t_2;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_grid_point", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":352
+  /* "lib/libmise/mise.pyx":352
  *     cdef inline void add_grid_point(self, Vector3D loc):
  *         cdef GridPoint point = GridPoint(
  *             loc=loc,             # <<<<<<<<<<<<<<
@@ -20835,7 +20835,7 @@ static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point
   __pyx_t_1.loc = __pyx_v_loc;
   __pyx_t_1.value = 0.;
 
-  /* "gdna/lib/libmise/mise.pyx":354
+  /* "lib/libmise/mise.pyx":354
  *             loc=loc,
  *             value=0.,
  *             known=False,             # <<<<<<<<<<<<<<
@@ -20845,17 +20845,17 @@ static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point
   __pyx_t_1.known = 0;
   __pyx_v_point = __pyx_t_1;
 
-  /* "gdna/lib/libmise/mise.pyx":356
+  /* "lib/libmise/mise.pyx":356
  *             known=False,
  *         )
  *         self.grid_point_hash[vec_to_idx(loc, self.resolution + 1)] = self.grid_points.size()             # <<<<<<<<<<<<<<
  *         self.grid_points.push_back(point)
  * 
  */
-  __pyx_t_2 = __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(__pyx_v_loc, (__pyx_v_self->resolution + 1)); if (unlikely(__pyx_t_2 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 356, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_3lib_7libmise_4mise_vec_to_idx(__pyx_v_loc, (__pyx_v_self->resolution + 1)); if (unlikely(__pyx_t_2 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 356, __pyx_L1_error)
   (__pyx_v_self->grid_point_hash[__pyx_t_2]) = __pyx_v_self->grid_points.size();
 
-  /* "gdna/lib/libmise/mise.pyx":357
+  /* "lib/libmise/mise.pyx":357
  *         )
  *         self.grid_point_hash[vec_to_idx(loc, self.resolution + 1)] = self.grid_points.size()
  *         self.grid_points.push_back(point)             # <<<<<<<<<<<<<<
@@ -20869,7 +20869,7 @@ static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point
     __PYX_ERR(0, 357, __pyx_L1_error)
   }
 
-  /* "gdna/lib/libmise/mise.pyx":350
+  /* "lib/libmise/mise.pyx":350
  * 
  * 
  *     cdef inline void add_grid_point(self, Vector3D loc):             # <<<<<<<<<<<<<<
@@ -20880,12 +20880,12 @@ static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point
   /* function exit code */
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.add_grid_point", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.add_grid_point", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
 }
 
-/* "gdna/lib/libmise/mise.pyx":359
+/* "lib/libmise/mise.pyx":359
  *         self.grid_points.push_back(point)
  * 
  *     cdef inline int get_grid_point_idx(self, Vector3D loc):             # <<<<<<<<<<<<<<
@@ -20893,7 +20893,7 @@ static CYTHON_INLINE void __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point
  *         if p_idx == self.grid_point_hash.end():
  */
 
-static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_idx(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D __pyx_v_loc) {
+static CYTHON_INLINE int __pyx_f_3lib_7libmise_4mise_4MISE_get_grid_point_idx(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, struct __pyx_t_3lib_7libmise_4mise_Vector3D __pyx_v_loc) {
   std::map<long,long> ::iterator __pyx_v_p_idx;
   int __pyx_v_idx;
   int __pyx_r;
@@ -20906,17 +20906,17 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_grid_point_idx", 0);
 
-  /* "gdna/lib/libmise/mise.pyx":360
+  /* "lib/libmise/mise.pyx":360
  * 
  *     cdef inline int get_grid_point_idx(self, Vector3D loc):
  *         p_idx = self.grid_point_hash.find(vec_to_idx(loc, self.resolution + 1))             # <<<<<<<<<<<<<<
  *         if p_idx == self.grid_point_hash.end():
  *             return -1
  */
-  __pyx_t_1 = __pyx_f_4gdna_3lib_7libmise_4mise_vec_to_idx(__pyx_v_loc, (__pyx_v_self->resolution + 1)); if (unlikely(__pyx_t_1 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 360, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_3lib_7libmise_4mise_vec_to_idx(__pyx_v_loc, (__pyx_v_self->resolution + 1)); if (unlikely(__pyx_t_1 == ((unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 360, __pyx_L1_error)
   __pyx_v_p_idx = __pyx_v_self->grid_point_hash.find(__pyx_t_1);
 
-  /* "gdna/lib/libmise/mise.pyx":361
+  /* "lib/libmise/mise.pyx":361
  *     cdef inline int get_grid_point_idx(self, Vector3D loc):
  *         p_idx = self.grid_point_hash.find(vec_to_idx(loc, self.resolution + 1))
  *         if p_idx == self.grid_point_hash.end():             # <<<<<<<<<<<<<<
@@ -20926,7 +20926,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
   __pyx_t_2 = (__pyx_v_p_idx == __pyx_v_self->grid_point_hash.end());
   if (__pyx_t_2) {
 
-    /* "gdna/lib/libmise/mise.pyx":362
+    /* "lib/libmise/mise.pyx":362
  *         p_idx = self.grid_point_hash.find(vec_to_idx(loc, self.resolution + 1))
  *         if p_idx == self.grid_point_hash.end():
  *             return -1             # <<<<<<<<<<<<<<
@@ -20936,7 +20936,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
     __pyx_r = -1;
     goto __pyx_L0;
 
-    /* "gdna/lib/libmise/mise.pyx":361
+    /* "lib/libmise/mise.pyx":361
  *     cdef inline int get_grid_point_idx(self, Vector3D loc):
  *         p_idx = self.grid_point_hash.find(vec_to_idx(loc, self.resolution + 1))
  *         if p_idx == self.grid_point_hash.end():             # <<<<<<<<<<<<<<
@@ -20945,7 +20945,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
  */
   }
 
-  /* "gdna/lib/libmise/mise.pyx":364
+  /* "lib/libmise/mise.pyx":364
  *             return -1
  * 
  *         cdef int idx = dref(p_idx).second             # <<<<<<<<<<<<<<
@@ -20955,7 +20955,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
   __pyx_t_3 = (*__pyx_v_p_idx).second;
   __pyx_v_idx = __pyx_t_3;
 
-  /* "gdna/lib/libmise/mise.pyx":365
+  /* "lib/libmise/mise.pyx":365
  * 
  *         cdef int idx = dref(p_idx).second
  *         assert(self.grid_points[idx].loc.x == loc.x)             # <<<<<<<<<<<<<<
@@ -20974,7 +20974,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
   if ((1)); else __PYX_ERR(0, 365, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":366
+  /* "lib/libmise/mise.pyx":366
  *         cdef int idx = dref(p_idx).second
  *         assert(self.grid_points[idx].loc.x == loc.x)
  *         assert(self.grid_points[idx].loc.y == loc.y)             # <<<<<<<<<<<<<<
@@ -20993,7 +20993,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
   if ((1)); else __PYX_ERR(0, 366, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":367
+  /* "lib/libmise/mise.pyx":367
  *         assert(self.grid_points[idx].loc.x == loc.x)
  *         assert(self.grid_points[idx].loc.y == loc.y)
  *         assert(self.grid_points[idx].loc.z == loc.z)             # <<<<<<<<<<<<<<
@@ -21012,7 +21012,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
   if ((1)); else __PYX_ERR(0, 367, __pyx_L1_error)
   #endif
 
-  /* "gdna/lib/libmise/mise.pyx":369
+  /* "lib/libmise/mise.pyx":369
  *         assert(self.grid_points[idx].loc.z == loc.z)
  * 
  *         return idx             # <<<<<<<<<<<<<<
@@ -21020,7 +21020,7 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
   __pyx_r = __pyx_v_idx;
   goto __pyx_L0;
 
-  /* "gdna/lib/libmise/mise.pyx":359
+  /* "lib/libmise/mise.pyx":359
  *         self.grid_points.push_back(point)
  * 
  *     cdef inline int get_grid_point_idx(self, Vector3D loc):             # <<<<<<<<<<<<<<
@@ -21030,14 +21030,14 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.get_grid_point_idx", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.get_grid_point_idx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":37
+/* "lib/libmise/mise.pyx":37
  *     cdef vector[GridPoint] grid_points
  *     cdef map[long, long] grid_point_hash
  *     cdef readonly int resolution_0             # <<<<<<<<<<<<<<
@@ -21046,20 +21046,20 @@ static CYTHON_INLINE int __pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_12resolution_0_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_12resolution_0_1__get__(PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0___get__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_12resolution_0___get__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_12resolution_0___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -21077,7 +21077,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0___get__
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.resolution_0.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.resolution_0.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -21085,7 +21085,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0___get__
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":38
+/* "lib/libmise/mise.pyx":38
  *     cdef map[long, long] grid_point_hash
  *     cdef readonly int resolution_0
  *     cdef readonly int depth             # <<<<<<<<<<<<<<
@@ -21094,20 +21094,20 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0___get__
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_5depth_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_5depth_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_5depth_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_5depth_1__get__(PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_5depth___get__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_5depth___get__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_5depth___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_5depth___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -21125,7 +21125,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_5depth___get__(struct 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.depth.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.depth.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -21133,7 +21133,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_5depth___get__(struct 
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":39
+/* "lib/libmise/mise.pyx":39
  *     cdef readonly int resolution_0
  *     cdef readonly int depth
  *     cdef readonly double threshold             # <<<<<<<<<<<<<<
@@ -21142,20 +21142,20 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_5depth___get__(struct 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_9threshold_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_9threshold_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_9threshold_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_9threshold_1__get__(PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_9threshold___get__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_9threshold___get__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_9threshold___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_9threshold___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -21173,7 +21173,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_9threshold___get__(str
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.threshold.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.threshold.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -21181,7 +21181,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_9threshold___get__(str
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":40
+/* "lib/libmise/mise.pyx":40
  *     cdef readonly int depth
  *     cdef readonly double threshold
  *     cdef readonly int voxel_size_0             # <<<<<<<<<<<<<<
@@ -21190,20 +21190,20 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_9threshold___get__(str
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_12voxel_size_0_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_12voxel_size_0_1__get__(PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -21221,7 +21221,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.voxel_size_0.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.voxel_size_0.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -21229,7 +21229,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__
   return __pyx_r;
 }
 
-/* "gdna/lib/libmise/mise.pyx":41
+/* "lib/libmise/mise.pyx":41
  *     cdef readonly double threshold
  *     cdef readonly int voxel_size_0
  *     cdef readonly int resolution             # <<<<<<<<<<<<<<
@@ -21238,20 +21238,20 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0___get__
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_10resolution_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_10resolution_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_10resolution_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_10resolution_1__get__(PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10resolution___get__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_10resolution___get__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10resolution___get__(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_10resolution___get__(struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -21269,7 +21269,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10resolution___get__(s
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.resolution.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.resolution.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -21284,15 +21284,15 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10resolution___get__(s
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_11__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_11__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_11__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_11__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_11__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_3lib_7libmise_4mise_4MISE_11__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_11__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_11__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -21309,14 +21309,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("__reduce_cython__", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__reduce_cython__", 0))) return NULL;
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10__reduce_cython__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_10__reduce_cython__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_lineno = 0;
@@ -21341,7 +21341,7 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10__reduce_cython__(CY
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -21356,15 +21356,15 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_10__reduce_cython__(CY
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_13__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_13__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_13__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_13__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_13__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_3lib_7libmise_4mise_4MISE_13__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_13__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_3lib_7libmise_4mise_4MISE_13__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -21415,18 +21415,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__setstate_cython__", 1, 1, 1, __pyx_nargs); __PYX_ERR(1, 3, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12__setstate_cython__(((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_3lib_7libmise_4mise_4MISE_12__setstate_cython__(((struct __pyx_obj_3lib_7libmise_4mise_MISE *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_3lib_7libmise_4mise_4MISE_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3lib_7libmise_4mise_MISE *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_lineno = 0;
@@ -21451,16 +21451,16 @@ static PyObject *__pyx_pf_4gdna_3lib_7libmise_4mise_4MISE_12__setstate_cython__(
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("gdna.lib.libmise.mise.MISE.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("lib.libmise.mise.MISE.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-static struct __pyx_vtabstruct_4gdna_3lib_7libmise_4mise_MISE __pyx_vtable_4gdna_3lib_7libmise_4mise_MISE;
+static struct __pyx_vtabstruct_3lib_7libmise_4mise_MISE __pyx_vtable_3lib_7libmise_4mise_MISE;
 
-static PyObject *__pyx_tp_new_4gdna_3lib_7libmise_4mise_MISE(PyTypeObject *t, PyObject *a, PyObject *k) {
-  struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *p;
+static PyObject *__pyx_tp_new_3lib_7libmise_4mise_MISE(PyTypeObject *t, PyObject *a, PyObject *k) {
+  struct __pyx_obj_3lib_7libmise_4mise_MISE *p;
   PyObject *o;
   #if CYTHON_COMPILING_IN_LIMITED_API
   allocfunc alloc_func = (allocfunc)PyType_GetSlot(t, Py_tp_alloc);
@@ -21473,23 +21473,23 @@ static PyObject *__pyx_tp_new_4gdna_3lib_7libmise_4mise_MISE(PyTypeObject *t, Py
   }
   if (unlikely(!o)) return 0;
   #endif
-  p = ((struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)o);
-  p->__pyx_vtab = __pyx_vtabptr_4gdna_3lib_7libmise_4mise_MISE;
-  new((void*)&(p->voxels)) std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_Voxel> ();
-  new((void*)&(p->grid_points)) std::vector<struct __pyx_t_4gdna_3lib_7libmise_4mise_GridPoint> ();
+  p = ((struct __pyx_obj_3lib_7libmise_4mise_MISE *)o);
+  p->__pyx_vtab = __pyx_vtabptr_3lib_7libmise_4mise_MISE;
+  new((void*)&(p->voxels)) std::vector<struct __pyx_t_3lib_7libmise_4mise_Voxel> ();
+  new((void*)&(p->grid_points)) std::vector<struct __pyx_t_3lib_7libmise_4mise_GridPoint> ();
   new((void*)&(p->grid_point_hash)) std::map<long,long> ();
-  if (unlikely(__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_1__cinit__(o, a, k) < 0)) goto bad;
+  if (unlikely(__pyx_pw_3lib_7libmise_4mise_4MISE_1__cinit__(o, a, k) < 0)) goto bad;
   return o;
   bad:
   Py_DECREF(o); o = 0;
   return NULL;
 }
 
-static void __pyx_tp_dealloc_4gdna_3lib_7libmise_4mise_MISE(PyObject *o) {
-  struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *p = (struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *)o;
+static void __pyx_tp_dealloc_3lib_7libmise_4mise_MISE(PyObject *o) {
+  struct __pyx_obj_3lib_7libmise_4mise_MISE *p = (struct __pyx_obj_3lib_7libmise_4mise_MISE *)o;
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely((PY_VERSION_HEX >= 0x03080000 || __Pyx_PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE)) && __Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && (!PyType_IS_GC(Py_TYPE(o)) || !__Pyx_PyObject_GC_IsFinalized(o))) {
-    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_4gdna_3lib_7libmise_4mise_MISE) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_3lib_7libmise_4mise_MISE) {
       if (PyObject_CallFinalizerFromDealloc(o)) return;
     }
   }
@@ -21500,67 +21500,67 @@ static void __pyx_tp_dealloc_4gdna_3lib_7libmise_4mise_MISE(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyObject *__pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_resolution_0(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_12resolution_0_1__get__(o);
+static PyObject *__pyx_getprop_3lib_7libmise_4mise_4MISE_resolution_0(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_3lib_7libmise_4mise_4MISE_12resolution_0_1__get__(o);
 }
 
-static PyObject *__pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_depth(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_5depth_1__get__(o);
+static PyObject *__pyx_getprop_3lib_7libmise_4mise_4MISE_depth(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_3lib_7libmise_4mise_4MISE_5depth_1__get__(o);
 }
 
-static PyObject *__pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_threshold(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_9threshold_1__get__(o);
+static PyObject *__pyx_getprop_3lib_7libmise_4mise_4MISE_threshold(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_3lib_7libmise_4mise_4MISE_9threshold_1__get__(o);
 }
 
-static PyObject *__pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_voxel_size_0(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_12voxel_size_0_1__get__(o);
+static PyObject *__pyx_getprop_3lib_7libmise_4mise_4MISE_voxel_size_0(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_3lib_7libmise_4mise_4MISE_12voxel_size_0_1__get__(o);
 }
 
-static PyObject *__pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_resolution(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_10resolution_1__get__(o);
+static PyObject *__pyx_getprop_3lib_7libmise_4mise_4MISE_resolution(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_3lib_7libmise_4mise_4MISE_10resolution_1__get__(o);
 }
 
-static PyMethodDef __pyx_methods_4gdna_3lib_7libmise_4mise_MISE[] = {
-  {"update", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_3update, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_2update},
-  {"query", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_5query, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_4query},
-  {"to_dense", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_7to_dense, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_4gdna_3lib_7libmise_4mise_4MISE_6to_dense},
-  {"get_points", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_9get_points, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_11__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4gdna_3lib_7libmise_4mise_4MISE_13__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+static PyMethodDef __pyx_methods_3lib_7libmise_4mise_MISE[] = {
+  {"update", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_3update, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_3lib_7libmise_4mise_4MISE_2update},
+  {"query", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_5query, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_3lib_7libmise_4mise_4MISE_4query},
+  {"to_dense", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_7to_dense, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_3lib_7libmise_4mise_4MISE_6to_dense},
+  {"get_points", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_9get_points, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_11__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3lib_7libmise_4mise_4MISE_13__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
-static struct PyGetSetDef __pyx_getsets_4gdna_3lib_7libmise_4mise_MISE[] = {
-  {(char *)"resolution_0", __pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_resolution_0, 0, (char *)0, 0},
-  {(char *)"depth", __pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_depth, 0, (char *)0, 0},
-  {(char *)"threshold", __pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_threshold, 0, (char *)0, 0},
-  {(char *)"voxel_size_0", __pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_voxel_size_0, 0, (char *)0, 0},
-  {(char *)"resolution", __pyx_getprop_4gdna_3lib_7libmise_4mise_4MISE_resolution, 0, (char *)0, 0},
+static struct PyGetSetDef __pyx_getsets_3lib_7libmise_4mise_MISE[] = {
+  {(char *)"resolution_0", __pyx_getprop_3lib_7libmise_4mise_4MISE_resolution_0, 0, (char *)0, 0},
+  {(char *)"depth", __pyx_getprop_3lib_7libmise_4mise_4MISE_depth, 0, (char *)0, 0},
+  {(char *)"threshold", __pyx_getprop_3lib_7libmise_4mise_4MISE_threshold, 0, (char *)0, 0},
+  {(char *)"voxel_size_0", __pyx_getprop_3lib_7libmise_4mise_4MISE_voxel_size_0, 0, (char *)0, 0},
+  {(char *)"resolution", __pyx_getprop_3lib_7libmise_4mise_4MISE_resolution, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
-static PyType_Slot __pyx_type_4gdna_3lib_7libmise_4mise_MISE_slots[] = {
-  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_4gdna_3lib_7libmise_4mise_MISE},
-  {Py_tp_methods, (void *)__pyx_methods_4gdna_3lib_7libmise_4mise_MISE},
-  {Py_tp_getset, (void *)__pyx_getsets_4gdna_3lib_7libmise_4mise_MISE},
-  {Py_tp_new, (void *)__pyx_tp_new_4gdna_3lib_7libmise_4mise_MISE},
+static PyType_Slot __pyx_type_3lib_7libmise_4mise_MISE_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_3lib_7libmise_4mise_MISE},
+  {Py_tp_methods, (void *)__pyx_methods_3lib_7libmise_4mise_MISE},
+  {Py_tp_getset, (void *)__pyx_getsets_3lib_7libmise_4mise_MISE},
+  {Py_tp_new, (void *)__pyx_tp_new_3lib_7libmise_4mise_MISE},
   {0, 0},
 };
-static PyType_Spec __pyx_type_4gdna_3lib_7libmise_4mise_MISE_spec = {
-  "gdna.lib.libmise.mise.MISE",
-  sizeof(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE),
+static PyType_Spec __pyx_type_3lib_7libmise_4mise_MISE_spec = {
+  "lib.libmise.mise.MISE",
+  sizeof(struct __pyx_obj_3lib_7libmise_4mise_MISE),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE,
-  __pyx_type_4gdna_3lib_7libmise_4mise_MISE_slots,
+  __pyx_type_3lib_7libmise_4mise_MISE_slots,
 };
 #else
 
-static PyTypeObject __pyx_type_4gdna_3lib_7libmise_4mise_MISE = {
+static PyTypeObject __pyx_type_3lib_7libmise_4mise_MISE = {
   PyVarObject_HEAD_INIT(0, 0)
-  "gdna.lib.libmise.mise.""MISE", /*tp_name*/
-  sizeof(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE), /*tp_basicsize*/
+  "lib.libmise.mise.""MISE", /*tp_name*/
+  sizeof(struct __pyx_obj_3lib_7libmise_4mise_MISE), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_4gdna_3lib_7libmise_4mise_MISE, /*tp_dealloc*/
+  __pyx_tp_dealloc_3lib_7libmise_4mise_MISE, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -21593,9 +21593,9 @@ static PyTypeObject __pyx_type_4gdna_3lib_7libmise_4mise_MISE = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_4gdna_3lib_7libmise_4mise_MISE, /*tp_methods*/
+  __pyx_methods_3lib_7libmise_4mise_MISE, /*tp_methods*/
   0, /*tp_members*/
-  __pyx_getsets_4gdna_3lib_7libmise_4mise_MISE, /*tp_getset*/
+  __pyx_getsets_3lib_7libmise_4mise_MISE, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
@@ -21605,7 +21605,7 @@ static PyTypeObject __pyx_type_4gdna_3lib_7libmise_4mise_MISE = {
   #endif
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_4gdna_3lib_7libmise_4mise_MISE, /*tp_new*/
+  __pyx_tp_new_3lib_7libmise_4mise_MISE, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -21767,7 +21767,7 @@ static PyType_Slot __pyx_type___pyx_array_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_array_spec = {
-  "gdna.lib.libmise.mise.array",
+  "lib.libmise.mise.array",
   sizeof(struct __pyx_array_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_SEQUENCE,
@@ -21813,7 +21813,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "gdna.lib.libmise.mise.""array", /*tp_name*/
+  "lib.libmise.mise.""array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -21966,7 +21966,7 @@ static PyType_Slot __pyx_type___pyx_MemviewEnum_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
-  "gdna.lib.libmise.mise.Enum",
+  "lib.libmise.mise.Enum",
   sizeof(struct __pyx_MemviewEnum_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -21976,7 +21976,7 @@ static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "gdna.lib.libmise.mise.""Enum", /*tp_name*/
+  "lib.libmise.mise.""Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -22266,7 +22266,7 @@ static PyType_Slot __pyx_type___pyx_memoryview_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryview_spec = {
-  "gdna.lib.libmise.mise.memoryview",
+  "lib.libmise.mise.memoryview",
   sizeof(struct __pyx_memoryview_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -22312,7 +22312,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "gdna.lib.libmise.mise.""memoryview", /*tp_name*/
+  "lib.libmise.mise.""memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -22466,7 +22466,7 @@ static PyType_Slot __pyx_type___pyx_memoryviewslice_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
-  "gdna.lib.libmise.mise._memoryviewslice",
+  "lib.libmise.mise._memoryviewslice",
   sizeof(struct __pyx_memoryviewslice_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_SEQUENCE,
@@ -22476,7 +22476,7 @@ static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "gdna.lib.libmise.mise.""_memoryviewslice", /*tp_name*/
+  "lib.libmise.mise.""_memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -22655,8 +22655,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_u_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 1, 0, 1},
     {&__pyx_n_s_full, __pyx_k_full, sizeof(__pyx_k_full), 0, 0, 1, 1},
     {&__pyx_kp_u_gc, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
-    {&__pyx_n_s_gdna_lib_libmise_mise, __pyx_k_gdna_lib_libmise_mise, sizeof(__pyx_k_gdna_lib_libmise_mise), 0, 0, 1, 1},
-    {&__pyx_kp_s_gdna_lib_libmise_mise_pyx, __pyx_k_gdna_lib_libmise_mise_pyx, sizeof(__pyx_k_gdna_lib_libmise_mise_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_get_points, __pyx_k_get_points, sizeof(__pyx_k_get_points), 0, 0, 1, 1},
     {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
     {&__pyx_kp_u_got, __pyx_k_got, sizeof(__pyx_k_got), 0, 1, 0, 0},
@@ -22677,6 +22675,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_k, __pyx_k_k, sizeof(__pyx_k_k), 0, 0, 1, 1},
     {&__pyx_n_s_known, __pyx_k_known, sizeof(__pyx_k_known), 0, 0, 1, 1},
     {&__pyx_n_s_level, __pyx_k_level, sizeof(__pyx_k_level), 0, 0, 1, 1},
+    {&__pyx_n_s_lib_libmise_mise, __pyx_k_lib_libmise_mise, sizeof(__pyx_k_lib_libmise_mise), 0, 0, 1, 1},
+    {&__pyx_kp_s_lib_libmise_mise_pyx, __pyx_k_lib_libmise_mise_pyx, sizeof(__pyx_k_lib_libmise_mise_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_loc, __pyx_k_loc, sizeof(__pyx_k_loc), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
     {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
@@ -22807,7 +22807,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "gdna/lib/libmise/mise.pyx":100
+  /* "lib/libmise/mise.pyx":100
  *             idx = self.get_grid_point_idx(loc)
  *             if idx == -1:
  *                 raise ValueError('Point not in grid!')             # <<<<<<<<<<<<<<
@@ -22919,7 +22919,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__19);
   __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(1, 1, __pyx_L1_error)
 
-  /* "gdna/lib/libmise/mise.pyx":87
+  /* "lib/libmise/mise.pyx":87
  *                     self.add_grid_point(loc)
  * 
  *     def update(self, long[:, :] points, double[:] values):             # <<<<<<<<<<<<<<
@@ -22929,9 +22929,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__21 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_points, __pyx_n_s_values, __pyx_n_s_loc, __pyx_n_s_idx, __pyx_n_s_i); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_gdna_lib_libmise_mise_pyx, __pyx_n_s_update, 87, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_lib_libmise_mise_pyx, __pyx_n_s_update, 87, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 87, __pyx_L1_error)
 
-  /* "gdna/lib/libmise/mise.pyx":106
+  /* "lib/libmise/mise.pyx":106
  *         self.subdivide_voxels()
  * 
  *     def query(self):             # <<<<<<<<<<<<<<
@@ -22941,9 +22941,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__23 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_points, __pyx_n_s_n_unknown, __pyx_n_s_p, __pyx_n_s_points_np, __pyx_n_s_points_view, __pyx_n_s_i); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_gdna_lib_libmise_mise_pyx, __pyx_n_s_query, 106, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_lib_libmise_mise_pyx, __pyx_n_s_query, 106, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 106, __pyx_L1_error)
 
-  /* "gdna/lib/libmise/mise.pyx":130
+  /* "lib/libmise/mise.pyx":130
  *         return points_np
  * 
  *     def to_dense(self):             # <<<<<<<<<<<<<<
@@ -22953,9 +22953,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__25 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_out_array, __pyx_n_s_out_view, __pyx_n_s_point, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_gdna_lib_libmise_mise_pyx, __pyx_n_s_to_dense, 130, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_lib_libmise_mise_pyx, __pyx_n_s_to_dense, 130, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 130, __pyx_L1_error)
 
-  /* "gdna/lib/libmise/mise.pyx":166
+  /* "lib/libmise/mise.pyx":166
  *         return out_array
  * 
  *     def get_points(self):             # <<<<<<<<<<<<<<
@@ -22965,7 +22965,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__27 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_points_np, __pyx_n_s_values_np, __pyx_n_s_points_view, __pyx_n_s_values_view, __pyx_n_s_loc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_gdna_lib_libmise_mise_pyx, __pyx_n_s_get_points, 166, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_lib_libmise_mise_pyx, __pyx_n_s_get_points, 166, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 166, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -23068,38 +23068,38 @@ static int __Pyx_modinit_type_init_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  __pyx_vtabptr_4gdna_3lib_7libmise_4mise_MISE = &__pyx_vtable_4gdna_3lib_7libmise_4mise_MISE;
-  __pyx_vtable_4gdna_3lib_7libmise_4mise_MISE.subdivide_voxels = (void (*)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *))__pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxels;
-  __pyx_vtable_4gdna_3lib_7libmise_4mise_MISE.subdivide_voxel = (void (*)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, long))__pyx_f_4gdna_3lib_7libmise_4mise_4MISE_subdivide_voxel;
-  __pyx_vtable_4gdna_3lib_7libmise_4mise_MISE.get_voxel_idx = (long (*)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D))__pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_voxel_idx;
-  __pyx_vtable_4gdna_3lib_7libmise_4mise_MISE.add_grid_point = (void (*)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D))__pyx_f_4gdna_3lib_7libmise_4mise_4MISE_add_grid_point;
-  __pyx_vtable_4gdna_3lib_7libmise_4mise_MISE.get_grid_point_idx = (int (*)(struct __pyx_obj_4gdna_3lib_7libmise_4mise_MISE *, struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D))__pyx_f_4gdna_3lib_7libmise_4mise_4MISE_get_grid_point_idx;
+  __pyx_vtabptr_3lib_7libmise_4mise_MISE = &__pyx_vtable_3lib_7libmise_4mise_MISE;
+  __pyx_vtable_3lib_7libmise_4mise_MISE.subdivide_voxels = (void (*)(struct __pyx_obj_3lib_7libmise_4mise_MISE *))__pyx_f_3lib_7libmise_4mise_4MISE_subdivide_voxels;
+  __pyx_vtable_3lib_7libmise_4mise_MISE.subdivide_voxel = (void (*)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, long))__pyx_f_3lib_7libmise_4mise_4MISE_subdivide_voxel;
+  __pyx_vtable_3lib_7libmise_4mise_MISE.get_voxel_idx = (long (*)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D))__pyx_f_3lib_7libmise_4mise_4MISE_get_voxel_idx;
+  __pyx_vtable_3lib_7libmise_4mise_MISE.add_grid_point = (void (*)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D))__pyx_f_3lib_7libmise_4mise_4MISE_add_grid_point;
+  __pyx_vtable_3lib_7libmise_4mise_MISE.get_grid_point_idx = (int (*)(struct __pyx_obj_3lib_7libmise_4mise_MISE *, struct __pyx_t_3lib_7libmise_4mise_Vector3D))__pyx_f_3lib_7libmise_4mise_4MISE_get_grid_point_idx;
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_4gdna_3lib_7libmise_4mise_MISE_spec, NULL); if (unlikely(!__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE)) __PYX_ERR(0, 33, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_4gdna_3lib_7libmise_4mise_MISE_spec, __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_ptype_3lib_7libmise_4mise_MISE = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_3lib_7libmise_4mise_MISE_spec, NULL); if (unlikely(!__pyx_ptype_3lib_7libmise_4mise_MISE)) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_3lib_7libmise_4mise_MISE_spec, __pyx_ptype_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   #else
-  __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE = &__pyx_type_4gdna_3lib_7libmise_4mise_MISE;
+  __pyx_ptype_3lib_7libmise_4mise_MISE = &__pyx_type_3lib_7libmise_4mise_MISE;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
-  __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_print = 0;
+  __pyx_ptype_3lib_7libmise_4mise_MISE->tp_print = 0;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_dictoffset && __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_3lib_7libmise_4mise_MISE->tp_dictoffset && __pyx_ptype_3lib_7libmise_4mise_MISE->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_ptype_3lib_7libmise_4mise_MISE->tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
   #endif
-  if (__Pyx_SetVtable(__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE, __pyx_vtabptr_4gdna_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_ptype_3lib_7libmise_4mise_MISE, __pyx_vtabptr_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_MergeVtables(__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_MergeVtables(__pyx_ptype_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MISE, (PyObject *) __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_MISE, (PyObject *) __pyx_ptype_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_4gdna_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_3lib_7libmise_4mise_MISE) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   #endif
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
@@ -23531,14 +23531,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_gdna__lib__libmise__mise) {
+  if (__pyx_module_is_main_lib__libmise__mise) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "gdna.lib.libmise.mise")) {
-      if (unlikely((PyDict_SetItemString(modules, "gdna.lib.libmise.mise", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "lib.libmise.mise")) {
+      if (unlikely((PyDict_SetItemString(modules, "lib.libmise.mise", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -24072,7 +24072,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Enum, __pyx_t_7) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":7
+  /* "lib/libmise/mise.pyx":7
  * from libcpp.map cimport map
  * from libc.math cimport isnan, NAN
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -24084,64 +24084,64 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_7) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":87
+  /* "lib/libmise/mise.pyx":87
  *                     self.add_grid_point(loc)
  * 
  *     def update(self, long[:, :] points, double[:] values):             # <<<<<<<<<<<<<<
  *         """Update points and set their values. Also determine all active voxels and subdivide them."""
  *         assert(points.shape[0] == values.shape[0])
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_3update, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_update, NULL, __pyx_n_s_gdna_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_3lib_7libmise_4mise_4MISE_3update, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_update, NULL, __pyx_n_s_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_update, __pyx_t_7) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_update, __pyx_t_7) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  PyType_Modified(__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE);
+  PyType_Modified(__pyx_ptype_3lib_7libmise_4mise_MISE);
 
-  /* "gdna/lib/libmise/mise.pyx":106
+  /* "lib/libmise/mise.pyx":106
  *         self.subdivide_voxels()
  * 
  *     def query(self):             # <<<<<<<<<<<<<<
  *         """Query points to evaluate."""
  *         # Find all points with unknown value
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_5query, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_query, NULL, __pyx_n_s_gdna_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_3lib_7libmise_4mise_4MISE_5query, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_query, NULL, __pyx_n_s_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_query, __pyx_t_7) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_query, __pyx_t_7) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  PyType_Modified(__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE);
+  PyType_Modified(__pyx_ptype_3lib_7libmise_4mise_MISE);
 
-  /* "gdna/lib/libmise/mise.pyx":130
+  /* "lib/libmise/mise.pyx":130
  *         return points_np
  * 
  *     def to_dense(self):             # <<<<<<<<<<<<<<
  *         """Output dense matrix at highest resolution."""
  *         out_array = np.full((self.resolution + 1,) * 3, np.nan)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_7to_dense, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_to_dense, NULL, __pyx_n_s_gdna_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_3lib_7libmise_4mise_4MISE_7to_dense, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_to_dense, NULL, __pyx_n_s_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_to_dense, __pyx_t_7) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_to_dense, __pyx_t_7) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  PyType_Modified(__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE);
+  PyType_Modified(__pyx_ptype_3lib_7libmise_4mise_MISE);
 
-  /* "gdna/lib/libmise/mise.pyx":166
+  /* "lib/libmise/mise.pyx":166
  *         return out_array
  * 
  *     def get_points(self):             # <<<<<<<<<<<<<<
  *         points_np = np.zeros((self.grid_points.size(), 3), dtype=np.int64)
  *         values_np = np.zeros((self.grid_points.size()), dtype=np.float64)
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_9get_points, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_get_points, NULL, __pyx_n_s_gdna_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_3lib_7libmise_4mise_4MISE_9get_points, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE_get_points, NULL, __pyx_n_s_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_get_points, __pyx_t_7) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3lib_7libmise_4mise_MISE->tp_dict, __pyx_n_s_get_points, __pyx_t_7) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  PyType_Modified(__pyx_ptype_4gdna_3lib_7libmise_4mise_MISE);
+  PyType_Modified(__pyx_ptype_3lib_7libmise_4mise_MISE);
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
  * def __setstate_cython__(self, __pyx_state):
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_11__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE___reduce_cython, NULL, __pyx_n_s_gdna_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_3lib_7libmise_4mise_4MISE_11__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE___reduce_cython, NULL, __pyx_n_s_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_reduce_cython, __pyx_t_7) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -24152,12 +24152,12 @@ if (!__Pyx_RefNanny) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4gdna_3lib_7libmise_4mise_4MISE_13__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE___setstate_cython, NULL, __pyx_n_s_gdna_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 3, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_3lib_7libmise_4mise_4MISE_13__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_MISE___setstate_cython, NULL, __pyx_n_s_lib_libmise_mise, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_setstate_cython, __pyx_t_7) < 0) __PYX_ERR(1, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "gdna/lib/libmise/mise.pyx":1
+  /* "lib/libmise/mise.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * cimport cython
  * from cython.operator cimport dereference as dref
@@ -24176,7 +24176,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_7);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init gdna.lib.libmise.mise", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init lib.libmise.mise", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -24190,7 +24190,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init gdna.lib.libmise.mise");
+    PyErr_SetString(PyExc_ImportError, "init lib.libmise.mise");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -29327,7 +29327,7 @@ __pyx_fail:
     return result;
 }
 
-static PyObject* __pyx_convert__to_py_struct____pyx_t_4gdna_3lib_7libmise_4mise_Vector3D(struct __pyx_t_4gdna_3lib_7libmise_4mise_Vector3D s) {
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3lib_7libmise_4mise_Vector3D(struct __pyx_t_3lib_7libmise_4mise_Vector3D s) {
     PyObject* res;
     PyObject* member;
     res = __Pyx_PyDict_NewPresized(3); if (unlikely(!res)) return NULL;

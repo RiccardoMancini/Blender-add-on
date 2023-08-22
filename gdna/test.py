@@ -58,7 +58,8 @@ class GDNA:
             # self.datamodule = omegaconf.OmegaConf.load(f'{ROOT}/gdna/config/datamodule/thuman.yaml').datamodule
             # self.cfg_model.norm_network.multires = 6
         else:
-            self.expname = 'renderpeople'
+            self.expname = expname
+            sys.argv[1:] = ['expname=renderpeople', '+experiments=fine', f'+r_path={ROOTD}']
         # print(self.datamodule, self.expname)
         get_cfg()
         self.max_samples, self.seed, self.datamodule, self.cfg_model, self.expname = \
@@ -319,4 +320,4 @@ class GDNA:
             BATCH_GEN.append(batch)
 
         self.get_mesh(batch_list)
-        # print(BATCH_GEN)
+        return batch_list

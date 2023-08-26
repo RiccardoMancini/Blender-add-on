@@ -152,6 +152,7 @@ class GDNA:
                     [img_def], codec='libx264')
 
     def action_z_shape(self, batch=None):
+        global ACT_GEN
         self.eval_mode = 'z_shape'
         batch_list = []
         if batch is None:
@@ -192,6 +193,7 @@ class GDNA:
 
                     batch_list.append(batch)
 
+        ACT_GEN = batch_list
         self.get_mesh(batch_list)
         return batch_list
 
@@ -318,6 +320,6 @@ class GDNA:
             # print(batch)
             batch_list.append(batch)
             BATCH_GEN.append(batch)
-
+        #print(BATCH_GEN)
         self.get_mesh(batch_list)
         return batch_list

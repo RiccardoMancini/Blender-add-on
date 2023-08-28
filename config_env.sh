@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if conda info --envs | grep -q gdna2;
+if conda info --envs | grep -q gdna;
   then
     echo "gdna conda env already exists!";
   else
-    conda create -n gdna2 python=3.10 -y
-    conda activate gdna2
+    conda create -n gdna python=3.10 -y
+    conda activate gdna
     conda install pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia -y
     conda install cudatoolkit -y
     conda install -c fvcore -c iopath -c conda-forge fvcore iopath -y

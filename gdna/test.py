@@ -198,6 +198,7 @@ class GDNA:
         return batch_list
 
     def action_z_detail(self, batch=None):
+        global ACT_GEN
         self.eval_mode = 'z_detail'
         batch_list = []
 
@@ -237,10 +238,12 @@ class GDNA:
 
                     batch_list.append(batch)
 
+        ACT_GEN = batch_list
         self.get_mesh(batch_list)
         return batch_list
 
     def action_betas(self, batch=None):
+        global ACT_GEN
         self.eval_mode = 'betas'
 
         batch_list = []
@@ -272,10 +275,12 @@ class GDNA:
 
                 batch_list.append(batch)
 
+        ACT_GEN = batch_list
         self.get_mesh(batch_list)
         return batch_list
 
-    def action_thetas(self, batch=None):
+    def action_thetas(self, batch=None, n_pose=None):
+        global ACT_GEN
         self.eval_mode = 'thetas'
         batch_list = []
         if batch is None:
@@ -291,15 +296,18 @@ class GDNA:
         else:
             j = torch.where((self.smpl_param_anim == batch['smpl_params'].unsqueeze(1))
                             .prod(dim=2))[1].cpu().numpy()[0].item()
-
-            for i in range(len(self.smpl_param_anim.tolist()[j - 20:j + 20])):
+            print("THETAS NPOSE: ", n_pose)
+            x = int(n_pose/2)
+            for i in range(len(self.smpl_param_anim.tolist()[j - x:j + x])):
                 batch = {'z_shape': batch['z_shape'],
                          'z_detail': batch['z_detail'],
-                         'smpl_params': self.smpl_param_anim[[i + (j - 10)]]
+                         'smpl_params': self.smpl_param_anim[[i + (j - x)]]
                          }
 
                 batch_list.append(batch)
 
+        ACT_GEN = batch_list
+        print("N° Poses: ", len(batch_list))
         self.get_mesh(batch_list)
         return batch_list
 

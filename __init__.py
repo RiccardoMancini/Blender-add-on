@@ -6,7 +6,7 @@ bl_info = {
     "version": (2, 0, 0),
     "blender": (3, 0, 1),
     "location": "Viewport > Right panel",
-    "description": "GDNA for Blender",
+    "description": "gDNA for Blender",
     "category": "GDNA"}
 
 import bpy
@@ -43,12 +43,11 @@ import test as gl
 # print(bpy.utils.user_resource('SCRIPTS', path='addons'))
 objR, objT, twrv, last_obj = None, None, None, None
 G = {'m1': [], 'm2': []}
-Last_OR = {}
-Last_OG = {}
 Last = {}
-Flag = {}
 zero = {"Shape": True, "Details": True, "Scale": True, "Pose": True}
 index_Gen = {}
+zero_s = {"Slider": "0", "Val": 0}
+memory_slider = {}
 
 
 class ThreadWithReturnValue(Thread):
@@ -100,6 +99,7 @@ def check_tmp(eval_mode):
 
 
 def array2mesh(verts, faces, replace=False):
+    global last_obj
     n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
     num = len(n_avatars) if len(n_avatars) != 0 else 0
     if not replace:
@@ -113,6 +113,8 @@ def array2mesh(verts, faces, replace=False):
         bpy.context.view_layer.objects.active = obj
         Last[bpy.context.active_object] = None
         index_Gen[bpy.context.active_object] = zero.copy()
+        memory_slider[bpy.context.active_object] = zero_s.copy()
+        last_obj = bpy.context.active_object
         # print(index_Gen)
 
     else:
@@ -212,17 +214,36 @@ def generate_mesh(process):
                        gl.MESH_GEN[generate_mesh.n_mesh_gen]['faces'])
             generate_mesh.n_mesh_gen += 1
 
-        return 1.0
+        return 1.5
 
 
 def update_z_shape(self, context):
-    print("shape")
+    #print("shape")
     num_slider = bpy.context.window_manager.gdna_tool.gdna_z_shape
+    GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
+
+    print(num_slider)
+    if num_slider != 0 and bpy.context.active_object == last_obj:
+        if num_slider > len(gl.MESH_GEN):
+            num_slider = len(gl.MESH_GEN)
+            bpy.context.window_manager.gdna_tool.gdna_z_shape = num_slider
+
+        GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
+        array2mesh(gl.MESH_GEN[num_slider - 1]['verts'], gl.MESH_GEN[num_slider - 1]['faces'], True)
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
+        gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'] = gl.ACT_GEN[num_slider - 1]
+    else:
+        bpy.context.window_manager.gdna_tool.gdna_z_shape = GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object]
+
+def update_z_details(self, context):
+    #print("shape")
+    num_slider = bpy.context.window_manager.gdna_tool.gdna_z_details
     if num_slider > len(gl.MESH_GEN):
         num_slider = len(gl.MESH_GEN)
-        bpy.context.window_manager.gdna_tool.gdna_z_shape = num_slider
+        bpy.context.window_manager.gdna_tool.gdna_z_details = num_slider
 
-    GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
+    GDNA_Gen_Details.bl_slider_val[bpy.context.active_object] = num_slider
     print(num_slider)
     if num_slider != 0 and bpy.context.active_object == last_obj:
         array2mesh(gl.MESH_GEN[num_slider - 1]['verts'], gl.MESH_GEN[num_slider - 1]['faces'], True)
@@ -231,20 +252,85 @@ def update_z_shape(self, context):
         gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'] = gl.ACT_GEN[num_slider - 1]
 
 
-def update_z_details(self, context):
-    GDNA_Gen_Details.bl_slider_val[bpy.context.active_object] = bpy.context.window_manager.gdna_tool.gdna_z_details
-
-
 def update_scale(self, context):
-    GDNA_Gen_Scale.bl_slider_val[bpy.context.active_object] = bpy.context.window_manager.gdna_tool.gdna_scale
+    #print("scale")
+    num_slider = bpy.context.window_manager.gdna_tool.gdna_scale
+    if num_slider > len(gl.MESH_GEN):
+        num_slider = len(gl.MESH_GEN)
+        bpy.context.window_manager.gdna_tool.gdna_scale = num_slider
+
+    GDNA_Gen_Scale.bl_slider_val[bpy.context.active_object] = num_slider
+    print(num_slider)
+    if num_slider != 0 and bpy.context.active_object == last_obj:
+        array2mesh(gl.MESH_GEN[num_slider - 1]['verts'], gl.MESH_GEN[num_slider - 1]['faces'], True)
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
+        gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'] = gl.ACT_GEN[num_slider - 1]
+    else:
+        bpy.context.window_manager.gdna_tool.gdna_scale = GDNA_Gen_Scale.bl_slider_val[bpy.context.active_object]
 
 
 def update_pose(self, context):
-    GDNA_Gen_Pose.bl_slider_val[bpy.context.active_object] = bpy.context.window_manager.gdna_tool.gdna_pose
+    num_slider = 0
+    n_pose = memory_slider[bpy.context.active_object]["Slider"]
+    x = int(n_pose)
+    x = int(x / 2)
+    if bpy.context.active_object == last_obj:
+        if n_pose == "20":
+            num_slider = bpy.context.window_manager.gdna_tool.gdna_pose1 + x
+            if num_slider > len(gl.MESH_GEN):
+                num_slider = len(gl.MESH_GEN)
+                bpy.context.window_manager.gdna_tool.gdna_pose1 = num_slider - x
+            act_n = bpy.context.window_manager.gdna_tool.gdna_pose1
+            if bpy.context.window_manager.gdna_tool.gdna_pose1 > 0:
+                num_slider -= 1
+            memory_slider[bpy.context.active_object]["Val"] = num_slider
 
 
-def action_retrieve(avatar_id, obj, num_slider):
-    load_tmp(avatar_id, obj.eval_mode, obj.expname)
+
+        elif n_pose == "40":
+            num_slider = bpy.context.window_manager.gdna_tool.gdna_pose2
+            memory_slider[bpy.context.active_object]["Val"] = num_slider
+        elif n_pose == "60":
+            num_slider = bpy.context.window_manager.gdna_tool.gdna_pose3
+            memory_slider[bpy.context.active_object]["Val"] = num_slider
+
+
+    print(num_slider)
+
+
+
+
+    '''if num_slider != 0 and bpy.context.active_object == last_obj:
+        array2mesh(gl.MESH_GEN[num_slider - 1]['verts'], gl.MESH_GEN[num_slider - 1]['faces'], True)
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
+        gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'] = gl.ACT_GEN[num_slider - 1]'''
+
+'''def update_pose1(self, context):
+    if (memory_slider[bpy.context.active_object]["Slider"] == "20"):  # credo che questo if non sia necessario
+        memory_slider[bpy.context.active_object]["Val"] = bpy.context.window_manager.gdna_tool.gdna_pose1
+
+    print(self.get("gdna_pose1"))
+
+
+def update_pose2(self, context):
+    if (memory_slider[bpy.context.active_object]["Slider"] == "40"):
+        memory_slider[bpy.context.active_object]["Val"] = bpy.context.window_manager.gdna_tool.gdna_pose2
+        print(memory_slider)
+    # memory_slider[bpy.context.active_object] = d_slider["160"]
+    print(self.get("gdna_pose2"))
+
+
+def update_pose3(self, context):
+    if (memory_slider[bpy.context.active_object]["Slider"] == "60"):
+        memory_slider[bpy.context.active_object]["Val"] = bpy.context.window_manager.gdna_tool.gdna_pose3
+    # memory_slider[bpy.context.active_object] = d_slider["320"]
+    print(self.get("gdna_pose3"))
+
+'''
+def action_retrieve(avatar_id, eval_mode, obj, num_slider):
+    load_tmp(avatar_id, eval_mode, obj.expname)
     array2mesh(gl.MESH_GEN[num_slider - 1]['verts'], gl.MESH_GEN[num_slider - 1]['faces'], True)
 
     a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
@@ -252,9 +338,10 @@ def action_retrieve(avatar_id, obj, num_slider):
 
 
 def abil_retrieve(mod):
-    # check
+    parse_eval_mode = {"Shape": "z_shape", "Details": "z_detail", "Scale": "betas", "Pose": "thetas"}
     if (not (bpy.context.active_object in dix[mod])
             or (bpy.context.active_object.select_get() == False)
+            or not (check_tmp(parse_eval_mode[mod]))
             or (Last[bpy.context.active_object] == mod)
             or twrv.is_alive()):
         return False
@@ -266,6 +353,18 @@ def abil_generate(mod):
     if (bpy.context.active_object is None
             or bpy.context.active_object.select_get() == False
             or index_Gen[bpy.context.active_object][mod] == False
+            or twrv.is_alive()):
+        return False
+    else:
+        return True
+
+
+def abil_generate_pose(mod):
+    if ((bpy.context.active_object is None)
+            or (bpy.context.active_object.select_get() == False)
+            or (index_Gen[bpy.context.active_object][mod] == False
+                and int(memory_slider[bpy.context.active_object]["Slider"]) >= int(
+                        bpy.context.window_manager.gdna_tool.gdna_n_pose))
             or twrv.is_alive()):
         return False
     else:
@@ -294,21 +393,22 @@ class GDNA_Properties(PropertyGroup):
 
     gdna_n_pose: EnumProperty(
         items=[
-            ('40', '40', '40', '', 0),
-            ('160', '160', '160', '', 1),
-            ('320', '320', '320', '', 2)
+            ('20', '20', '20', '', 0),
+            ('40', '40', '40', '', 1),
+            ('60', '60', '60', '', 2)
         ],
-        default='40'
+        default='20'
     )
     gdna_z_shape: IntProperty(name="Slider Z Shape", default=0, min=0, max=10, update=update_z_shape)
     gdna_z_details: IntProperty(name="Slider Z Details", default=0, min=0, max=10, update=update_z_details)
     gdna_scale: IntProperty(name="Slider Scale", default=0, min=0, max=40, update=update_scale)
-    gdna_pose: IntProperty(name="Slider Pose", default=0, min=-20, max=20, update=update_pose)
+    gdna_pose: IntProperty(name="Slider Pose", default=0, min=-20, max=20)
+    gdna_pose1: IntProperty(name="Slider Pose", default=0, min=-10, max=10, update=update_pose)
+    gdna_pose2: IntProperty(name="Slider Pose", default=0, min=-19, max=20, update=update_pose)
+    gdna_pose3: IntProperty(name="Slider Pose", default=0, min=-29, max=30, update=update_pose)
+
     gdna_n_models: IntProperty(name="number models generation", default=1, min=0, max=100)
     gdna_seed: IntProperty(name="seed", default=1, min=0, max=100)
-    gdna_40_pose: BoolProperty(name="40 Poses", description="40 Models with differents Poses")
-    gdna_160_pose: BoolProperty(name="160 Poses", description="160 Models with differents Poses")
-    gdna_320_pose: BoolProperty(name="320 Poses", description="320 Models with differents Poses")
 
 
 # operator
@@ -317,6 +417,13 @@ class GDNA_Start(bpy.types.Operator):
     bl_label = "Start"
     bl_description = ("")
     bl_options = {'REGISTER', 'UNDO'}
+
+    @classmethod
+    def poll(cls, context):
+        if twrv is not None and twrv.is_alive():
+            return False
+        else:
+            return True
 
     def execute(self, context):
         global objR, objT, twrv
@@ -358,13 +465,12 @@ class GDNA_Gen_Shape(bpy.types.Operator):
         # mette a 0 lo slider se non è stato ancora modificato
         if not (bpy.context.active_object in GDNA_Gen_Shape.bl_slider_val):
             bpy.context.window_manager.gdna_tool.gdna_z_shape = 0
-
         #####################################################################################################
         if bpy.context.active_object != GDNA_Gen_Shape.bl_Last_OS:
             GDNA_Gen_Shape.bl_Last_OS = bpy.context.active_object
             bpy.context.window_manager.gdna_tool.gdna_z_shape = GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object]
             # QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-        return {'FINISHED'}
+        return abil_generate("Shape")
 
     def execute(self, context):
         global objR, objT, twrv, last_obj
@@ -409,18 +515,18 @@ class GDNA_Gen_Details(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        if (not (bpy.context.active_object in GDNA_Gen_Details.bl_slider_val)):
+        if not (bpy.context.active_object in GDNA_Gen_Details.bl_slider_val):
             bpy.context.window_manager.gdna_tool.gdna_z_details = 0
-        if (not (bpy.context.active_object in Last_OR)):
-            Last_OR[bpy.context.active_object] = None
-        if (bpy.context.active_object != GDNA_Gen_Details.bl_Last_OS):
+        if bpy.context.active_object != GDNA_Gen_Details.bl_Last_OS:
             GDNA_Gen_Details.bl_Last_OS = bpy.context.active_object
             bpy.context.window_manager.gdna_tool.gdna_z_details = GDNA_Gen_Details.bl_slider_val[
                 bpy.context.active_object]
-        return {'FINISHED'}
+        return abil_generate("Details")
 
     def execute(self, context):
-        Flag['Last'] = 0
+        global objR, objT, twrv, last_obj
+        bpy.context.window_manager.gdna_tool.gdna_z_details = 0
+
         if (not (bpy.context.active_object in self.bl_objects)):
             self.bl_objects.append(bpy.context.active_object)
         Last[bpy.context.active_object] = "Details"
@@ -432,6 +538,20 @@ class GDNA_Gen_Details(bpy.types.Operator):
             else:
                 index_Gen[ob][o] = True
 
+        last_obj = bpy.context.active_object
+
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
+        obj = objR if m[0] == 'm1' else objT
+
+        # print(gl.BATCH_GEN)
+        a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
+        twrv = ThreadWithReturnValue(target=obj.action_z_detail, args=(gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'],))
+        twrv.start()
+
+        show_progress.n_dot = 0
+        bpy.app.timers.register(partial(show_progress, bpy.context.area, twrv, obj, avatar_id))
+
         return {'FINISHED'}
 
 
@@ -440,7 +560,6 @@ class GDNA_Gen_Scale(bpy.types.Operator):
     bl_label = "Start Scale"
     bl_description = ("")
     bl_options = {'REGISTER', 'UNDO'}
-
     bl_objects = []
     bl_slider_val = {}
     bl_Last_OS = None
@@ -449,17 +568,14 @@ class GDNA_Gen_Scale(bpy.types.Operator):
     def poll(cls, context):
         if (not (bpy.context.active_object in GDNA_Gen_Scale.bl_slider_val)):
             bpy.context.window_manager.gdna_tool.gdna_scale = 0
-            # Last[bpy.context.active_object] = None
-        if (not (bpy.context.active_object in Last_OR)):
-            Last_OR[bpy.context.active_object] = None
         if (bpy.context.active_object != GDNA_Gen_Scale.bl_Last_OS):
             GDNA_Gen_Scale.bl_Last_OS = bpy.context.active_object
             bpy.context.window_manager.gdna_tool.gdna_scale = GDNA_Gen_Scale.bl_slider_val[bpy.context.active_object]
-        # print(GDNA_Gen_Details.bl_slider_val)
-        return {'FINISHED'}
+        return abil_generate("Scale")
 
     def execute(self, context):
-        Flag['Last'] = 0
+        global objR, objT, twrv, last_obj
+        bpy.context.window_manager.gdna_tool.gdna_scale = 0
         if (not (bpy.context.active_object in self.bl_objects)):
             self.bl_objects.append(bpy.context.active_object)
         Last[bpy.context.active_object] = "Scale"
@@ -471,6 +587,20 @@ class GDNA_Gen_Scale(bpy.types.Operator):
             else:
                 index_Gen[ob][o] = True
 
+        last_obj = bpy.context.active_object
+
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
+        obj = objR if m[0] == 'm1' else objT
+
+        # print(gl.BATCH_GEN)
+        a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
+        twrv = ThreadWithReturnValue(target=obj.action_betas, args=(gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'],))
+        twrv.start()
+
+        show_progress.n_dot = 0
+        bpy.app.timers.register(partial(show_progress, bpy.context.area, twrv, obj, avatar_id))
+
         return {'FINISHED'}
 
 
@@ -479,26 +609,39 @@ class GDNA_Gen_Pose(bpy.types.Operator):
     bl_label = "Start Pose"
     bl_description = ("")
     bl_options = {'REGISTER', 'UNDO'}
-
     bl_objects = []
     bl_slider_val = {}
     bl_Last_OS = None
 
     @classmethod
     def poll(cls, context):
-        if (not (bpy.context.active_object in GDNA_Gen_Pose.bl_slider_val)):
-            bpy.context.window_manager.gdna_tool.gdna_pose = 0
-            # Last[bpy.context.active_object] = None
-        if (not (bpy.context.active_object in Last_OR)):
-            Last_OR[bpy.context.active_object] = None
-        if (bpy.context.active_object != GDNA_Gen_Pose.bl_Last_OS):
+        if bpy.context.active_object != GDNA_Gen_Pose.bl_Last_OS:
             GDNA_Gen_Pose.bl_Last_OS = bpy.context.active_object
-            bpy.context.window_manager.gdna_tool.gdna_pose = GDNA_Gen_Pose.bl_slider_val[bpy.context.active_object]
-        return {'FINISHED'}
+            print(memory_slider)
+            if memory_slider[bpy.context.active_object]["Slider"] == "20":
+                bpy.context.window_manager.gdna_tool.gdna_pose1 = memory_slider[bpy.context.active_object]["Val"]
+                bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
+            elif memory_slider[bpy.context.active_object]["Slider"] == "40":
+                bpy.context.window_manager.gdna_tool.gdna_pose2 = memory_slider[bpy.context.active_object]["Val"]
+                bpy.context.window_manager.gdna_tool.gdna_n_pose = "40"
+            elif memory_slider[bpy.context.active_object]["Slider"] == "60":
+                bpy.context.window_manager.gdna_tool.gdna_pose3 = memory_slider[bpy.context.active_object]["Val"]
+                bpy.context.window_manager.gdna_tool.gdna_n_pose = "60"
+            elif (memory_slider[bpy.context.active_object][
+                      "Slider"] == "0"):  # quando crea un nuovo oggetto il selettore di n_pose è su 40
+                bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
+        return abil_generate_pose("Pose")
 
     def execute(self, context):
-        Flag['Last'] = 0
-        if (not (bpy.context.active_object in self.bl_objects)):
+        global objR, objT, twrv, last_obj
+        if bpy.context.window_manager.gdna_tool.gdna_n_pose == "20":
+            bpy.context.window_manager.gdna_tool.gdna_pose1 = 0
+        elif bpy.context.window_manager.gdna_tool.gdna_n_pose == "40":
+            bpy.context.window_manager.gdna_tool.gdna_pose2 = 0
+        elif bpy.context.window_manager.gdna_tool.gdna_n_pose == "60":
+            bpy.context.window_manager.gdna_tool.gdna_pose3 = 0
+
+        if not (bpy.context.active_object in self.bl_objects):
             self.bl_objects.append(bpy.context.active_object)
         Last[bpy.context.active_object] = "Pose"
 
@@ -509,6 +652,23 @@ class GDNA_Gen_Pose(bpy.types.Operator):
             else:
                 index_Gen[ob][o] = True
 
+        memory_slider[bpy.context.active_object]["Slider"] = bpy.context.window_manager.gdna_tool.gdna_n_pose
+        last_obj = bpy.context.active_object
+
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
+        obj = objR if m[0] == 'm1' else objT
+
+        # print(gl.BATCH_GEN)
+        a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
+        twrv = ThreadWithReturnValue(target=obj.action_thetas,
+                                     args=(gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'],
+                                           int(memory_slider[bpy.context.active_object]["Slider"])))
+        twrv.start()
+
+        show_progress.n_dot = 0
+        bpy.app.timers.register(partial(show_progress, bpy.context.area, twrv, obj, avatar_id))
+
         return {'FINISHED'}
 
 
@@ -518,6 +678,10 @@ class GDNA_Ret_Shape(bpy.types.Operator):
     bl_description = ("")
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
+
+    @classmethod
+    def poll(cls, context):
+        return abil_retrieve("Shape")
 
     def execute(self, context):
         global objR, objT, last_obj
@@ -536,7 +700,7 @@ class GDNA_Ret_Shape(bpy.types.Operator):
         obj = objR if m[0] == 'm1' else objT
 
         num_slider = bpy.context.window_manager.gdna_tool.gdna_z_shape
-        ret_thread = ThreadWithReturnValue(target=action_retrieve, args=(avatar_id, obj, num_slider,))
+        ret_thread = ThreadWithReturnValue(target=action_retrieve, args=(avatar_id, 'z_shape', obj, num_slider,))
         ret_thread.start()
 
         return {'FINISHED'}
@@ -549,8 +713,12 @@ class GDNA_Ret_Details(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
 
+    @classmethod
+    def poll(cls, context):
+        return abil_retrieve("Details")
+
     def execute(self, context):
-        Flag['Last'] = 1
+        global objR, objT, last_obj
         Last[bpy.context.active_object] = "Details"
 
         ob = bpy.context.active_object
@@ -559,6 +727,15 @@ class GDNA_Ret_Details(bpy.types.Operator):
                 index_Gen[ob][o] = False
             else:
                 index_Gen[ob][o] = True
+
+        last_obj = bpy.context.active_object
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
+        obj = objR if m[0] == 'm1' else objT
+
+        num_slider = bpy.context.window_manager.gdna_tool.gdna_z_details
+        ret_thread = ThreadWithReturnValue(target=action_retrieve, args=(avatar_id, 'z_detail', obj, num_slider,))
+        ret_thread.start()
 
         return {'FINISHED'}
 
@@ -570,8 +747,12 @@ class GDNA_Ret_Scale(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
 
+    @classmethod
+    def poll(cls, context):
+        return abil_retrieve("Scale")
+
     def execute(self, context):
-        Flag['Last'] = 1
+        global objR, objT, last_obj
         Last[bpy.context.active_object] = "Scale"
 
         ob = bpy.context.active_object
@@ -580,6 +761,15 @@ class GDNA_Ret_Scale(bpy.types.Operator):
                 index_Gen[ob][o] = False
             else:
                 index_Gen[ob][o] = True
+
+        last_obj = bpy.context.active_object
+        avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+        m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
+        obj = objR if m[0] == 'm1' else objT
+
+        num_slider = bpy.context.window_manager.gdna_tool.gdna_scale
+        ret_thread = ThreadWithReturnValue(target=action_retrieve, args=(avatar_id, 'betas', obj, num_slider,))
+        ret_thread.start()
 
         return {'FINISHED'}
 
@@ -591,8 +781,11 @@ class GDNA_Ret_Pose(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
 
+    @classmethod
+    def poll(cls, context):
+        return abil_retrieve("Pose")
+
     def execute(self, context):
-        Flag['Last'] = 1
         Last[bpy.context.active_object] = "Pose"
 
         ob = bpy.context.active_object
@@ -601,15 +794,33 @@ class GDNA_Ret_Pose(bpy.types.Operator):
                 index_Gen[ob][o] = False
             else:
                 index_Gen[ob][o] = True
-
         return {'FINISHED'}
 
 
-class GDNA_Retrieve(bpy.types.Operator):
-    bl_idname = "object.retrieve"
+class GDNA_Reset(bpy.types.Operator):
+    bl_idname = "object.reset"
     bl_label = "Total Retrive"
     bl_description = ("")
     bl_options = {'REGISTER', 'UNDO'}
+
+    def execute(self, context):
+        bpy.context.window_manager.gdna_tool.gdna_z_shape = 0
+        bpy.context.window_manager.gdna_tool.gdna_z_details = 0
+        bpy.context.window_manager.gdna_tool.gdna_scale = 0
+        ###
+        bpy.context.window_manager.gdna_tool.gdna_pose1 = 0
+        bpy.context.window_manager.gdna_tool.gdna_pose2 = 0
+        bpy.context.window_manager.gdna_tool.gdna_pose3 = 0
+        bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
+
+        index_Gen[bpy.context.active_object]["Shape"] = True
+        index_Gen[bpy.context.active_object]["Details"] = True
+        index_Gen[bpy.context.active_object]["Scale"] = True
+        index_Gen[bpy.context.active_object]["Pose"] = True
+        Last[bpy.context.active_object] = None
+        # eliminare file di retrive per disabilitare i retrieve
+        memory_slider[bpy.context.active_object] = zero_s.copy()
+        return {'FINISHED'}
 
 
 dix = {"Shape": GDNA_Gen_Shape.bl_objects,
@@ -654,81 +865,82 @@ class GDNA_PT_Edit(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         ##Shape##
-        col = layout.column(align=True)
+        col = layout.box().column(align=True)
         split = col.split(factor=0.21, align=True)
         # Slider
         split.enabled = abil_slider("Shape")
         split.label(text="Shape:")
         split.prop(context.window_manager.gdna_tool, "gdna_z_shape", text="", slider=False)
         # abilitazione Generate
-        col = layout.column(align=True)
-        col.enabled = abil_generate("Shape")
-        col.operator("object.gen_shape", text="Generate")
+        col.separator()
+        row = col.row(align=True)
+        row.operator("object.gen_shape", text="Generate", icon="PLUS")
         # abilitazione Retrieve
-        col = layout.column(align=True)
-        col.enabled = abil_retrieve("Shape")
-        col.operator("object.ret_shape", text="Retrieve")
+        row.operator("object.ret_shape", text="Retrieve", icon="RECOVER_LAST")
         col.separator()
 
         ##Details##
-        col = layout.column(align=True)
+        col = layout.box().column(align=True)
         split = col.split(factor=0.21, align=False)
         # Slider
         split.enabled = abil_slider("Details")
         split.label(text="Details:")
         split.prop(context.window_manager.gdna_tool, "gdna_z_details", text="", slider=False)
         # Generate
-        col = layout.column(align=True)
-        col.enabled = abil_generate("Details")
-        col.operator("object.gen_details", text="Generate")
+        col.separator()
+        row = col.row(align=True)
+        row.operator("object.gen_details", text="Generate", icon="PLUS")
         # Retrieve
-        col = layout.column(align=True)
-        col.enabled = abil_retrieve("Details")
-        col.operator("object.ret_details", text="Retrieve")
+        row.operator("object.ret_details", text="Retrieve", icon="RECOVER_LAST")
         col.separator()
 
         ##Scale##
-        col = layout.column(align=True)
+        col = layout.box().column(align=True)
         split = col.split(factor=0.21, align=True)
         # Slider
         split.enabled = abil_slider("Scale")
         split.label(text="Scale:")
         split.prop(context.window_manager.gdna_tool, "gdna_scale", text="", slider=False)
         # Abilitazione Generate
-        col = layout.column(align=True)
-        col.enabled = abil_generate("Scale")
-        col.operator("object.gen_scale", text="Generate")
+        col.separator()
+        row = col.row(align=True)
+        row.operator("object.gen_scale", text="Generate", icon="PLUS")
         # Retrieve
-        col = layout.column(align=True)
-        col.enabled = abil_retrieve("Scale")
-        col.operator("object.ret_scale", text="Retrieve")
+        row.operator("object.ret_scale", text="Retrieve", icon="RECOVER_LAST")
         col.separator()
 
         ##Pose##
-        col = layout.column(align=True)
+        col = layout.box().column(align=True)
         split = col.split(factor=0.21, align=True)
         # Slider
         split.enabled = abil_slider("Pose")
         split.label(text="Pose:")
-        split.prop(context.window_manager.gdna_tool, "gdna_pose", text="", slider=False)
+
+        if (bpy.context.active_object == None or memory_slider[bpy.context.active_object]["Slider"] == "0"):
+            split.prop(context.window_manager.gdna_tool, "gdna_pose", text="", slider=False)
+        elif (memory_slider[bpy.context.active_object]["Slider"] == "20"):
+            split.prop(context.window_manager.gdna_tool, "gdna_pose1", text="(20)", slider=False)
+        elif (memory_slider[bpy.context.active_object]["Slider"] == "40"):
+            split.prop(context.window_manager.gdna_tool, "gdna_pose2", text="(40)", slider=False)
+        elif (memory_slider[bpy.context.active_object]["Slider"] == "60"):
+            split.prop(context.window_manager.gdna_tool, "gdna_pose3", text="(60)", slider=False)
+
         # N. Pose
-        layout.prop(context.window_manager.gdna_tool, "gdna_n_pose", expand=True)
-        '''row = layout.row(align=True)
-        row.prop(context.window_manager.gdna_tool, "gdna_40_pose", text = "40", slider = True)
-        row.prop(context.window_manager.gdna_tool, "gdna_160_pose", text = "160", slider = True)
-        row.prop(context.window_manager.gdna_tool, "gdna_320_pose", text = "320", slider = True)'''
+        col.separator()
+        row = col.row(align=True)
+        row.prop(context.window_manager.gdna_tool, "gdna_n_pose", expand=True)
+
         # Generate
-        col = layout.column(align=True)
-        col.enabled = abil_generate("Pose")
-        col.operator("object.gen_pose", text="Generate")
-        # Retrieve
-        col = layout.column(align=True)
-        col.enabled = abil_retrieve("Pose")
-        col.operator("object.ret_pose", text="Retrieve")
+        # col.separator()
+        row = col.row(align=True)
         col.separator()
 
-        ##Retrieve
-        layout.box().operator("object.retrieve", text="Retrieve")
+        row.operator("object.gen_pose", text="Generate", icon="PLUS")
+        # Retrieve
+        row.operator("object.ret_pose", text="Retrieve", icon="RECOVER_LAST")
+
+        ##Reset
+        layout.operator("object.reset", text="Reset", icon="RECOVER_LAST")
 
 
 classes = [
@@ -742,7 +954,7 @@ classes = [
     GDNA_Ret_Details,
     GDNA_Ret_Scale,
     GDNA_Ret_Pose,
-    GDNA_Retrieve,
+    GDNA_Reset,
     GDNA_PT_Model,
     GDNA_PT_Edit
 ]

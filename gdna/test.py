@@ -296,7 +296,7 @@ class GDNA:
         else:
             j = torch.where((self.smpl_param_anim == batch['smpl_params'].unsqueeze(1))
                             .prod(dim=2))[1].cpu().numpy()[0].item()
-            print("THETAS NPOSE: ", n_pose)
+            # print("THETAS NPOSE: ", n_pose)
             x = int(n_pose/2)
             for i in range(len(self.smpl_param_anim.tolist()[j - x:j + x])):
                 batch = {'z_shape': batch['z_shape'],
@@ -307,7 +307,7 @@ class GDNA:
                 batch_list.append(batch)
 
         ACT_GEN = batch_list
-        print("N° Poses: ", len(batch_list))
+        # print("N° Poses: ", len(batch_list))
         self.get_mesh(batch_list)
         return batch_list
 

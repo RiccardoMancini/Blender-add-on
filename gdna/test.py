@@ -294,14 +294,24 @@ class GDNA:
 
                 batch_list.append(batch)
         else:
+            x = int(n_pose / 2)
+            max = len(self.smpl_param_anim.tolist())
+            # print(max)
             j = torch.where((self.smpl_param_anim == batch['smpl_params'].unsqueeze(1))
                             .prod(dim=2))[1].cpu().numpy()[0].item()
-            # print("THETAS NPOSE: ", n_pose)
-            x = int(n_pose/2)
-            for i in range(len(self.smpl_param_anim.tolist()[j - x:j + x])):
+            if j + x > max:
+                lower = ((j + x) - max) + x
+                upper = (j + x) - max
+            elif j - x < 0:
+                lower = abs(j - x)
+                upper = x + abs(j - x)
+            else:
+                lower = x
+                upper = x
+            for i in range(len(self.smpl_param_anim.tolist()[j - lower:j + upper])):
                 batch = {'z_shape': batch['z_shape'],
                          'z_detail': batch['z_detail'],
-                         'smpl_params': self.smpl_param_anim[[i + (j - x)]]
+                         'smpl_params': self.smpl_param_anim[[i + (j - lower)]]
                          }
 
                 batch_list.append(batch)

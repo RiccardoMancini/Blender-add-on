@@ -10,7 +10,7 @@ bl_info = {
     "category": "GDNA"}
 
 import bpy
-from bpy.props import BoolProperty, EnumProperty, FloatProperty, PointerProperty, IntProperty
+from bpy.props import BoolProperty, EnumProperty, FloatProperty, PointerProperty, IntProperty, StringProperty
 from bpy.types import PropertyGroup
 import os
 import sys
@@ -222,13 +222,13 @@ def update_z_shape(self, context):
     num_slider = bpy.context.window_manager.gdna_tool.gdna_z_shape
     GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
 
-    #print(num_slider)
+    # print(num_slider)
     if num_slider != 0 and bpy.context.active_object == last_obj and Last[bpy.context.active_object] == 'Shape':
         if num_slider > len(gl.MESH_GEN):
             num_slider = len(gl.MESH_GEN)
             bpy.context.window_manager.gdna_tool.gdna_z_shape = num_slider
 
-        #GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
+        # GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
         array2mesh(gl.MESH_GEN[num_slider - 1]['verts'], gl.MESH_GEN[num_slider - 1]['faces'], True)
         avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
@@ -239,7 +239,7 @@ def update_scale(self, context):
     num_slider = bpy.context.window_manager.gdna_tool.gdna_scale
     GDNA_Gen_Scale.bl_slider_val[bpy.context.active_object] = num_slider
 
-    #print(num_slider)
+    # print(num_slider)
     if num_slider != 0 and bpy.context.active_object == last_obj and Last[bpy.context.active_object] == 'Scale':
         if num_slider > len(gl.MESH_GEN):
             num_slider = len(gl.MESH_GEN)
@@ -376,6 +376,13 @@ class GDNA_Properties(PropertyGroup):
 
     gdna_n_models: IntProperty(name="number models generation", default=1, min=0, max=100)
     gdna_seed: IntProperty(name="seed", default=1, min=0, max=100)
+
+    path: StringProperty(
+        name="",
+        description="Choose a directory:",
+        default="",
+        maxlen=1024,
+        subtype='DIR_PATH')
 
 
 # operator
@@ -533,7 +540,7 @@ class GDNA_Gen_Pose(bpy.types.Operator):
     def poll(cls, context):
         if bpy.context.active_object != GDNA_Gen_Pose.bl_Last_OS:
             GDNA_Gen_Pose.bl_Last_OS = bpy.context.active_object
-            #print(memory_slider)
+            # print(memory_slider)
             if memory_slider[bpy.context.active_object]["Slider"] == "20":
                 bpy.context.window_manager.gdna_tool.gdna_pose1 = memory_slider[bpy.context.active_object]["Val"]
                 bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
@@ -748,6 +755,52 @@ class GDNA_Reset(bpy.types.Operator):
         return {'FINISHED'}
 
 
+class Organize(bpy.types.Operator):
+    bl_idname = "object.organize"
+    bl_label = "Organize"
+
+    def execute(self, context):
+        centr_mesh()
+
+
+class Optimize(bpy.types.Operator):
+    bl_idname = "object.optimize"
+    bl_label = "Optimize"
+
+    def execute(self, context):
+        # Enable smooth shading on an mesh object
+        for face in bpy.context.active_object.data.polygons:
+            face.use_smooth = True
+
+        # Enable Decimate Modifier
+        modifier = bpy.context.active_object.modifiers.new('DecimateMod', 'DECIMATE')
+        # ratio definisce il rapporto di riduzione dei poligoni della mesh ed assume un valore compreso tra 0-1;
+        # 0.5 significa che riduco della metà i poligoni della mesh
+        modifier.ratio = 0.5
+
+
+class Save(bpy.types.Operator):
+    bl_idname = "object.save"
+    bl_label = "Save"
+
+    def execute(self, context):
+        myfile = bpy.context.active_object
+        name = myfile.name
+
+        if myfile.name in bpy.data.objects:
+            bpy.ops.object.select_all(action='DESELECT')
+            bpy.data.objects[myfile.name].select_set(True)
+
+            percorso_file_esportazione = bpy.context.window_manager.gdna_tool.path
+            bpy.ops.export_scene.obj(filepath=f'{percorso_file_esportazione}{name}.obj', check_existing=True,
+                                     use_materials=False, use_selection=True)
+            print(f"Object '{myfile.name}' successfully exported")
+        else:
+            print(f"Object with name '{myfile.name}' not exist in the scene")
+
+        return {'FINISHED'}
+
+
 dix = {"Shape": GDNA_Gen_Shape.bl_objects,
        "Scale": GDNA_Gen_Scale.bl_objects,
        "Pose": GDNA_Gen_Pose.bl_objects
@@ -802,7 +855,6 @@ class GDNA_PT_Edit(bpy.types.Panel):
         # abilitazione Retrieve
         row.operator("object.ret_shape", text="Retrieve", icon="RECOVER_LAST")
 
-
         ##Scale##
         col = layout.box().column(align=True)
         split = col.split(factor=0.21, align=True)
@@ -852,6 +904,24 @@ class GDNA_PT_Edit(bpy.types.Panel):
         layout.operator("object.reset", text="Reset", icon="RECOVER_LAST")
 
 
+class GDNA_PT_Utility(bpy.types.Panel):
+    bl_label = "Utility"
+    bl_idname = "GDNA"
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "GDNA"
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator("object.organize", icon='TRACKER')
+        layout.operator("object.optimize", icon='SYSTEM')
+
+        layout.label(text="Export Avatar:")
+        col = layout.column(align=True)
+        col.prop(context.window_manager.gdna_tool, "path", text="")
+        layout.operator("object.save", icon='IMPORT')
+        layout.separator()
+
 classes = [
     GDNA_Properties,
     GDNA_Start,
@@ -862,6 +932,9 @@ classes = [
     GDNA_Ret_Scale,
     GDNA_Ret_Pose,
     GDNA_Reset,
+    Organize,
+    Optimize,
+    Save,
     GDNA_PT_Model,
     GDNA_PT_Edit
 ]

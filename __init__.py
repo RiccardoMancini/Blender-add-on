@@ -436,6 +436,7 @@ class GDNA_Gen_Shape(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
+        global last_obj
         # mette a 0 lo slider se non è stato ancora modificato
         if not (bpy.context.active_object in GDNA_Gen_Shape.bl_slider_val):
             bpy.context.window_manager.gdna_tool.gdna_z_shape = 0
@@ -443,7 +444,23 @@ class GDNA_Gen_Shape(bpy.types.Operator):
         if bpy.context.active_object != GDNA_Gen_Shape.bl_Last_OS:
             GDNA_Gen_Shape.bl_Last_OS = bpy.context.active_object
             bpy.context.window_manager.gdna_tool.gdna_z_shape = GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object]
-            # QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+
+            if twrv is not None and not twrv.is_alive():
+                # load avatar weights on click
+                parse_eval_mode = {"Shape": "z_shape", "Scale": "betas", "Pose": "thetas"}
+                eval_mode = [key for key, val in index_Gen[bpy.context.active_object].items() if val == False]
+                avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+                m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
+                if len(m) != 0:
+                    obj = objR if m[0] == 'm1' else objT
+                    print('Qui!')
+                    if len(eval_mode) != 0:
+                        load_tmp(avatar_id, parse_eval_mode[eval_mode[0]], obj.expname)
+                    else:
+                        load_tmp(avatar_id, 'sample', obj.expname)
+
+                    last_obj = bpy.context.active_object
+
         return abil_generate("Shape")
 
     def execute(self, context):
@@ -762,6 +779,8 @@ class Organize(bpy.types.Operator):
     def execute(self, context):
         centr_mesh()
 
+        return {'FINISHED'}
+
 
 class Optimize(bpy.types.Operator):
     bl_idname = "object.optimize"
@@ -777,6 +796,8 @@ class Optimize(bpy.types.Operator):
         # ratio definisce il rapporto di riduzione dei poligoni della mesh ed assume un valore compreso tra 0-1;
         # 0.5 significa che riduco della metà i poligoni della mesh
         modifier.ratio = 0.5
+
+        return {'FINISHED'}
 
 
 class Save(bpy.types.Operator):
@@ -813,7 +834,6 @@ class GDNA_PT_Model(bpy.types.Panel):
     bl_category = "GDNA"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "GDNA"
 
     def draw(self, context):
         layout = self.layout
@@ -834,10 +854,9 @@ class GDNA_PT_Model(bpy.types.Panel):
 
 class GDNA_PT_Edit(bpy.types.Panel):
     bl_label = "Edit"
-    bl_idname = "GDNA"
+    bl_category = "GDNA"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
-    bl_category = "GDNA"
 
     def draw(self, context):
         layout = self.layout
@@ -906,10 +925,9 @@ class GDNA_PT_Edit(bpy.types.Panel):
 
 class GDNA_PT_Utility(bpy.types.Panel):
     bl_label = "Utility"
-    bl_idname = "GDNA"
+    bl_category = "GDNA"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "GDNA"
 
     def draw(self, context):
         layout = self.layout
@@ -921,6 +939,18 @@ class GDNA_PT_Utility(bpy.types.Panel):
         col.prop(context.window_manager.gdna_tool, "path", text="")
         layout.operator("object.save", icon='IMPORT')
         layout.separator()
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator("object.organize", icon='TRACKER')
+        layout.operator("object.optimize", icon='SYSTEM')
+
+        layout.label(text="Export Avatar:")
+        col = layout.column(align=True)
+        col.prop(context.window_manager.gdna_tool, "path", text="")
+        layout.operator("object.save", icon='IMPORT')
+        layout.separator()
+
 
 classes = [
     GDNA_Properties,
@@ -936,14 +966,15 @@ classes = [
     Optimize,
     Save,
     GDNA_PT_Model,
-    GDNA_PT_Edit
+    GDNA_PT_Edit,
+    GDNA_PT_Utility
 ]
 
 
 def register():
     from bpy.utils import register_class
     for cls in classes:
-        bpy.utils.register_class(cls)
+        register_class(cls)
     # Store properties under WindowManager (not Scene) so that they are not saved in .blend files and always show
     # default values after loading
     bpy.types.WindowManager.gdna_tool = PointerProperty(type=GDNA_Properties)
@@ -952,7 +983,7 @@ def register():
 def unregister():
     from bpy.utils import unregister_class
     for cls in classes:
-        bpy.utils.unregister_class(cls)
+        unregister_class(cls)
 
     del bpy.types.WindowManager.gdna_tool
 

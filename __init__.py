@@ -98,10 +98,18 @@ def check_tmp(eval_mode):
         return False
 
 
+def get_n_avatar():
+    path = f'{ROOT}/tmp'
+    return len(glob.glob(f'{path}/ID_*_sample_*.npz'))
+
+
 def array2mesh(verts, faces, replace=False):
     global last_obj
-    n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
-    num = len(n_avatars) if len(n_avatars) != 0 else 0
+    # n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
+    num = get_n_avatar()
+    if num == 0:
+        n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
+        num = len(n_avatars) if len(n_avatars) != 0 else 0
     if not replace:
         mesh = bpy.data.meshes.new(f'Avatar_{num}')
         obj = bpy.data.objects.new(f'Avatar_{num}', mesh)

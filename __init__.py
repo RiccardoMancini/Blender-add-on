@@ -4,7 +4,7 @@ bl_info = {
     "name": "GDNA for Blender",
     "author": "Arment Pelivani, Enrico Tarsi, Riccardo Mancini",
     "version": (2, 0, 0),
-    "blender": (3, 0, 1),
+    "blender": (3, 6, 0),
     "location": "Viewport > Right panel",
     "description": "gDNA for Blender",
     "category": "GDNA"}
@@ -137,7 +137,7 @@ def array2mesh(verts, faces, replace=False):
         bpy.context.view_layer.objects.active = obj
 
 
-def array2bones(bones, num):
+'''def array2bones(bones, num):
     armature = bpy.data.armatures.new(f'Armature{num}')
     rig = bpy.data.objects.new(f'Armature{num}', armature)
     bpy.context.scene.collection.objects.link(rig)
@@ -167,7 +167,7 @@ def array2bones(bones, num):
             parent_bone = current_bone
 
     bpy.ops.object.editmode_toggle()
-
+'''
 
 def centr_mesh(c=2):
     objs = [ob for ob in bpy.context.scene.objects if ob.type == "MESH" and "Avatar" in ob.name]
@@ -299,6 +299,13 @@ def update_pose(self, context):
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
         gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'] = gl.ACT_GEN[num_slider]
 
+def update_shading(self, context):
+    if bpy.context.window_manager.gdna_tool.gdna_shading == True:
+        for face in bpy.context.active_object.data.polygons:
+            face.use_smooth = True
+    else:
+        for face in bpy.context.active_object.data.polygons:
+            face.use_smooth = False
 
 def action_retrieve(avatar_id, eval_mode, obj, num_slider, pose=False, x=0):
     load_tmp(avatar_id, eval_mode, obj.expname)
@@ -326,36 +333,43 @@ def abil_retrieve(mod):
 
 
 def abil_generate(mod):
-    if (bpy.context.active_object is None
-            or bpy.context.active_object.select_get() == False
-            or index_Gen[bpy.context.active_object][mod] == False
-            or twrv.is_alive()):
+    try:
+        if (bpy.context.active_object is None
+                or bpy.context.active_object.select_get() == False
+                or index_Gen[bpy.context.active_object][mod] == False
+                or twrv.is_alive()):
+            return False
+        else:
+            return True
+    except:
+        print('Qui')
         return False
-    else:
-        return True
-
 
 def abil_generate_pose(mod):
-    if ((bpy.context.active_object is None)
-            or (bpy.context.active_object.select_get() == False)
-            or (index_Gen[bpy.context.active_object][mod] == False
-                and int(memory_slider[bpy.context.active_object]["Slider"]) >= int(
-                        bpy.context.window_manager.gdna_tool.gdna_n_pose))
-            or twrv.is_alive()):
+    try:
+        if ((bpy.context.active_object is None)
+                or (bpy.context.active_object.select_get() == False)
+                or (index_Gen[bpy.context.active_object][mod] == False
+                    and int(memory_slider[bpy.context.active_object]["Slider"]) >= int(
+                            bpy.context.window_manager.gdna_tool.gdna_n_pose))
+                or twrv.is_alive()):
+            return False
+        else:
+            return True
+    except:
         return False
-    else:
-        return True
-
 
 def abil_slider(mod):
-    if (bpy.context.active_object is None
-            or bpy.context.active_object.select_get() == False
-            or (Last[bpy.context.active_object] != mod)
-            or (twrv.is_alive() and bpy.context.active_object != last_obj)):
+    try:
+        if (bpy.context.active_object is None
+                or bpy.context.active_object.select_get() == False
+                or (Last[bpy.context.active_object] != mod)
+                or (twrv.is_alive() and bpy.context.active_object != last_obj)):
+            return False
+        else:
+            return True
+    except:
         return False
-    else:
-        return True
-
 
 # Property groups for UI
 class GDNA_Properties(PropertyGroup):
@@ -375,6 +389,15 @@ class GDNA_Properties(PropertyGroup):
         ],
         default='20'
     )
+    gdna_remesh_mode: EnumProperty(
+        items=[
+            ('BLOCKS', 'BLOCKS', 'BLOCKS', '', 0),
+            ('SMOOTH', 'SMOOTH', 'SMOOTH', '', 1),
+            ('SHARP', 'SHARP', 'SHARP', '', 2),
+            ('VOXEL', 'VOXEL', 'VOXEL', '', 3)
+        ],
+        default='BLOCKS'
+    )
     gdna_z_shape: IntProperty(name="Slider Z Shape", default=0, min=0, max=10, update=update_z_shape)
     gdna_scale: IntProperty(name="Slider Scale", default=0, min=0, max=40, update=update_scale)
     gdna_pose: IntProperty(name="Slider Pose", default=0, min=-20, max=20)
@@ -383,8 +406,10 @@ class GDNA_Properties(PropertyGroup):
     gdna_pose3: IntProperty(name="Slider Pose", default=0, min=-30, max=30, update=update_pose)
 
     gdna_n_models: IntProperty(name="number models generation", default=1, min=0, max=100)
+    gdna_decimate_ratio: FloatProperty(name="decimate ratior", default=0.5, min=0, max=1)
+    gdna_octree_depth: IntProperty(name="octree depth", default=4, min=1, max=10)
     gdna_seed: IntProperty(name="seed", default=1, min=0, max=100)
-
+    gdna_shading: BoolProperty(name="shading", description="Smooth Shading", default=True, update=update_shading)
     path: StringProperty(
         name="",
         description="Choose a directory:",
@@ -448,7 +473,7 @@ class GDNA_Gen_Shape(bpy.types.Operator):
         # mette a 0 lo slider se non è stato ancora modificato
         if not (bpy.context.active_object in GDNA_Gen_Shape.bl_slider_val):
             bpy.context.window_manager.gdna_tool.gdna_z_shape = 0
-        #####################################################################################################
+
         if bpy.context.active_object != GDNA_Gen_Shape.bl_Last_OS:
             GDNA_Gen_Shape.bl_Last_OS = bpy.context.active_object
             bpy.context.window_manager.gdna_tool.gdna_z_shape = GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object]
@@ -734,12 +759,15 @@ class GDNA_Reset(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        if (bpy.context.active_object is None
-                or bpy.context.active_object.select_get() == False
-                or twrv is not None and twrv.is_alive()):
+        try:
+            if (bpy.context.active_object is None
+                    or bpy.context.active_object.select_get() == False
+                    or twrv is not None and twrv.is_alive()):
+                return False
+            else:
+                return True
+        except:
             return False
-        else:
-            return True
 
     def execute(self, context):
         global objR, objT, last_obj
@@ -784,26 +812,77 @@ class Organize(bpy.types.Operator):
     bl_idname = "object.organize"
     bl_label = "Organize"
 
+    @classmethod
+    def poll(cls, context):
+        if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
+            return False
+        else:
+            return True
+
     def execute(self, context):
         centr_mesh()
-
         return {'FINISHED'}
 
 
-class Optimize(bpy.types.Operator):
-    bl_idname = "object.optimize"
-    bl_label = "Optimize"
+class Shading(bpy.types.Operator):
+    bl_idname = "object.shading"
+    bl_label = "Smooth Shading"
+
+    @classmethod
+    def poll(cls, context):
+        if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
+            return False
+        else:
+            return True
 
     def execute(self, context):
         # Enable smooth shading on an mesh object
         for face in bpy.context.active_object.data.polygons:
             face.use_smooth = True
+        return {'FINISHED'}
 
+
+class Decimate(bpy.types.Operator):
+    bl_idname = "object.decimate"
+    bl_label = "Decimate"
+
+    @classmethod
+    def poll(cls, context):
+        if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
+            return False
+        else:
+            return True
+
+    def execute(self, context):
         # Enable Decimate Modifier
         modifier = bpy.context.active_object.modifiers.new('DecimateMod', 'DECIMATE')
         # ratio definisce il rapporto di riduzione dei poligoni della mesh ed assume un valore compreso tra 0-1;
         # 0.5 significa che riduco della metà i poligoni della mesh
-        modifier.ratio = 0.5
+        modifier.ratio = bpy.context.window_manager.gdna_tool.gdna_decimate_ratio
+        return {'FINISHED'}
+
+
+class Remesh(bpy.types.Operator):
+    bl_idname = "object.remesh"
+    bl_label = "Octree"
+
+    @classmethod
+    def poll(cls, context):
+
+        if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
+            return False
+        else:
+            return True
+
+    def execute(self, context):
+        # Enable Decimate Modifier
+        remesh_modifier = bpy.context.active_object.modifiers.new("Remesh", 'REMESH')
+
+        # Imposta il tipo di remesh su "Octree"
+        remesh_modifier.mode = bpy.context.window_manager.gdna_tool.gdna_remesh_mode
+
+        # Imposta la profondità Octree Depth
+        remesh_modifier.octree_depth = bpy.context.window_manager.gdna_tool.gdna_octree_depth
 
         return {'FINISHED'}
 
@@ -863,11 +942,47 @@ class GDNA_PT_Model(bpy.types.Panel):
 class GDNA_PT_Edit(bpy.types.Panel):
     bl_label = "Edit"
     bl_category = "GDNA"
+    # bl_idname = "GDNA"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
+    label = ''
+    global loading
+
+    '''@classmethod
+    def poll(cls, context): 
+        if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
+            GDNA_PT_Edit.bl_label='No Avatar Selected'
+            print('GDNA_PT_Edit.label', GDNA_PT_Edit.label)
+        else:
+            GDNA_PT_Edit.bl_label=bpy.context.active_object.name
+            print('GDNA_PT_Edit.label', GDNA_PT_Edit.label)
+        return {'FINISHED'}'''
 
     def draw(self, context):
         layout = self.layout
+        col = layout.column(align=True)
+        row = col.row(align=True)
+        try:
+            index_Gen[bpy.context.active_object]
+            if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
+                layout.enabled = False
+            else:
+                layout.enabled = True
+            if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
+                self.label = 'No Avatar Selected'
+            else:
+                self.label = bpy.context.active_object.name
+            # self.bl_label = ('Edit: ' + self.label)
+            # GDNA_PT_Edit.bl_label='No Avatar Selected
+            # print('self.bl_label', self.bl_label)
+
+        except:
+            self.label = 'No Avatar Selected'
+            layout.enabled = False
+
+        row.label(text=self.label)
+        row.label(text=loading)
+
         ##Shape##
         col = layout.box().column(align=True)
         split = col.split(factor=0.21, align=True)
@@ -881,14 +996,30 @@ class GDNA_PT_Edit(bpy.types.Panel):
         row.operator("object.gen_shape", text="Generate", icon="PLUS")
         # abilitazione Retrieve
         row.operator("object.ret_shape", text="Retrieve", icon="RECOVER_LAST")
+        col.separator()
+
+        ##Details##
+        '''col = layout.box().column(align=True)
+        split = col.split(factor=0.21, align=False)
+    #Slider      
+        split.enabled = abil_slider("Details")
+        split.label(text="Details:")             
+        split.prop(context.window_manager.gdna_tool, "gdna_z_details", text = "", slider = False)       
+    #Generate
+        col.separator()
+        row = col.row(align=True)
+        row.operator("object.gen_details", text="Generate", icon = "PLUS")               
+    #Retrieve  
+        row.operator("object.ret_details", text="Retrieve", icon = "RECOVER_LAST") 
+        col.separator()'''
 
         ##Scale##
         col = layout.box().column(align=True)
         split = col.split(factor=0.21, align=True)
         # Slider
         split.enabled = abil_slider("Scale")
-        split.label(text="Scale:")
-        split.prop(context.window_manager.gdna_tool, "gdna_scale", text="", slider=False)
+        split.label(text="Size:")
+        split.prop(context.window_manager.gdna_tool, "gdna_scale", text='', slider=False)
         # Abilitazione Generate
         col.separator()
         row = col.row(align=True)
@@ -903,19 +1034,21 @@ class GDNA_PT_Edit(bpy.types.Panel):
         # Slider
         split.enabled = abil_slider("Pose")
         split.label(text="Pose:")
-
-        if (bpy.context.active_object == None or memory_slider[bpy.context.active_object]["Slider"] == "0"):
+        try:
+            if (bpy.context.active_object == None or memory_slider[bpy.context.active_object]["Slider"] == "0"):
+                split.prop(context.window_manager.gdna_tool, "gdna_pose", text="", slider=False)
+            elif (memory_slider[bpy.context.active_object]["Slider"] == "20"):
+                split.prop(context.window_manager.gdna_tool, "gdna_pose1", text="(20)", slider=False)
+            elif (memory_slider[bpy.context.active_object]["Slider"] == "40"):
+                split.prop(context.window_manager.gdna_tool, "gdna_pose2", text="(40)", slider=False)
+            elif (memory_slider[bpy.context.active_object]["Slider"] == "60"):
+                split.prop(context.window_manager.gdna_tool, "gdna_pose3", text="(60)", slider=False)
+        except:
             split.prop(context.window_manager.gdna_tool, "gdna_pose", text="", slider=False)
-        elif (memory_slider[bpy.context.active_object]["Slider"] == "20"):
-            split.prop(context.window_manager.gdna_tool, "gdna_pose1", text="(20)", slider=False)
-        elif (memory_slider[bpy.context.active_object]["Slider"] == "40"):
-            split.prop(context.window_manager.gdna_tool, "gdna_pose2", text="(40)", slider=False)
-        elif (memory_slider[bpy.context.active_object]["Slider"] == "60"):
-            split.prop(context.window_manager.gdna_tool, "gdna_pose3", text="(60)", slider=False)
-
-        # N. Pose
+            # N. Pose
         col.separator()
         row = col.row(align=True)
+        # row.enabled = abil_generate_pose("Pose")
         row.prop(context.window_manager.gdna_tool, "gdna_n_pose", expand=True)
 
         # Generate
@@ -934,30 +1067,62 @@ class GDNA_PT_Edit(bpy.types.Panel):
 class GDNA_PT_Utility(bpy.types.Panel):
     bl_label = "Utility"
     bl_category = "GDNA"
+    # bl_idname = "GDNA"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
 
     def draw(self, context):
         layout = self.layout
+        try:
+            index_Gen[bpy.context.active_object]
+            if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
+                layout.enabled = False
+            else:
+                layout.enabled = True
+        except:
+            layout.enabled = False
+
         layout.operator("object.organize", icon='TRACKER')
-        layout.operator("object.optimize", icon='SYSTEM')
+        # layout.separator()
+        col = layout.column(align=True)
+        split = col.split(factor=0.45, align=False)
+        '''if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
+            split.enabled=False
+        else:
+            split.enabled=True'''
+        split.label(text='Remesh mode:')
+        split.prop(context.window_manager.gdna_tool, "gdna_remesh_mode", text='')
+        # col = layout.column(align=True)
+
+        split = col.split(factor=0.50, align=True)
+        '''if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
+            split.enabled=False
+        else:
+            split.enabled=True'''
+
+        split.operator("object.remesh", text="Remesh", icon='MOD_DECIM')
+        split.label(text="Depth:")
+        split.prop(context.window_manager.gdna_tool, "gdna_octree_depth", text="", slider=True)
+
+        col = layout.column(align=True)
+        split = col.split(factor=0.50, align=True)
+        '''if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
+            split.enabled=False
+        else:
+            split.enabled=True'''
+        # split.label(text="Decimate Ratio:")
+        split.operator("object.decimate", text="Decimate", icon='MOD_DECIM')
+        split.label(text="Ratio:")
+        split.prop(context.window_manager.gdna_tool, "gdna_decimate_ratio", text="", slider=True)
+
+        # layout.operator("object.shading",text="Smooth Shading", icon = 'MOD_DECIM')
+        layout.prop(context.window_manager.gdna_tool, "gdna_shading", text="Smooth Shading")
 
         layout.label(text="Export Avatar:")
         col = layout.column(align=True)
         col.prop(context.window_manager.gdna_tool, "path", text="")
         layout.operator("object.save", icon='IMPORT')
-        layout.separator()
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator("object.organize", icon='TRACKER')
-        layout.operator("object.optimize", icon='SYSTEM')
-
-        layout.label(text="Export Avatar:")
-        col = layout.column(align=True)
-        col.prop(context.window_manager.gdna_tool, "path", text="")
-        layout.operator("object.save", icon='IMPORT')
-        layout.separator()
+        # layout.separator()
 
 
 classes = [
@@ -971,7 +1136,9 @@ classes = [
     GDNA_Ret_Pose,
     GDNA_Reset,
     Organize,
-    Optimize,
+    Shading,
+    Decimate,
+    Remesh,
     Save,
     GDNA_PT_Model,
     GDNA_PT_Edit,

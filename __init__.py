@@ -113,8 +113,8 @@ def array2mesh(verts, faces, replace=False):
         n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
         num = len(n_avatars) if len(n_avatars) != 0 else 0'''
     if not replace:
-        mesh = bpy.data.meshes.new(f'Avatar_{num}')
-        obj = bpy.data.objects.new(f'Avatar_{num}', mesh)
+        mesh = bpy.data.meshes.new(f'Avatar_{str(num)}')
+        obj = bpy.data.objects.new(f'Avatar_{str(num)}', mesh)
         mesh.from_pydata(verts.tolist(), [], faces.tolist())
         mesh.update(calc_edges=True)  # Update mesh with new data
         bpy.context.collection.objects.link(obj)  # Link to scene
@@ -124,6 +124,7 @@ def array2mesh(verts, faces, replace=False):
         Last[bpy.context.active_object] = None
         index_Gen[bpy.context.active_object] = zero.copy()
         memory_slider[bpy.context.active_object] = zero_s.copy()
+        memory_shading[bpy.context.active_object] = False
         last_obj = bpy.context.active_object
         num += 1
         # print(index_Gen)
@@ -186,7 +187,7 @@ def centr_mesh(c=2):
 def show_progress(area, process, obj, avatar_id=None):
     if not process.is_alive():
         area.header_text_set(None)
-        print('Created!')
+        # print('Created!')
         if 'sample' in process._target.__name__:
             gl.ACT_GEN = process.join()
             # print(gl.MESH_GEN)
@@ -218,7 +219,7 @@ def show_progress(area, process, obj, avatar_id=None):
 
 def generate_mesh(process):
     if generate_mesh.n_mesh_gen == len(gl.MESH_GEN) and not process.is_alive():
-        print('Mesh generated!')
+        print('Avatar(s) generated!')
         return
     else:
         while generate_mesh.n_mesh_gen < len(gl.MESH_GEN):

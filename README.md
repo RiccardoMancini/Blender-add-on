@@ -7,19 +7,17 @@ Developing an add-on for Blender that incorporates the gDNA neural network to ge
 - Linux (OS where gDNA network was implemented)
 - GPU drivers updated
 
-## How to install
-This section is a detailed guide for use developed add-on in Blender. Before that, you need to download this repository in local.
+## Installation Instructions
+This section provides a comprehensive guide for using the developed add-on in Blender. Before proceeding, make sure you have downloaded this repository to your local machine.
 
-### Setup conda env and connect it with Blender
-- First of all you need to set up an Anaconda virtual environment with all the required libraries, dependencies and model weights. Then you must link the created environment to the Blender Python interpreter.
-A bash script 'config_env.sh' has been devoloped which automates this whole process.
+### Setting up Conda Environment and Linking with Blender
+- To begin, you'll need to create an Anaconda virtual environment with all the necessary libraries, dependencies, and model weights. Next, you must establish a connection between this environment and the Blender Python interpreter.
 
-- So it will be enough to open a terminal in the directory of the downloaded repository where the 'config_env.sh' file resides and run the following command:
+- We have provided a convenient bash script called 'config_env.sh' that automates this entire process for you. To get started, open a terminal in the directory where you downloaded the repository and execute the following command:
 ```source config_env.sh```
 
 
-### Install add-on in Blender
-At this point you need to compress the entire project folder (.zip), so you can install the add-on from Blender's 'Preferences', inside Blender add-ons section, and start using it.
-
+### Installing the Add-on in Blender
+Now that you've completed the environment setup, it's time to install the add-on in Blender. To do this, compress the entire project folder into a .zip file. Then, within Blender's 'Preferences' menu, navigate to the add-ons section, and install the add-on from the .zip file. You're now ready to start using it.
 
 

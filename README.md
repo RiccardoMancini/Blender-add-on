@@ -1,23 +1,22 @@
 # Progetto CG
 ## Task
-Realizzare un componente aggiuntivo per Blender che integri la rete neurale gDNA per generare avatar 3D in diverse pose e con diversi abiti.
+Developing an add-on for Blender that incorporates the gDNA neural network to generate 3D avatars in various poses and outfits.
 
-## Setup environment
-Place in 'gdna' directory and exec these commands from terminal:
+## How to install
+To use the add-on:
+- First of all you need to configure a Conda virtual environment with all the required libraries, dependencies, and model weights.
+- Once that's done, you must link the created environment to the Blender Python interpreter.
+- Finally, you can install the add-on from Blender's "Preferences" and start using it.
 
-```
-conda create -n gdna python=3.10 -y
-conda activate gdna
-conda install pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia -y
-conda install cudatoolkit -y
-conda install -c fvcore -c iopath -c conda-forge fvcore iopath -y
-conda install pytorch3d -c pytorch3d -y
-conda env update --file env.yml
-python setup.py install
-```
+Below, we will provide a detailed breakdown of these steps. Before that you need to download this repository in local.
 
-## Setup environment 2.0
-TODO: mettere env.yml nella root dir del progetto e testare se la rete funziona anche senza setup.py
+### Setup conda env
+
+1. 
+
+1. Download the zip from this Git and installing the add-on file inside Blender add-ons section
+2. Download the weights from Pix2Vox-A
+3. Insert in the add-on (Tools: Pix2Blender): the Input Image folder (3 are provided in this Git to test it), the Core folder and the Weights file.
 ```
 source config_env.sh
 ```

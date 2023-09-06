@@ -1,13 +1,13 @@
 import glob
 
 bl_info = {
-    "name": "GDNA for Blender",
+    "name": "gDNA for Blender",
     "author": "Arment Pelivani, Enrico Tarsi, Riccardo Mancini",
     "version": (2, 0, 0),
     "blender": (3, 6, 0),
     "location": "Viewport > Right panel",
     "description": "gDNA for Blender",
-    "category": "GDNA"}
+    "category": "gDNA"}
 
 import bpy
 from bpy.props import BoolProperty, EnumProperty, FloatProperty, PointerProperty, IntProperty, StringProperty
@@ -48,6 +48,7 @@ zero = {"Shape": True, "Scale": True, "Pose": True}
 index_Gen = {}
 zero_s = {"Slider": "0", "Val": 0}
 memory_slider = {}
+memory_shading = {}
 num = 0
 
 
@@ -305,9 +306,11 @@ def update_pose(self, context):
 
 def update_shading(self, context):
     if bpy.context.window_manager.gdna_tool.gdna_shading == True:
+        memory_shading[bpy.context.active_object] = True
         for face in bpy.context.active_object.data.polygons:
             face.use_smooth = True
     else:
+        memory_shading[bpy.context.active_object] = False
         for face in bpy.context.active_object.data.polygons:
             face.use_smooth = False
 
@@ -417,7 +420,8 @@ class GDNA_Properties(PropertyGroup):
     gdna_decimate_ratio: FloatProperty(name="decimate ratior", default=0.5, min=0, max=1)
     gdna_octree_depth: IntProperty(name="octree depth", default=4, min=1, max=10)
     gdna_seed: IntProperty(name="seed", default=1, min=0, max=100)
-    gdna_shading: BoolProperty(name="shading", description="Smooth Shading", default=True, update=update_shading)
+    gdna_shading: BoolProperty(name="shading", description="Smooth Shading",default = False, update=update_shading)
+
     path: StringProperty(
         name="",
         description="Choose a directory:",
@@ -432,13 +436,21 @@ class GDNA_Start(bpy.types.Operator):
     bl_label = "Start"
     bl_description = ("")
     bl_options = {'REGISTER', 'UNDO'}
+    bl_Last_OS = None  # attributo con l'ultimo oggetto selezionato
 
     @classmethod
     def poll(cls, context):
-        if twrv is not None and twrv.is_alive():
+        try:
+            if bpy.context.active_object != GDNA_Start.bl_Last_OS:
+                GDNA_Start.bl_Last_OS = bpy.context.active_object
+                bpy.context.window_manager.gdna_tool.gdna_shading = memory_shading[bpy.context.active_object]
+
+            if twrv is not None and twrv.is_alive():
+                return False
+            else:
+                return True
+        except:
             return False
-        else:
-            return True
 
     def execute(self, context):
         global objR, objT, twrv
@@ -929,8 +941,8 @@ dix = {"Shape": GDNA_Gen_Shape.bl_objects,
 
 # UI
 class GDNA_PT_Model(bpy.types.Panel):
-    bl_label = "GDNA Model"
-    bl_category = "GDNA"
+    bl_label = "gDNA Model"
+    bl_category = "gDNA"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
 
@@ -953,8 +965,7 @@ class GDNA_PT_Model(bpy.types.Panel):
 
 class GDNA_PT_Edit(bpy.types.Panel):
     bl_label = "Edit"
-    bl_category = "GDNA"
-    # bl_idname = "GDNA"
+    bl_category = "gDNA"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     label = ''
@@ -1066,8 +1077,7 @@ class GDNA_PT_Edit(bpy.types.Panel):
 
 class GDNA_PT_Utility(bpy.types.Panel):
     bl_label = "Utility"
-    bl_category = "GDNA"
-    # bl_idname = "GDNA"
+    bl_category = "gDNA"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
 
@@ -1116,7 +1126,7 @@ class GDNA_PT_Utility(bpy.types.Panel):
         split.prop(context.window_manager.gdna_tool, "gdna_decimate_ratio", text="", slider=True)
 
         # layout.operator("object.shading",text="Smooth Shading", icon = 'MOD_DECIM')
-        layout.prop(context.window_manager.gdna_tool, "gdna_shading", text="Smooth Shading")
+        layout.prop(context.window_manager.gdna_tool, "gdna_shading", text = "Smooth Shading")
 
         layout.label(text="Export Avatar:")
         col = layout.column(align=True)

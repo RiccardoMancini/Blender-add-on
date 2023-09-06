@@ -48,6 +48,7 @@ zero = {"Shape": True, "Scale": True, "Pose": True}
 index_Gen = {}
 zero_s = {"Slider": "0", "Val": 0}
 memory_slider = {}
+num = 0
 
 
 class ThreadWithReturnValue(Thread):
@@ -104,12 +105,12 @@ def get_n_avatar():
 
 
 def array2mesh(verts, faces, replace=False):
-    global last_obj
+    global last_obj, num
     # n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
-    num = get_n_avatar()
+    '''num = get_n_avatar()
     if num == 0:
         n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
-        num = len(n_avatars) if len(n_avatars) != 0 else 0
+        num = len(n_avatars) if len(n_avatars) != 0 else 0'''
     if not replace:
         mesh = bpy.data.meshes.new(f'Avatar_{num}')
         obj = bpy.data.objects.new(f'Avatar_{num}', mesh)
@@ -123,6 +124,7 @@ def array2mesh(verts, faces, replace=False):
         index_Gen[bpy.context.active_object] = zero.copy()
         memory_slider[bpy.context.active_object] = zero_s.copy()
         last_obj = bpy.context.active_object
+        num += 1
         # print(index_Gen)
 
     else:
@@ -168,6 +170,7 @@ def array2mesh(verts, faces, replace=False):
 
     bpy.ops.object.editmode_toggle()
 '''
+
 
 def centr_mesh(c=2):
     objs = [ob for ob in bpy.context.scene.objects if ob.type == "MESH" and "Avatar" in ob.name]
@@ -222,7 +225,7 @@ def generate_mesh(process):
                        gl.MESH_GEN[generate_mesh.n_mesh_gen]['faces'])
             generate_mesh.n_mesh_gen += 1
 
-        return 1.5
+        return 0.2
 
 
 def update_z_shape(self, context):
@@ -299,6 +302,7 @@ def update_pose(self, context):
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
         gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'] = gl.ACT_GEN[num_slider]
 
+
 def update_shading(self, context):
     if bpy.context.window_manager.gdna_tool.gdna_shading == True:
         for face in bpy.context.active_object.data.polygons:
@@ -306,6 +310,7 @@ def update_shading(self, context):
     else:
         for face in bpy.context.active_object.data.polygons:
             face.use_smooth = False
+
 
 def action_retrieve(avatar_id, eval_mode, obj, num_slider, pose=False, x=0):
     load_tmp(avatar_id, eval_mode, obj.expname)
@@ -342,8 +347,9 @@ def abil_generate(mod):
         else:
             return True
     except:
-        print('Qui')
+        # print('Qui')
         return False
+
 
 def abil_generate_pose(mod):
     try:
@@ -359,6 +365,7 @@ def abil_generate_pose(mod):
     except:
         return False
 
+
 def abil_slider(mod):
     try:
         if (bpy.context.active_object is None
@@ -370,6 +377,7 @@ def abil_slider(mod):
             return True
     except:
         return False
+
 
 # Property groups for UI
 class GDNA_Properties(PropertyGroup):
@@ -480,19 +488,20 @@ class GDNA_Gen_Shape(bpy.types.Operator):
 
             if twrv is not None and not twrv.is_alive():
                 # load avatar weights on click
-                parse_eval_mode = {"Shape": "z_shape", "Scale": "betas", "Pose": "thetas"}
-                eval_mode = [key for key, val in index_Gen[bpy.context.active_object].items() if val == False]
-                avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
-                m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
-                if len(m) != 0:
-                    obj = objR if m[0] == 'm1' else objT
-                    print('Qui!')
-                    if len(eval_mode) != 0:
-                        load_tmp(avatar_id, parse_eval_mode[eval_mode[0]], obj.expname)
-                    else:
-                        load_tmp(avatar_id, 'sample', obj.expname)
+                if bpy.context.active_object in index_Gen:
+                    parse_eval_mode = {"Shape": "z_shape", "Scale": "betas", "Pose": "thetas"}
+                    eval_mode = [key for key, val in index_Gen[bpy.context.active_object].items() if val == False]
+                    avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
+                    m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
+                    if len(m) != 0:
+                        obj = objR if m[0] == 'm1' else objT
+                        # print('Qui!')
+                        if len(eval_mode) != 0:
+                            load_tmp(avatar_id, parse_eval_mode[eval_mode[0]], obj.expname)
+                        else:
+                            load_tmp(avatar_id, 'sample', obj.expname)
 
-                    last_obj = bpy.context.active_object
+                        last_obj = bpy.context.active_object
 
         return abil_generate("Shape")
 
@@ -588,22 +597,25 @@ class GDNA_Gen_Pose(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        if bpy.context.active_object != GDNA_Gen_Pose.bl_Last_OS:
-            GDNA_Gen_Pose.bl_Last_OS = bpy.context.active_object
-            # print(memory_slider)
-            if memory_slider[bpy.context.active_object]["Slider"] == "20":
-                bpy.context.window_manager.gdna_tool.gdna_pose1 = memory_slider[bpy.context.active_object]["Val"]
-                bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
-            elif memory_slider[bpy.context.active_object]["Slider"] == "40":
-                bpy.context.window_manager.gdna_tool.gdna_pose2 = memory_slider[bpy.context.active_object]["Val"]
-                bpy.context.window_manager.gdna_tool.gdna_n_pose = "40"
-            elif memory_slider[bpy.context.active_object]["Slider"] == "60":
-                bpy.context.window_manager.gdna_tool.gdna_pose3 = memory_slider[bpy.context.active_object]["Val"]
-                bpy.context.window_manager.gdna_tool.gdna_n_pose = "60"
-            elif (memory_slider[bpy.context.active_object][
-                      "Slider"] == "0"):  # quando crea un nuovo oggetto il selettore di n_pose è su 40
-                bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
-        return abil_generate_pose("Pose")
+        try:
+            if bpy.context.active_object != GDNA_Gen_Pose.bl_Last_OS:
+                GDNA_Gen_Pose.bl_Last_OS = bpy.context.active_object
+                # print(memory_slider)
+                if memory_slider[bpy.context.active_object]["Slider"] == "20":
+                    bpy.context.window_manager.gdna_tool.gdna_pose1 = memory_slider[bpy.context.active_object]["Val"]
+                    bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
+                elif memory_slider[bpy.context.active_object]["Slider"] == "40":
+                    bpy.context.window_manager.gdna_tool.gdna_pose2 = memory_slider[bpy.context.active_object]["Val"]
+                    bpy.context.window_manager.gdna_tool.gdna_n_pose = "40"
+                elif memory_slider[bpy.context.active_object]["Slider"] == "60":
+                    bpy.context.window_manager.gdna_tool.gdna_pose3 = memory_slider[bpy.context.active_object]["Val"]
+                    bpy.context.window_manager.gdna_tool.gdna_n_pose = "60"
+                elif (memory_slider[bpy.context.active_object][
+                          "Slider"] == "0"):  # quando crea un nuovo oggetto il selettore di n_pose è su 40
+                    bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
+            return abil_generate_pose("Pose")
+        except:
+            return False
 
     def execute(self, context):
         global objR, objT, twrv, last_obj
@@ -946,17 +958,6 @@ class GDNA_PT_Edit(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     label = ''
-    global loading
-
-    '''@classmethod
-    def poll(cls, context): 
-        if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
-            GDNA_PT_Edit.bl_label='No Avatar Selected'
-            print('GDNA_PT_Edit.label', GDNA_PT_Edit.label)
-        else:
-            GDNA_PT_Edit.bl_label=bpy.context.active_object.name
-            print('GDNA_PT_Edit.label', GDNA_PT_Edit.label)
-        return {'FINISHED'}'''
 
     def draw(self, context):
         layout = self.layout
@@ -981,7 +982,6 @@ class GDNA_PT_Edit(bpy.types.Panel):
             layout.enabled = False
 
         row.label(text=self.label)
-        row.label(text=loading)
 
         ##Shape##
         col = layout.box().column(align=True)

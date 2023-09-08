@@ -1,23 +1,26 @@
-# Progetto CG
-## Task
-Realizzare un componente aggiuntivo per Blender che integri la rete neurale gDNA per generare avatar 3D in diverse pose e con diversi abiti.
+# Computer Graphics 2022/23 Project: gDNA for Blender (Add-On Development)
+## Project Overview
+Our project involves the development of a Blender add-on that seamlessly integrates the gDNA neural network. This add-on enables the generation of 3D avatars in diverse poses and outfits, enhancing the capabilities of Blender.
 
-## Setup environment
-Place in 'gdna' directory and exec these commands from terminal:
+## System Requirements
+To successfully use this add-on, your system must meet the following requirements:
+- Anaconda Distribution
+- Linux OS (where the gDNA network implementation is supported)
+- Up-to-date GPU drivers
 
-```
-conda create -n gdna python=3.10 -y
-conda activate gdna
-conda install pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia -y
-conda install cudatoolkit -y
-conda install -c fvcore -c iopath -c conda-forge fvcore iopath -y
-conda install pytorch3d -c pytorch3d -y
-conda env update --file env.yml
-python setup.py install
-```
 
-## Setup environment 2.0
-TODO: mettere env.yml nella root dir del progetto e testare se la rete funziona anche senza setup.py
-```
-source config_env.sh
-```
+## Installation Instructions
+This section provides a comprehensive guide for using the developed add-on in Blender. Before proceeding, make sure you have downloaded this repository to your local machine.
+
+### Setting up Conda Environment and Linking with Blender
+- First of all, you'll need to create an Anaconda virtual environment with all the necessary libraries, dependencies, and model weights. Next, you must establish a connection between this environment and the Blender Python interpreter.
+
+- We have provided a convenient bash script called 'config_env.sh' that automates this entire process for you. To get started, open a terminal in the directory where you downloaded the repository and execute the following command:
+```source config_env.sh```
+
+
+### Installing the Add-on in Blender
+Now that you've completed the environment setup, it's time to install the add-on in Blender. To do this, compress the entire project folder into a .zip file. Then, within Blender's 'Preferences' menu, navigate to the add-ons section, and install the add-on from the .zip file. 
+You're now ready to start using developed add-on.
+
+

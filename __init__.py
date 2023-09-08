@@ -113,8 +113,8 @@ def array2mesh(verts, faces, replace=False):
         n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
         num = len(n_avatars) if len(n_avatars) != 0 else 0'''
     if not replace:
-        mesh = bpy.data.meshes.new(f'Avatar_{num}')
-        obj = bpy.data.objects.new(f'Avatar_{num}', mesh)
+        mesh = bpy.data.meshes.new(f'Avatar_{str(num)}')
+        obj = bpy.data.objects.new(f'Avatar_{str(num)}', mesh)
         mesh.from_pydata(verts.tolist(), [], faces.tolist())
         mesh.update(calc_edges=True)  # Update mesh with new data
         bpy.context.collection.objects.link(obj)  # Link to scene
@@ -124,6 +124,7 @@ def array2mesh(verts, faces, replace=False):
         Last[bpy.context.active_object] = None
         index_Gen[bpy.context.active_object] = zero.copy()
         memory_slider[bpy.context.active_object] = zero_s.copy()
+        memory_shading[bpy.context.active_object] = False
         last_obj = bpy.context.active_object
         num += 1
         # print(index_Gen)
@@ -186,7 +187,7 @@ def centr_mesh(c=2):
 def show_progress(area, process, obj, avatar_id=None):
     if not process.is_alive():
         area.header_text_set(None)
-        print('Created!')
+        # print('Created!')
         if 'sample' in process._target.__name__:
             gl.ACT_GEN = process.join()
             # print(gl.MESH_GEN)
@@ -218,7 +219,7 @@ def show_progress(area, process, obj, avatar_id=None):
 
 def generate_mesh(process):
     if generate_mesh.n_mesh_gen == len(gl.MESH_GEN) and not process.is_alive():
-        print('Mesh generated!')
+        print('Avatar(s) generated!')
         return
     else:
         while generate_mesh.n_mesh_gen < len(gl.MESH_GEN):
@@ -386,17 +387,17 @@ def abil_slider(mod):
 class GDNA_Properties(PropertyGroup):
     gdna_model: EnumProperty(
         items=[
-            ('model_1', 'Model 1', 'Renderpeople weights', '', 0),
-            ('model_2', 'Model 2', 'Thuman weights', '', 1)
+            ('model_1', 'Model 1', 'Set Renderpeople Weights', '', 0),
+            ('model_2', 'Model 2', 'Set THuman2.0 Weights', '', 1)
         ],
         default='model_1'
     )
 
     gdna_n_pose: EnumProperty(
         items=[
-            ('20', '20', '20', '', 0),
-            ('40', '40', '40', '', 1),
-            ('60', '60', '60', '', 2)
+            ('20', '20', 'Generate 20 differents poses', '', 0),
+            ('40', '40', 'Generate 40 differents poses', '', 1),
+            ('60', '60', 'Generate 60 differents poses', '', 2)
         ],
         default='20'
     )
@@ -409,18 +410,18 @@ class GDNA_Properties(PropertyGroup):
         ],
         default='BLOCKS'
     )
-    gdna_z_shape: IntProperty(name="Slider Z Shape", default=0, min=0, max=10, update=update_z_shape)
-    gdna_scale: IntProperty(name="Slider Scale", default=0, min=0, max=40, update=update_scale)
-    gdna_pose: IntProperty(name="Slider Pose", default=0, min=-20, max=20)
-    gdna_pose1: IntProperty(name="Slider Pose", default=0, min=-10, max=10, update=update_pose)
-    gdna_pose2: IntProperty(name="Slider Pose", default=0, min=-20, max=20, update=update_pose)
-    gdna_pose3: IntProperty(name="Slider Pose", default=0, min=-30, max=30, update=update_pose)
+    gdna_z_shape: IntProperty(name="Select the Avatar Shape", default=0, min=0, max=10, update=update_z_shape)
+    gdna_scale: IntProperty(name="Select the Avatar Size", default=0, min=0, max=40, update=update_scale)
+    gdna_pose: IntProperty(name="Select the Avatar Pose", default=0, min=-20, max=20)
+    gdna_pose1: IntProperty(name="Select the Avatar Pose", default=0, min=-10, max=10, update=update_pose)
+    gdna_pose2: IntProperty(name="Select the Avatar Pose", default=0, min=-20, max=20, update=update_pose)
+    gdna_pose3: IntProperty(name="Select the Avatar Pose", default=0, min=-30, max=30, update=update_pose)
 
-    gdna_n_models: IntProperty(name="number models generation", default=1, min=0, max=100)
-    gdna_decimate_ratio: FloatProperty(name="decimate ratior", default=0.5, min=0, max=1)
-    gdna_octree_depth: IntProperty(name="octree depth", default=4, min=1, max=10)
-    gdna_seed: IntProperty(name="seed", default=1, min=0, max=100)
-    gdna_shading: BoolProperty(name="shading", description="Smooth Shading",default = False, update=update_shading)
+    gdna_n_models: IntProperty(name="Number of random Avatars to generate", default=1, min=0, max=100)
+    gdna_decimate_ratio: FloatProperty(name="Set Decimate Ratio for Decimate modifier", default=0.5, min=0, max=1)
+    gdna_octree_depth: IntProperty(name="Set Octree Depth for Remesh modifier", default=4, min=1, max=10)
+    gdna_seed: IntProperty(name="Set Seed for the Weight initialization", default=1, min=0, max=100)
+    gdna_shading: BoolProperty(name="shading", description="Enable/Disable Smooth Shading on the selected Avatar",default = False, update=update_shading)
 
     path: StringProperty(
         name="",
@@ -434,7 +435,7 @@ class GDNA_Properties(PropertyGroup):
 class GDNA_Start(bpy.types.Operator):
     bl_idname = "object.start"
     bl_label = "Start"
-    bl_description = ("")
+    bl_description = ("Add gDNA model/s with selected weights to scene")
     bl_options = {'REGISTER', 'UNDO'}
     bl_Last_OS = None  # attributo con l'ultimo oggetto selezionato
 
@@ -481,7 +482,7 @@ class GDNA_Start(bpy.types.Operator):
 class GDNA_Gen_Shape(bpy.types.Operator):
     bl_idname = "object.gen_shape"
     bl_label = "Start Shape"
-    bl_description = ("")
+    bl_description = ("Start generation of 10 differents Shapes of the selected Avatar")
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []  # lista degli oggetti su cui è stato effettuato un generate Shape
     bl_slider_val = {}  # valore dello slider di ogni oggetto presente
@@ -552,7 +553,7 @@ class GDNA_Gen_Shape(bpy.types.Operator):
 class GDNA_Gen_Scale(bpy.types.Operator):
     bl_idname = "object.gen_scale"
     bl_label = "Start Scale"
-    bl_description = ("")
+    bl_description = ("Start generation of 40 differents Sizes of the selected Avatar")
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
     bl_slider_val = {}
@@ -601,7 +602,7 @@ class GDNA_Gen_Scale(bpy.types.Operator):
 class GDNA_Gen_Pose(bpy.types.Operator):
     bl_idname = "object.gen_pose"
     bl_label = "Start Pose"
-    bl_description = ("")
+    bl_description = ("Start generation of N differents Poses of the selected Avatar")
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
     bl_slider_val = {}
@@ -672,7 +673,7 @@ class GDNA_Gen_Pose(bpy.types.Operator):
 class GDNA_Ret_Shape(bpy.types.Operator):
     bl_idname = "object.ret_shape"
     bl_label = "Retrive Shape"
-    bl_description = ("")
+    bl_description = ("Retrive the latest Shape generation for the selected Avatar")
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
 
@@ -706,7 +707,7 @@ class GDNA_Ret_Shape(bpy.types.Operator):
 class GDNA_Ret_Scale(bpy.types.Operator):
     bl_idname = "object.ret_scale"
     bl_label = "Retrive Scale"
-    bl_description = ("")
+    bl_description = ("Retrive the latest Size generation for the selected Avatar")
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
 
@@ -741,7 +742,7 @@ class GDNA_Ret_Scale(bpy.types.Operator):
 class GDNA_Ret_Pose(bpy.types.Operator):
     bl_idname = "object.ret_pose"
     bl_label = "Retrive Pose"
-    bl_description = ("")
+    bl_description = ("Retrive the latest Pose generation for the selected Avatar")
     bl_options = {'REGISTER', 'UNDO'}
     bl_objects = []
 
@@ -778,7 +779,7 @@ class GDNA_Ret_Pose(bpy.types.Operator):
 class GDNA_Reset(bpy.types.Operator):
     bl_idname = "object.reset"
     bl_label = "Total Retrive"
-    bl_description = ("")
+    bl_description = ("Return to initial Avatar generation")
     bl_options = {'REGISTER', 'UNDO'}
 
     @classmethod
@@ -835,6 +836,7 @@ class GDNA_Reset(bpy.types.Operator):
 class Organize(bpy.types.Operator):
     bl_idname = "object.organize"
     bl_label = "Organize"
+    bl_description = "Organize all Avatars in the scene"
 
     @classmethod
     def poll(cls, context):
@@ -848,7 +850,7 @@ class Organize(bpy.types.Operator):
         return {'FINISHED'}
 
 
-class Shading(bpy.types.Operator):
+'''class Shading(bpy.types.Operator):
     bl_idname = "object.shading"
     bl_label = "Smooth Shading"
 
@@ -863,12 +865,13 @@ class Shading(bpy.types.Operator):
         # Enable smooth shading on an mesh object
         for face in bpy.context.active_object.data.polygons:
             face.use_smooth = True
-        return {'FINISHED'}
+        return {'FINISHED'}'''
 
 
 class Decimate(bpy.types.Operator):
     bl_idname = "object.decimate"
     bl_label = "Decimate"
+    bl_description = "Apply the Decimate modifier to reduce the vertex/face on the selected Avatar with selected Ratio"
 
     @classmethod
     def poll(cls, context):
@@ -889,6 +892,7 @@ class Decimate(bpy.types.Operator):
 class Remesh(bpy.types.Operator):
     bl_idname = "object.remesh"
     bl_label = "Octree"
+    bl_description = "Apply the Remesh modifier set in 'remesh mode' to the selected Avatar with selected Octree Depth"
 
     @classmethod
     def poll(cls, context):
@@ -914,6 +918,7 @@ class Remesh(bpy.types.Operator):
 class Save(bpy.types.Operator):
     bl_idname = "object.save"
     bl_label = "Save"
+    bl_description = "Save selected Avatar"
 
     def execute(self, context):
         myfile = bpy.context.active_object
@@ -951,7 +956,7 @@ class GDNA_PT_Model(bpy.types.Panel):
         layout.label(text="Model:")
         layout.prop(context.window_manager.gdna_tool, "gdna_model", expand=True)
         col = layout.column(align=True)
-        row = col.row(align=True)
+        #row = col.row(align=True)
         split = col.split(factor=0.50, align=False)
         split.label(text="Number:")
         split.label(text="Seed:")
@@ -1146,7 +1151,7 @@ classes = [
     GDNA_Ret_Pose,
     GDNA_Reset,
     Organize,
-    Shading,
+    #Shading,
     Decimate,
     Remesh,
     Save,

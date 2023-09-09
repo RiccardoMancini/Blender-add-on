@@ -1,6 +1,6 @@
 # Computer Graphics 2022/23 Project: gDNA for Blender (Add-On Development)
 ## Project Overview
-Our project involves the development of a Blender add-on that seamlessly integrates the gDNA neural network. This add-on enables the generation a variety of 3D 3D human avatars with varied
+Our project involves the development of a Blender add-on that seamlessly integrates the gDNA neural network. This add-on enables the generation of 3D human avatars with varied
 identities and shapes in arbitrary poses, enhancing the capabilities of Blender.
 
 ## System Requirements

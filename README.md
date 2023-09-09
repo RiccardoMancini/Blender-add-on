@@ -1,6 +1,7 @@
 # Computer Graphics 2022/23 Project: gDNA for Blender (Add-On Development)
 ## Project Overview
-Our project involves the development of a Blender add-on that seamlessly integrates the gDNA neural network. This add-on enables the generation of 3D avatars in diverse poses and outfits, enhancing the capabilities of Blender.
+Our project involves the development of a Blender add-on that seamlessly integrates the gDNA neural network. This add-on enables the generation a variety of 3D 3D human avatars with varied
+identities and shapes in arbitrary poses, enhancing the capabilities of Blender.
 
 ## System Requirements
 To successfully use this add-on, your system must meet the following requirements:
@@ -20,7 +21,7 @@ This section provides a comprehensive guide for using the developed add-on in Bl
 
 
 ### Installing the Add-on in Blender
-Now that you've completed the environment setup, it's time to install the add-on in Blender. To do this, compress the entire project folder into a .zip file. Then, within Blender's 'Preferences' menu, navigate to the add-ons section, and install the add-on from the .zip file. 
-You're now ready to start using developed add-on.
+Now that you've completed the environment setup, it's time to install the add-on in Blender. To do this, compress the entire project folder into a .zip file. Then, within Blender's 'Preferences' menu, navigate to the add-ons section, and install the add-on from the .zip file.
+You're now ready to start using the developed add-on.
 
 

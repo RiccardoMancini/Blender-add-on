@@ -387,8 +387,8 @@ def abil_slider(mod):
 class GDNA_Properties(PropertyGroup):
     gdna_model: EnumProperty(
         items=[
-            ('model_1', 'Model 1', 'Set Renderpeople Weights', '', 0),
-            ('model_2', 'Model 2', 'Set THuman2.0 Weights', '', 1)
+            ('model_1', 'Renderpeople', 'Set Renderpeople Weights', '', 0),
+            ('model_2', 'THuman2.0', 'Set THuman2.0 Weights', '', 1)
         ],
         default='model_1'
     )

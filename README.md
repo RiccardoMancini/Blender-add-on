@@ -21,7 +21,7 @@ We have provided a convenient bash script called 'config_env.sh' that automates 
 ```source config_env.sh -c <CONDA_ENVS_PATH>/gdna -b <BLENDER_PYTHON_PATH>```
 
 Example:
-```source config_env.sh -c ~/anaconda3/envs/gdna -b ~/Scaricati/Blender/3.6```
+```source config_env.sh -c ~/anaconda3/envs/gdna -b ~/Blender/3.6```
 
 
 ### Installing the Add-on in Blender

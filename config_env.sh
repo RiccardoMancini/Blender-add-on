@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if conda info --envs | grep -q gdna;
+if conda info --envs | grep -w gdna;
   then
     echo "gdna conda env already exists!";
   else

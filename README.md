@@ -14,10 +14,12 @@ To successfully use this add-on, your system must meet the following requirement
 This section provides a comprehensive guide for using the developed add-on in Blender. Before proceeding, make sure you have downloaded this repository to your local machine.
 
 ### Setting up Conda Environment and Linking with Blender
-- First of all, you'll need to create an Anaconda virtual environment with all the necessary libraries, dependencies, and model weights. Next, you must establish a connection between this environment and the Blender Python interpreter.
+First of all, you'll need to create an Anaconda virtual environment with all the necessary libraries, dependencies, and model weights. Next, you must establish a connection between this environment and the Blender Python interpreter.
 
-- We have provided a convenient bash script called 'config_env.sh' that automates this entire process for you. To get started, open a terminal in the directory where you downloaded the repository and execute the following command:
-```source config_env.sh```
+We have provided a convenient bash script called 'config_env.sh' that automates this entire process for you. To get started, open a terminal in the directory where you downloaded the repository and execute the following command:
+```source config_env.sh -c <CONDA_ENVS_PATH>/gdna -b <BLENDER_PYTHON_PATH>```
+Example:
+```source config_env.sh -c ~/anaconda3/envs/gdna -b ~/Scaricati/BlenderSW/3.6```
 
 
 ### Installing the Add-on in Blender

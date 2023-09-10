@@ -18,6 +18,7 @@ First of all, you'll need to create an Anaconda virtual environment with all the
 
 We have provided a convenient bash script called 'config_env.sh' that automates this entire process for you. To get started, open a terminal in the directory where you downloaded the repository and execute the following command:
 ```source config_env.sh -c <CONDA_ENVS_PATH>/gdna -b <BLENDER_PYTHON_PATH>```
+
 Example:
 ```source config_env.sh -c ~/anaconda3/envs/gdna -b ~/Scaricati/BlenderSW/3.6```
 

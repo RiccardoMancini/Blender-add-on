@@ -126,12 +126,6 @@ class GDNA:
                 batch_smpl = self.data_processor.process_smpl({'smpl_params': batch['smpl_params']},
                                                               self.model.smpl_server)
 
-                '''joints, _, _, _ = self.model.sampler_bone.get_points(batch_smpl['smpl_jnts'])
-                joints = joints.cpu().numpy()
-                # joints = batch_smpl['smpl_jnts'].cpu().numpy()
-                b = {'joints': joints}
-                bones.append(b)'''
-
                 mesh_cano = self.model.extract_mesh(batch_smpl['smpl_verts_cano'], batch_smpl['smpl_tfs'], cond,
                                                     res_up=4)
                 mesh_def = self.model.deform_mesh(mesh_cano, batch_smpl['smpl_tfs'])

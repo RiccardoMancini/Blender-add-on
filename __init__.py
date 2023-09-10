@@ -3,7 +3,7 @@ import glob
 bl_info = {
     "name": "gDNA for Blender",
     "author": "Arment Pelivani, Enrico Tarsi, Riccardo Mancini",
-    "version": (2, 0, 0),
+    "version": (1, 0, 0),
     "blender": (3, 6, 0),
     "location": "Viewport > Right panel",
     "description": "gDNA for Blender",
@@ -107,11 +107,6 @@ def get_n_avatar():
 
 def array2mesh(verts, faces, replace=False):
     global last_obj, num
-    # n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
-    '''num = get_n_avatar()
-    if num == 0:
-        n_avatars = list(filter(lambda x: 'Avatar' in x.name, bpy.data.objects))
-        num = len(n_avatars) if len(n_avatars) != 0 else 0'''
     if not replace:
         mesh = bpy.data.meshes.new(f'Avatar_{str(num)}')
         obj = bpy.data.objects.new(f'Avatar_{str(num)}', mesh)
@@ -131,47 +126,14 @@ def array2mesh(verts, faces, replace=False):
 
     else:
         obj = bpy.context.view_layer.objects.active
-        num = obj.name.split('_')[-1]
-        mesh = bpy.data.meshes.new(f'Avatar_{num}')
+        n = obj.name.split('_')[-1]
+        mesh = bpy.data.meshes.new(f'Avatar_{n}')
         mesh.from_pydata(verts.tolist(), [], faces.tolist())
         mesh.update(calc_edges=True)
         obj.data = mesh
-        obj.data.name = f'Avatar_{num}'
+        obj.data.name = f'Avatar_{n}'
 
         bpy.context.view_layer.objects.active = obj
-
-
-'''def array2bones(bones, num):
-    armature = bpy.data.armatures.new(f'Armature{num}')
-    rig = bpy.data.objects.new(f'Armature{num}', armature)
-    bpy.context.scene.collection.objects.link(rig)
-
-    bpy.context.view_layer.objects.active = rig
-    bpy.ops.object.editmode_toggle()
-
-    for i, bone in enumerate(bones[:-1]):
-        # create new bone
-        current_bone = armature.edit_bones.new(f'Bone{i}')
-        # print('Head: ', bone)
-        next_bone_vector = bones[i + 1]
-        # print('Tail: ', next_bone_vector)
-        current_bone.head = bone
-        current_bone.tail = next_bone_vector
-        if i == 0:
-            parent_bone = current_bone
-        elif i == (len(bones) - 1):
-            current_bone.parent = parent_bone
-            current_bone.use_connect = True
-        else:
-            # connect
-            current_bone.parent = parent_bone
-            current_bone.use_connect = True
-
-            # save bone, its tail position (next bone will be moved to it) and quaternion rotation
-            parent_bone = current_bone
-
-    bpy.ops.object.editmode_toggle()
-'''
 
 
 def centr_mesh(c=2):
@@ -282,16 +244,18 @@ def update_pose(self, context):
     # print('Before: ', num_slider)
     if num_slider != 0 and bpy.context.active_object == last_obj and Last[bpy.context.active_object] == 'Pose':
         num_slider += x
-        if num_slider > len(gl.MESH_GEN):
+        if num_slider >= len(gl.MESH_GEN) != x*2:
             num_slider = len(gl.MESH_GEN)
-            # print('In: ', num_slider)
-            # cosi funziona per i valori dello slider > 0
+            #print(num_slider)
             if n_pose == '20':
-                bpy.context.window_manager.gdna_tool.gdna_pose1 = num_slider - x
+                bpy.context.window_manager.gdna_tool.gdna_pose1 = num_slider - x - 1
             elif n_pose == '40':
-                bpy.context.window_manager.gdna_tool.gdna_pose2 = num_slider - x
+                bpy.context.window_manager.gdna_tool.gdna_pose2 = num_slider - x - 1
             elif n_pose == '60':
-                bpy.context.window_manager.gdna_tool.gdna_pose3 = num_slider - x
+                bpy.context.window_manager.gdna_tool.gdna_pose3 = num_slider - x - 1
+
+            if num_slider - x - 1 <= 0:
+                num_slider -= 1
 
         if (n_pose == '20' and bpy.context.window_manager.gdna_tool.gdna_pose1 > 0) or \
                 (n_pose == '40' and bpy.context.window_manager.gdna_tool.gdna_pose2 > 0) or \
@@ -421,7 +385,8 @@ class GDNA_Properties(PropertyGroup):
     gdna_decimate_ratio: FloatProperty(name="Set Decimate Ratio for Decimate modifier", default=0.5, min=0, max=1)
     gdna_octree_depth: IntProperty(name="Set Octree Depth for Remesh modifier", default=4, min=1, max=10)
     gdna_seed: IntProperty(name="Set Seed for the Weight initialization", default=1, min=0, max=100)
-    gdna_shading: BoolProperty(name="shading", description="Enable/Disable Smooth Shading on the selected Avatar",default = False, update=update_shading)
+    gdna_shading: BoolProperty(name="shading", description="Enable/Disable Smooth Shading on the selected Avatar",
+                               default=False, update=update_shading)
 
     path: StringProperty(
         name="",
@@ -956,7 +921,7 @@ class GDNA_PT_Model(bpy.types.Panel):
         layout.label(text="Model:")
         layout.prop(context.window_manager.gdna_tool, "gdna_model", expand=True)
         col = layout.column(align=True)
-        #row = col.row(align=True)
+        # row = col.row(align=True)
         split = col.split(factor=0.50, align=False)
         split.label(text="Number:")
         split.label(text="Seed:")
@@ -1131,7 +1096,7 @@ class GDNA_PT_Utility(bpy.types.Panel):
         split.prop(context.window_manager.gdna_tool, "gdna_decimate_ratio", text="", slider=True)
 
         # layout.operator("object.shading",text="Smooth Shading", icon = 'MOD_DECIM')
-        layout.prop(context.window_manager.gdna_tool, "gdna_shading", text = "Smooth Shading")
+        layout.prop(context.window_manager.gdna_tool, "gdna_shading", text="Smooth Shading")
 
         layout.label(text="Export Avatar:")
         col = layout.column(align=True)
@@ -1151,7 +1116,7 @@ classes = [
     GDNA_Ret_Pose,
     GDNA_Reset,
     Organize,
-    #Shading,
+    # Shading,
     Decimate,
     Remesh,
     Save,

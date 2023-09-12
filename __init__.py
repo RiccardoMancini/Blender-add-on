@@ -38,8 +38,6 @@ sys.path.insert(1, f'{ROOT}/gdna')
 from test import GDNA
 import test as gl
 
-# Blender path where addons is installed
-# print(bpy.utils.user_resource('SCRIPTS', path='addons'))
 objR, objT, twrv, last_obj = None, None, None, None
 G = {'m1': [], 'm2': []}
 Last = {}
@@ -148,11 +146,8 @@ def centr_mesh(c=2):
 def show_progress(area, process, obj, avatar_id=None):
     if not process.is_alive():
         area.header_text_set(None)
-        # print('Created!')
         if 'sample' in process._target.__name__:
             gl.ACT_GEN = process.join()
-            # print(gl.MESH_GEN)
-            # print(gl.ACT_GEN)
             torch.cuda.empty_cache()
             for i, batch in enumerate(gl.ACT_GEN):
                 name_btch = list(batch.keys())[0]
@@ -192,11 +187,9 @@ def generate_mesh(process):
 
 
 def update_z_shape(self, context):
-    # print("shape")
     num_slider = bpy.context.window_manager.gdna_tool.gdna_z_shape
     GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
-
-    # print(num_slider)
+    
     if num_slider != 0 and bpy.context.active_object == last_obj and Last[bpy.context.active_object] == 'Shape':
         if num_slider > len(gl.MESH_GEN):
             num_slider = len(gl.MESH_GEN)
@@ -213,7 +206,6 @@ def update_scale(self, context):
     num_slider = bpy.context.window_manager.gdna_tool.gdna_scale
     GDNA_Gen_Scale.bl_slider_val[bpy.context.active_object] = num_slider
 
-    # print(num_slider)
     if num_slider != 0 and bpy.context.active_object == last_obj and Last[bpy.context.active_object] == 'Scale':
         if num_slider > len(gl.MESH_GEN):
             num_slider = len(gl.MESH_GEN)
@@ -240,12 +232,10 @@ def update_pose(self, context):
         num_slider = bpy.context.window_manager.gdna_tool.gdna_pose3
         memory_slider[bpy.context.active_object]["Val"] = num_slider
 
-    # print('Before: ', num_slider)
     if num_slider != 0 and bpy.context.active_object == last_obj and Last[bpy.context.active_object] == 'Pose':
         num_slider += x
         if num_slider >= len(gl.MESH_GEN) != x*2:
             num_slider = len(gl.MESH_GEN)
-            #print(num_slider)
             if n_pose == '20':
                 bpy.context.window_manager.gdna_tool.gdna_pose1 = num_slider - x - 1
             elif n_pose == '40':
@@ -261,7 +251,6 @@ def update_pose(self, context):
                 (n_pose == '60' and bpy.context.window_manager.gdna_tool.gdna_pose3 > 0):
             num_slider -= 1
 
-        # print('After: ', num_slider )
         array2mesh(gl.MESH_GEN[num_slider]['verts'], gl.MESH_GEN[num_slider]['faces'], True)
         avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
@@ -314,7 +303,6 @@ def abil_generate(mod):
         else:
             return True
     except:
-        # print('Qui')
         return False
 
 
@@ -423,7 +411,6 @@ class GDNA_Start(bpy.types.Operator):
         n_samples = bpy.context.window_manager.gdna_tool.gdna_n_models
         seed = bpy.context.window_manager.gdna_tool.gdna_seed
         model = bpy.context.window_manager.gdna_tool.gdna_model
-        # print(n_samples, seed, model)
         if model == 'model_1':
             objR = GDNA(seed=seed, max_samples=n_samples, expname=d_model[model])
             obj = objR
@@ -472,7 +459,6 @@ class GDNA_Gen_Shape(bpy.types.Operator):
                     m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
                     if len(m) != 0:
                         obj = objR if m[0] == 'm1' else objT
-                        # print('Qui!')
                         if len(eval_mode) != 0:
                             load_tmp(avatar_id, parse_eval_mode[eval_mode[0]], obj.expname)
                         else:
@@ -503,7 +489,6 @@ class GDNA_Gen_Shape(bpy.types.Operator):
         m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
         obj = objR if m[0] == 'm1' else objT
 
-        # print(gl.BATCH_GEN)
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
         twrv = ThreadWithReturnValue(target=obj.action_z_shape, args=(gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'],))
         twrv.start()
@@ -552,7 +537,6 @@ class GDNA_Gen_Scale(bpy.types.Operator):
         m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
         obj = objR if m[0] == 'm1' else objT
 
-        # print(gl.BATCH_GEN)
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
         twrv = ThreadWithReturnValue(target=obj.action_betas, args=(gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'],))
         twrv.start()
@@ -577,7 +561,6 @@ class GDNA_Gen_Pose(bpy.types.Operator):
         try:
             if bpy.context.active_object != GDNA_Gen_Pose.bl_Last_OS:
                 GDNA_Gen_Pose.bl_Last_OS = bpy.context.active_object
-                # print(memory_slider)
                 if memory_slider[bpy.context.active_object]["Slider"] == "20":
                     bpy.context.window_manager.gdna_tool.gdna_pose1 = memory_slider[bpy.context.active_object]["Val"]
                     bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
@@ -621,7 +604,6 @@ class GDNA_Gen_Pose(bpy.types.Operator):
         m = [k for k, v in G.items() if f'Avatar_{avatar_id}' in v]
         obj = objR if m[0] == 'm1' else objT
 
-        # print(gl.BATCH_GEN)
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
         twrv = ThreadWithReturnValue(target=obj.action_thetas,
                                      args=(gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'],
@@ -788,8 +770,6 @@ class GDNA_Reset(bpy.types.Operator):
         # action_retrieve(avatar_id, 'sample', obj, 1)
         load_tmp(avatar_id, 'sample', obj.expname)
 
-        # print(gl.MESH_GEN)
-        # print(gl.ACT_GEN)
         array2mesh(gl.MESH_GEN[0]['verts'], gl.MESH_GEN[0]['faces'], True)
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
         gl.BATCH_GEN[a[0]][f'batch_{avatar_id}'] = gl.ACT_GEN
@@ -812,24 +792,6 @@ class Organize(bpy.types.Operator):
     def execute(self, context):
         centr_mesh()
         return {'FINISHED'}
-
-
-'''class Shading(bpy.types.Operator):
-    bl_idname = "object.shading"
-    bl_label = "Smooth Shading"
-
-    @classmethod
-    def poll(cls, context):
-        if ((bpy.context.active_object == None) or (bpy.context.active_object.select_get() == False)):
-            return False
-        else:
-            return True
-
-    def execute(self, context):
-        # Enable smooth shading on an mesh object
-        for face in bpy.context.active_object.data.polygons:
-            face.use_smooth = True
-        return {'FINISHED'}'''
 
 
 class Decimate(bpy.types.Operator):
@@ -953,10 +915,6 @@ class GDNA_PT_Edit(bpy.types.Panel):
                 self.label = 'No Avatar Selected'
             else:
                 self.label = bpy.context.active_object.name
-            # self.bl_label = ('Edit: ' + self.label)
-            # GDNA_PT_Edit.bl_label='No Avatar Selected
-            # print('self.bl_label', self.bl_label)
-
         except:
             self.label = 'No Avatar Selected'
             layout.enabled = False
@@ -977,21 +935,6 @@ class GDNA_PT_Edit(bpy.types.Panel):
         # abilitazione Retrieve
         row.operator("object.ret_shape", text="Retrieve", icon="RECOVER_LAST")
         col.separator()
-
-        ##Details##
-        '''col = layout.box().column(align=True)
-        split = col.split(factor=0.21, align=False)
-    #Slider      
-        split.enabled = abil_slider("Details")
-        split.label(text="Details:")             
-        split.prop(context.window_manager.gdna_tool, "gdna_z_details", text = "", slider = False)       
-    #Generate
-        col.separator()
-        row = col.row(align=True)
-        row.operator("object.gen_details", text="Generate", icon = "PLUS")               
-    #Retrieve  
-        row.operator("object.ret_details", text="Retrieve", icon = "RECOVER_LAST") 
-        col.separator()'''
 
         ##Scale##
         col = layout.box().column(align=True)
@@ -1028,11 +971,9 @@ class GDNA_PT_Edit(bpy.types.Panel):
             # N. Pose
         col.separator()
         row = col.row(align=True)
-        # row.enabled = abil_generate_pose("Pose")
         row.prop(context.window_manager.gdna_tool, "gdna_n_pose", expand=True)
 
         # Generate
-        # col.separator()
         row = col.row(align=True)
         col.separator()
 
@@ -1065,19 +1006,11 @@ class GDNA_PT_Utility(bpy.types.Panel):
         # layout.separator()
         col = layout.column(align=True)
         split = col.split(factor=0.45, align=False)
-        '''if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
-            split.enabled=False
-        else:
-            split.enabled=True'''
         split.label(text='Remesh mode:')
         split.prop(context.window_manager.gdna_tool, "gdna_remesh_mode", text='')
-        # col = layout.column(align=True)
+        
 
         split = col.split(factor=0.50, align=True)
-        '''if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
-            split.enabled=False
-        else:
-            split.enabled=True'''
 
         split.operator("object.remesh", text="Remesh", icon='MOD_DECIM')
         split.label(text="Depth:")
@@ -1085,23 +1018,16 @@ class GDNA_PT_Utility(bpy.types.Panel):
 
         col = layout.column(align=True)
         split = col.split(factor=0.50, align=True)
-        '''if((bpy.context.active_object==None) or (bpy.context.active_object.select_get() == False)):
-            split.enabled=False
-        else:
-            split.enabled=True'''
-        # split.label(text="Decimate Ratio:")
         split.operator("object.decimate", text="Decimate", icon='MOD_DECIM')
         split.label(text="Ratio:")
         split.prop(context.window_manager.gdna_tool, "gdna_decimate_ratio", text="", slider=True)
 
-        # layout.operator("object.shading",text="Smooth Shading", icon = 'MOD_DECIM')
         layout.prop(context.window_manager.gdna_tool, "gdna_shading", text="Smooth Shading")
 
         layout.label(text="Export Avatar:")
         col = layout.column(align=True)
         col.prop(context.window_manager.gdna_tool, "path", text="")
         layout.operator("object.save", icon='IMPORT')
-        # layout.separator()
 
 
 classes = [
@@ -1115,7 +1041,6 @@ classes = [
     GDNA_Ret_Pose,
     GDNA_Reset,
     Organize,
-    # Shading,
     Decimate,
     Remesh,
     Save,
@@ -1144,14 +1069,3 @@ def unregister():
 
 if __name__ == "__main__":
     register()
-    # obj = GDNA(max_samples=5, seed=45)
-    # obj.action_sample()
-    # obj.max_samples = 20
-    # gl.ACT_GEN = obj.action_z_shape(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
-    # gl.ACT_GEN = obj.action_z_detail(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
-    # gl.ACT_GEN = obj.action_betas(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
-    # gl.ACT_GEN = obj.action_thetas(gl.BATCH_GEN[0][list(gl.BATCH_GEN[0].keys())[0]])
-
-    # For retrieving past computed mesh and features generated
-    # save_tmp(0, obj.eval_mode, obj.seed, obj.expname)
-    # load_tmp(0, obj.eval_mode, obj.seed, obj.expname)

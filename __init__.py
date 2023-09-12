@@ -1,5 +1,3 @@
-import glob
-
 bl_info = {
     "name": "gDNA for Blender",
     "author": "Arment Pelivani, Enrico Tarsi, Riccardo Mancini",
@@ -15,6 +13,7 @@ from bpy.types import PropertyGroup
 import os
 import sys
 import torch
+import glob
 
 import numpy as np
 from pathlib import Path

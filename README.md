@@ -27,5 +27,5 @@ Example:
 After completing the environment setup, it's time to install the add-on in Blender. To do this, compress the entire project folder into a .zip file. Then, in Blender's 'Preferences' menu, go to the Add-ons section and install the add-on from the .zip file. You are now ready to start using the developed add-on.
 
 ### Video Tutorial
-[Click here](https://mega.nz/file/5psTDIhY#i5LDguCIz5p8IDuQGTEr8ZnDW03CMYrhDmOOHdHYZPo) to watch the tutorial video for the setup.
+[Click here](https://mega.nz/file/5psTDIhY#i5LDguCIz5p8IDuQGTEr8ZnDW03CMYrhDmOOHdHYZPo) to watch a video tutorial for the setup.
 

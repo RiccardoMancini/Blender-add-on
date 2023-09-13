@@ -119,7 +119,6 @@ def array2mesh(verts, faces, replace=False):
         memory_shading[bpy.context.active_object] = False
         last_obj = bpy.context.active_object
         num += 1
-        # print(index_Gen)
 
     else:
         obj = bpy.context.view_layer.objects.active
@@ -195,7 +194,6 @@ def update_z_shape(self, context):
             num_slider = len(gl.MESH_GEN)
             bpy.context.window_manager.gdna_tool.gdna_z_shape = num_slider
 
-        # GDNA_Gen_Shape.bl_slider_val[bpy.context.active_object] = num_slider
         array2mesh(gl.MESH_GEN[num_slider - 1]['verts'], gl.MESH_GEN[num_slider - 1]['faces'], True)
         avatar_id = bpy.context.view_layer.objects.active.name.split('_')[-1]
         a = [i for i, d in enumerate(gl.BATCH_GEN) if f'batch_{avatar_id}' in d.keys()]
@@ -571,7 +569,7 @@ class GDNA_Gen_Pose(bpy.types.Operator):
                     bpy.context.window_manager.gdna_tool.gdna_pose3 = memory_slider[bpy.context.active_object]["Val"]
                     bpy.context.window_manager.gdna_tool.gdna_n_pose = "60"
                 elif (memory_slider[bpy.context.active_object][
-                          "Slider"] == "0"):  # quando crea un nuovo oggetto il selettore di n_pose è su 40
+                          "Slider"] == "0"):  # quando crea un nuovo oggetto il selettore di n_pose è su 20
                     bpy.context.window_manager.gdna_tool.gdna_n_pose = "20"
             return abil_generate_pose("Pose")
         except:
@@ -829,10 +827,9 @@ class Remesh(bpy.types.Operator):
             return True
 
     def execute(self, context):
-        # Enable Decimate Modifier
         remesh_modifier = bpy.context.active_object.modifiers.new("Remesh", 'REMESH')
 
-        # Imposta il tipo di remesh su "Octree"
+        # Imposta il tipo di remesh
         remesh_modifier.mode = bpy.context.window_manager.gdna_tool.gdna_remesh_mode
 
         # Imposta la profondità Octree Depth
@@ -881,12 +878,12 @@ class GDNA_PT_Model(bpy.types.Panel):
         layout = self.layout
         layout.label(text="Model:")
         layout.prop(context.window_manager.gdna_tool, "gdna_model", expand=True)
+        
         col = layout.column(align=True)
-        # row = col.row(align=True)
         split = col.split(factor=0.50, align=False)
         split.label(text="Number:")
         split.label(text="Seed:")
-        # row = col.row(align=True)
+        
         split = col.split(factor=0.5, align=False)
         split.prop(context.window_manager.gdna_tool, "gdna_n_models", text="")
         split.prop(context.window_manager.gdna_tool, "gdna_seed", text="")
@@ -968,7 +965,7 @@ class GDNA_PT_Edit(bpy.types.Panel):
                 split.prop(context.window_manager.gdna_tool, "gdna_pose3", text="(60)", slider=False)
         except:
             split.prop(context.window_manager.gdna_tool, "gdna_pose", text="", slider=False)
-            # N. Pose
+        # N. Pose
         col.separator()
         row = col.row(align=True)
         row.prop(context.window_manager.gdna_tool, "gdna_n_pose", expand=True)
@@ -976,8 +973,8 @@ class GDNA_PT_Edit(bpy.types.Panel):
         # Generate
         row = col.row(align=True)
         col.separator()
-
         row.operator("object.gen_pose", text="Generate", icon="PLUS")
+        
         # Retrieve
         row.operator("object.ret_pose", text="Retrieve", icon="RECOVER_LAST")
 
